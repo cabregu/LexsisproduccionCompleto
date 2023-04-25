@@ -1,0 +1,161 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class FrmImprimirDesdeExcel
+    Inherits Correo.FrmPlantilla
+
+    'Form invalida a Dispose para limpiar la lista de componentes.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing AndAlso components IsNot Nothing Then
+            components.Dispose()
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+
+    'Requerido por el Diseñador de Windows Forms
+    Private components As System.ComponentModel.IContainer
+
+    'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
+    'Se puede modificar usando el Diseñador de Windows Forms.  
+    'No lo modifique con el editor de código.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.LblCant = New System.Windows.Forms.Label()
+        Me.DgvImprimir = New System.Windows.Forms.DataGridView()
+        Me.LblPath = New System.Windows.Forms.Label()
+        Me.TxtPath = New System.Windows.Forms.TextBox()
+        Me.BtnSelectEtic = New System.Windows.Forms.Button()
+        Me.Btnimprimir = New System.Windows.Forms.Button()
+        Me.BtnSeleccionarExcel = New System.Windows.Forms.Button()
+        CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Gb.SuspendLayout()
+        CType(Me.DgvImprimir, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'PBLogo
+        '
+        Me.PBLogo.Location = New System.Drawing.Point(5, 385)
+        '
+        'BtnSalir
+        '
+        Me.BtnSalir.Location = New System.Drawing.Point(885, 385)
+        '
+        'Gb
+        '
+        Me.Gb.Controls.Add(Me.BtnSeleccionarExcel)
+        Me.Gb.Controls.Add(Me.LblCant)
+        Me.Gb.Controls.Add(Me.DgvImprimir)
+        Me.Gb.Controls.Add(Me.LblPath)
+        Me.Gb.Controls.Add(Me.TxtPath)
+        Me.Gb.Controls.Add(Me.Btnimprimir)
+        Me.Gb.Controls.Add(Me.BtnSelectEtic)
+        Me.Gb.Size = New System.Drawing.Size(932, 436)
+        Me.Gb.Controls.SetChildIndex(Me.BtnSelectEtic, 0)
+        Me.Gb.Controls.SetChildIndex(Me.Btnimprimir, 0)
+        Me.Gb.Controls.SetChildIndex(Me.TxtPath, 0)
+        Me.Gb.Controls.SetChildIndex(Me.PBLogo, 0)
+        Me.Gb.Controls.SetChildIndex(Me.LblPath, 0)
+        Me.Gb.Controls.SetChildIndex(Me.DgvImprimir, 0)
+        Me.Gb.Controls.SetChildIndex(Me.BtnSalir, 0)
+        Me.Gb.Controls.SetChildIndex(Me.LblCant, 0)
+        Me.Gb.Controls.SetChildIndex(Me.BtnSeleccionarExcel, 0)
+        '
+        'LblCant
+        '
+        Me.LblCant.AutoSize = True
+        Me.LblCant.Location = New System.Drawing.Point(12, 357)
+        Me.LblCant.Name = "LblCant"
+        Me.LblCant.Size = New System.Drawing.Size(13, 13)
+        Me.LblCant.TabIndex = 35
+        Me.LblCant.Text = "0"
+        '
+        'DgvImprimir
+        '
+        Me.DgvImprimir.AllowUserToAddRows = False
+        Me.DgvImprimir.AllowUserToDeleteRows = False
+        Me.DgvImprimir.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvImprimir.Location = New System.Drawing.Point(12, 86)
+        Me.DgvImprimir.Name = "DgvImprimir"
+        Me.DgvImprimir.ReadOnly = True
+        Me.DgvImprimir.Size = New System.Drawing.Size(889, 268)
+        Me.DgvImprimir.TabIndex = 34
+        '
+        'LblPath
+        '
+        Me.LblPath.AutoSize = True
+        Me.LblPath.Location = New System.Drawing.Point(8, 30)
+        Me.LblPath.Name = "LblPath"
+        Me.LblPath.Size = New System.Drawing.Size(46, 13)
+        Me.LblPath.TabIndex = 33
+        Me.LblPath.Text = "Etiqueta"
+        '
+        'TxtPath
+        '
+        Me.TxtPath.Enabled = False
+        Me.TxtPath.Location = New System.Drawing.Point(11, 46)
+        Me.TxtPath.Name = "TxtPath"
+        Me.TxtPath.Size = New System.Drawing.Size(273, 20)
+        Me.TxtPath.TabIndex = 32
+        '
+        'BtnSelectEtic
+        '
+        Me.BtnSelectEtic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.BtnSelectEtic.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BtnSelectEtic.Image = Global.Correo.My.Resources.Resources.filefind
+        Me.BtnSelectEtic.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.BtnSelectEtic.Location = New System.Drawing.Point(343, 28)
+        Me.BtnSelectEtic.Name = "BtnSelectEtic"
+        Me.BtnSelectEtic.Size = New System.Drawing.Size(108, 47)
+        Me.BtnSelectEtic.TabIndex = 31
+        Me.BtnSelectEtic.Text = "Seleccionar Etiqueta"
+        Me.BtnSelectEtic.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnSelectEtic.UseVisualStyleBackColor = True
+        '
+        'Btnimprimir
+        '
+        Me.Btnimprimir.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Btnimprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Btnimprimir.Image = Global.Correo.My.Resources.Resources.Print
+        Me.Btnimprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Btnimprimir.Location = New System.Drawing.Point(784, 33)
+        Me.Btnimprimir.Name = "Btnimprimir"
+        Me.Btnimprimir.Size = New System.Drawing.Size(117, 47)
+        Me.Btnimprimir.TabIndex = 30
+        Me.Btnimprimir.Text = "   Imprimir"
+        Me.Btnimprimir.UseVisualStyleBackColor = True
+        '
+        'BtnSeleccionarExcel
+        '
+        Me.BtnSeleccionarExcel.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.BtnSeleccionarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BtnSeleccionarExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.BtnSeleccionarExcel.Location = New System.Drawing.Point(290, 44)
+        Me.BtnSeleccionarExcel.Name = "BtnSeleccionarExcel"
+        Me.BtnSeleccionarExcel.Size = New System.Drawing.Size(25, 25)
+        Me.BtnSeleccionarExcel.TabIndex = 36
+        Me.BtnSeleccionarExcel.Text = "..."
+        Me.BtnSeleccionarExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnSeleccionarExcel.UseVisualStyleBackColor = True
+        '
+        'FrmImprimirDesdeExcel
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.ClientSize = New System.Drawing.Size(932, 435)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Location = New System.Drawing.Point(0, 0)
+        Me.Name = "FrmImprimirDesdeExcel"
+        CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Gb.ResumeLayout(False)
+        Me.Gb.PerformLayout()
+        CType(Me.DgvImprimir, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents LblCant As System.Windows.Forms.Label
+    Friend WithEvents DgvImprimir As System.Windows.Forms.DataGridView
+    Friend WithEvents LblPath As System.Windows.Forms.Label
+    Friend WithEvents TxtPath As System.Windows.Forms.TextBox
+    Friend WithEvents Btnimprimir As System.Windows.Forms.Button
+    Friend WithEvents BtnSelectEtic As System.Windows.Forms.Button
+    Friend WithEvents BtnSeleccionarExcel As System.Windows.Forms.Button
+
+End Class
