@@ -2863,8 +2863,8 @@ Public Class CN_Correo
 
             Dim sql As String = "Select * from cartas where NRO_CART2 LIKE '%" & Socio & "%' ORDER by ID DESC LIMIT 1"
             Dim dt As New DataTable
-            Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
-            Dim cm As New MySqlCommand(sql, cn)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sql, cn)
             Dim da As New MySqlDataAdapter(cm)
             Dim ds As New DataSet
             cn.Open()
@@ -2881,7 +2881,7 @@ Public Class CN_Correo
     End Function
     Public Shared Function ObtenerMotivoDevoDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select Motivo_devo from devueltas Where nro_carta='" & Carta & "'"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
@@ -2892,7 +2892,7 @@ Public Class CN_Correo
 
     Public Shared Function ObtenerFechaDevoDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select Fech_devo from devueltas Where nro_carta='" & Carta & "'"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
@@ -2903,7 +2903,7 @@ Public Class CN_Correo
 
     Public Shared Function ObtenerEstadoenRecorrido(ByVal Carta As String) As String
         Dim Sql As String = "Select estado from recorridos Where nro_carta='" & Carta & "' ORDER by ID DESC LIMIT 1"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
@@ -2913,7 +2913,7 @@ Public Class CN_Correo
     End Function
     Public Shared Function ObtenerEstadoenPlanilladas(ByVal Carta As String) As String
         Dim Sql As String = "Select estado from planillado Where nro_carta='" & Carta & "' ORDER by ID DESC LIMIT 1"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
@@ -2923,7 +2923,7 @@ Public Class CN_Correo
     End Function
     Public Shared Function ObtenerEstadoenentregadas(ByVal Carta As String) As String
         Dim Sql As String = "Select NroRendicion from entregadas Where nro_carta='" & Carta & "' ORDER by identregadas DESC LIMIT 1"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
@@ -2940,7 +2940,7 @@ Public Class CN_Correo
 
     Public Shared Function ObtenerEstadoenVisitadas(ByVal Carta As String) As String
         Dim Sql As String = "Select NroRendicion from visitadas Where nro_carta='" & Carta & "' ORDER by idVisitadas DESC LIMIT 1"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
@@ -2956,7 +2956,7 @@ Public Class CN_Correo
     End Function
     Public Shared Function ObtenerEstadoenTransito(ByVal Carta As String) As String
         Dim Sql As String = "Select estadof from cartastr2 Where nro_carta='" & Carta & "' ORDER by ID DESC LIMIT 1"
-        Dim cn As New MySqlConnection(My.Settings.ConexionCorreoProduccion)
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cmconsult As New MySqlCommand(Sql, cn)
         cn.Open()
         Dim resultado As String = ""
