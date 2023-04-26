@@ -76,7 +76,6 @@ Public Class FrmDevolucion
 
     End Function
 
-
     Private Sub TxtCartas_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtCartas.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Then
             If ChkFijarMotivo.Checked = False Then
@@ -147,7 +146,6 @@ Public Class FrmDevolucion
         End If
     End Sub
 
-
     Private Sub BtnOkNoentregada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOkNoentregada.Click
 
         If Len(TxtBarraCliente.Text) > 0 Or Len(TxtCartas.Text) > 0 Then
@@ -191,8 +189,6 @@ Public Class FrmDevolucion
 
     End Sub
 
-
-
     Public Function CargarNroCarta(ByVal nroc As String) As Boolean
         BtnFinalizar.Enabled = True
         If Not ArrNroCartaLeido.Contains(nroc) Then
@@ -221,10 +217,13 @@ Public Class FrmDevolucion
 
 
                                 Dim Fech_trab As Date = drw("fech_trab").ToString
-                                DgvCartaDev.Rows.Add(Socio, Lote, integrante, Fech_trab.ToShortDateString, " - ", " - ", " - ", " - ", CmbMotivos.Text, DtpFechaDevo.Value.ToShortDateString, TxtPlanillaDevo.Text, drw("apellido").ToString, drw("calle").ToString, drw("cp").ToString, drw("localidad").ToString, drw("nro_carta").ToString)
 
+                                DgvCartaDev.Rows.Insert(0, Socio, Lote, integrante, Fech_trab.ToShortDateString, " - ", " - ", " - ", " - ", CmbMotivos.Text, DtpFechaDevo.Value.ToShortDateString, TxtPlanillaDevo.Text, drw("apellido").ToString, drw("calle").ToString, drw("cp").ToString, drw("localidad").ToString, drw("nro_carta").ToString)
 
-                                'End If
+                                'DgvCartaDev.Rows.Add(Socio, Lote, integrante, Fech_trab.ToShortDateString, " - ", " - ", " - ", " - ", CmbMotivos.Text, DtpFechaDevo.Value.ToShortDateString, TxtPlanillaDevo.Text, drw("apellido").ToString, drw("calle").ToString, drw("cp").ToString, drw("localidad").ToString, drw("nro_carta").ToString)
+
+                                DgvCartaDev.CurrentCell = DgvCartaDev.Rows(0).Cells(0)
+
                             Next
                             TxtCantidad.Text = DgvCartaDev.Rows.Count
                             ArrNroCartaLeido.Add(nroc)
@@ -486,7 +485,6 @@ Public Class FrmDevolucion
 
 
     End Sub
-
 
     Private Sub BtnDevolucionSeprit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDevolucionSeprit.Click
         BtnDevolucionSeprit.Enabled = False
