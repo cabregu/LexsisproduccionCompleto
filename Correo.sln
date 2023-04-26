@@ -7,7 +7,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Correo", "Correo\Correo.vbp
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConfigCorreo", "ConfigCorreo\ConfigCorreo.vbproj", "{0BA6EE79-5FCD-4059-951F-EF91B20B0D94}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalador", "Instalador\Instalador.vdproj", "{667BBAD8-DA37-405B-8956-BB4BB9377D78}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupLexs", "SetupLexs\SetupLexs.vdproj", "{647CCACD-FE4C-4F24-8FFB-0E3169325896}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,12 +39,12 @@ Global
 		{0BA6EE79-5FCD-4059-951F-EF91B20B0D94}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0BA6EE79-5FCD-4059-951F-EF91B20B0D94}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0BA6EE79-5FCD-4059-951F-EF91B20B0D94}.Release|x86.ActiveCfg = Release|Any CPU
-		{667BBAD8-DA37-405B-8956-BB4BB9377D78}.Debug|Any CPU.ActiveCfg = Debug
-		{667BBAD8-DA37-405B-8956-BB4BB9377D78}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{667BBAD8-DA37-405B-8956-BB4BB9377D78}.Debug|x86.ActiveCfg = Debug
-		{667BBAD8-DA37-405B-8956-BB4BB9377D78}.Release|Any CPU.ActiveCfg = Release
-		{667BBAD8-DA37-405B-8956-BB4BB9377D78}.Release|Mixed Platforms.ActiveCfg = Release
-		{667BBAD8-DA37-405B-8956-BB4BB9377D78}.Release|x86.ActiveCfg = Release
+		{647CCACD-FE4C-4F24-8FFB-0E3169325896}.Debug|Any CPU.ActiveCfg = Debug
+		{647CCACD-FE4C-4F24-8FFB-0E3169325896}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{647CCACD-FE4C-4F24-8FFB-0E3169325896}.Debug|x86.ActiveCfg = Debug
+		{647CCACD-FE4C-4F24-8FFB-0E3169325896}.Release|Any CPU.ActiveCfg = Release
+		{647CCACD-FE4C-4F24-8FFB-0E3169325896}.Release|Mixed Platforms.ActiveCfg = Release
+		{647CCACD-FE4C-4F24-8FFB-0E3169325896}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
