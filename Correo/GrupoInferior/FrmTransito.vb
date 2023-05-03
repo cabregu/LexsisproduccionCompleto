@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports System.IO
 Imports ConfigCorreo.CN_Correo
 Imports System.Globalization
-
+Imports System.Threading
 
 Public Class FrmTransito
     Dim dt2 As New DataTable
@@ -272,46 +272,67 @@ Public Class FrmTransito
 
 
     End Sub
+
     Private Sub BNBUSCAR_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BNBUSCAR.Click
 
+        'Desactiva el botón mientras se está procesando
+        BNBUSCAR.Enabled = False
+
+        'Inicia un nuevo hilo para ejecutar la tarea en segundo plano
+        Dim thread As New Thread(AddressOf ProcesarDatos)
+        thread.Start()
+
+    End Sub
+
+    Private Sub ProcesarDatos()
         Dim Numero As Integer = 0
-        PgbAnalisis.Minimum = 0
-        PgbAnalisis.Maximum = DgvDatos.Rows.Count
+
+        Me.Invoke(Sub()
+                      PgbAnalisis.Minimum = 0
+                      PgbAnalisis.Maximum = DgvDatos.Rows.Count
+                  End Sub)
 
         For Each DRW As DataGridViewRow In DgvDatos.Rows
 
-            Dim DtProd As New DataTable
-            DtProd = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(DRW.Cells("contra").Value & "-" & DRW.Cells("lote").Value)
-            For Each dr As DataRow In DtProd.Rows
-                If dr("NRO_CART2").ToString.Contains(DRW.Cells("lote").Value) Then
+            Dim result As String = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(DRW.Cells("contra").Value & "-" & DRW.Cells("lote").Value)
+            If result <> "" Then
 
-                    DRW.Cells("Nro_Carta").Value = dr("Nro_carta").ToString
-                    DRW.Cells("REMITENTE").Value = dr("REMITENTE").ToString
-                    DRW.Cells("FECH_TRAB").Value = dr("FECH_TRAB").ToString
-                    DRW.Cells("APELLIDO").Value = dr("APELLIDO").ToString
-                    DRW.Cells("CALLE").Value = dr("CALLE").ToString
-                    DRW.Cells("CP").Value = dr("CP").ToString
-                    DRW.Cells("LOCALIDAD").Value = dr("LOCALIDAD").ToString
-                    DRW.Cells("PROVINCIA").Value = dr("PROVINCIA").ToString
-                    DRW.Cells("FECHA_ENTR").Value = ""
-                    DRW.Cells("NRO_PLANIL").Value = ""
-                    DRW.Cells("FECH_PLANI").Value = ""
-                    DRW.Cells("ESTADO").Value = dr("ESTADO").ToString
-                    DRW.Cells("CARTERO").Value = dr("OBS2").ToString
-                    DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(dr("Nro_carta").ToString)
-                    DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(dr("Nro_carta").ToString)
-                    DRW.Cells("NRO_CART2").Value = dr("NRO_CART2").ToString
-                    DRW.Cells("INFORMADO").Value = ""
-                    'BuscarEntregadasPlanilladasvisitadasRecorrido(dr("Nro_carta").ToString)
-                    '
-                End If
-            Next
+                Dim values() As String = result.Split(";")
+
+            'If values.Length = 12 Then ' Verificamos que tengamos los 12 valores esperados
+            DRW.Cells("Nro_Carta").Value = values(0)
+                DRW.Cells("REMITENTE").Value = values(1)
+                DRW.Cells("FECH_TRAB").Value = values(2)
+                DRW.Cells("APELLIDO").Value = values(3)
+                DRW.Cells("CALLE").Value = values(4)
+                DRW.Cells("CP").Value = values(5)
+                DRW.Cells("LOCALIDAD").Value = values(6)
+                DRW.Cells("PROVINCIA").Value = values(7)
+                DRW.Cells("ESTADO").Value = values(8)
+                DRW.Cells("NRO_PLANIL").Value = values(9)
+                DRW.Cells("CARTERO").Value = ObtenerCarteroDeCorreoProduccion(values(0))
+                DRW.Cells("NRO_CART2").Value = values(10)
+                DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(values(0))
+                DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
+            'End If
 
             Numero = Numero + 1
-            PgbAnalisis.Value = Numero
+            'Actualiza la barra de progreso en el subproceso UI usando Invoke
+            Me.Invoke(Sub()
+                          PgbAnalisis.Value = Numero
+                      End Sub)
+
+            End If
 
         Next
+
+        'Habilita el botón cuando el procesamiento ha terminado
+        Me.Invoke(Sub() BNBUSCAR.Enabled = True)
+
+
     End Sub
+
+
 
     Private Function BuscarEntregadasPlanilladasvisitadasRecorrido(ByVal Carta As String) As String
         Dim EstadoEnRecorrido As String
@@ -336,112 +357,63 @@ Public Class FrmTransito
 
 
 
-
-    'Dim Numero As Integer = 0
-    'PgbAnalisis.Minimum = 0
-    'PgbAnalisis.Maximum = DgvDatos.Rows.Count
-
-
-    'For Each DRW As DataGridViewRow In DgvDatos.Rows
-    '    Dim dt As New DataTable
-    '    Dim Socio As String = DRW.Cells("contra").Value
-    '    Dim LOTE As String = DRW.Cells("lote").Value
-    '    LOTE = LOTE.TrimStart("0")
-    '    dt = ObtenerMAXIMA(Socio, LOTE)
-
-    '    If dt Is Nothing Then
-    '        DRW.Cells("ESTADO").Value = "NO_ENCONTRADO"
-    '    Else
-    '        For Each dr As DataRow In dt.Rows
-
-    '            If dr("NRO_CART2").ToString.Contains(LOTE) Then
-
-    '                Dim FechTrab As Date = dr("FECH_TRAB").ToString
-    '                Dim FechEntr As Date = dr("FECHA_ENTR").ToString
-    '                Dim FechPlan As Date = dr("FECH_PLANI").ToString
-    '                Dim fech4 As Date = dr("FECH4").ToString
-
-
-
-    '                DRW.Cells("Nro_Carta").Value = dr("Nro_carta").ToString
-    '                DRW.Cells("REMITENTE").Value = dr("REMITENTE").ToString
-    '                DRW.Cells("FECH_TRAB").Value = Normalizar2(FechTrab.ToShortDateString)
-    '                DRW.Cells("APELLIDO").Value = dr("APELLIDO").ToString
-    '                DRW.Cells("CALLE").Value = dr("CALLE").ToString
-    '                DRW.Cells("CP").Value = dr("CP").ToString
-    '                DRW.Cells("LOCALIDAD").Value = dr("LOCALIDAD").ToString
-    '                DRW.Cells("PROVINCIA").Value = dr("PROVINCIA").ToString
-    '                DRW.Cells("FECHA_ENTR").Value = Normalizar2(FechEntr.ToShortDateString)
-    '                DRW.Cells("NRO_PLANIL").Value = dr("NRO_PLANIL").ToString
-    '                DRW.Cells("FECH_PLANI").Value = Normalizar2(FechPlan.ToShortDateString)
-    '                DRW.Cells("ESTADO").Value = dr("ESTADO").ToString
-    '                DRW.Cells("CARTERO").Value = dr("CARTERO").ToString
-    '                DRW.Cells("TEMA4").Value = dr("TEMA4").ToString
-    '                DRW.Cells("FECH4").Value = Normalizar2(fech4.ToShortDateString)
-    '                DRW.Cells("NRO_CART2").Value = dr("NRO_CART2").ToString
-    '            End If
-    '        Next
-    '    End If
-    '    Numero = Numero + 1
-    '    PgbAnalisis.Value = Numero
-    'Next
-    'PgbAnalisis.Value = 0
-
-
     Private Sub BtnEstados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEstados.Click
         FechasEntregadas()
 
     End Sub
+
+
     Private Sub Btnexcel2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btnexcel2.Click
-        'Agregar referencia Microsoft.Office.Interop.Excel()
-        'Creamos las variables
-        Dim exApp As New Microsoft.Office.Interop.Excel.Application
-        Dim exLibro As Microsoft.Office.Interop.Excel.Workbook
-        Dim exHoja As Microsoft.Office.Interop.Excel.Worksheet
-
+        ExportarDataGridViewAExcel(DgvDatos)
+    End Sub
+    Private Sub ExportarDataGridViewAExcel(ByVal dgv As DataGridView)
         Try
-            'Añadimos el Libro al programa, y la hoja al libro
-            exLibro = exApp.Workbooks.Add
-            exHoja = exLibro.Worksheets.Add()
+            ' Crear una nueva instancia de Excel
+            Dim exApp As Object = CreateObject("Excel.Application")
+            exApp.Visible = True
+
+            ' Crear un nuevo libro y una nueva hoja
+            Dim exLibro As Object = exApp.Workbooks.Add()
+            Dim exHoja As Object = exLibro.Worksheets.Add()
+
+            ' Establecer el formato de todas las celdas como texto
             exHoja.Cells.NumberFormat = "@"
-            ' ¿Cuantas columnas y cuantas filas?
-            Dim NCol As Integer = DgvDatos.ColumnCount
-            Dim NRow As Integer = DgvDatos.RowCount
 
+            ' Obtener el número de filas y columnas
+            Dim NCol As Integer = dgv.ColumnCount
+            Dim NRow As Integer = dgv.RowCount
 
-            'Aqui recorremos todas las filas, y por cada fila todas las columnas y vamos escribiendo.
-            For i As Integer = 1 To NCol
-                exHoja.Cells.Item(1, i) = DgvDatos.Columns(i - 1).Name.ToString
-                'exHoja.Cells.Item(1, i).HorizontalAlignment = 3
-            Next
+            ' Copiar los nombres de las columnas al libro
+            Dim rg As Object = exHoja.Range(exHoja.Cells(1, 1), exHoja.Cells(1, NCol))
+            rg.Value = dgv.Columns.Cast(Of DataGridViewColumn).Select(Function(c) c.HeaderText).ToArray()
 
-            For Fila As Integer = 0 To NRow - 1
-                For Col As Integer = 0 To NCol - 1
-                    exHoja.Cells.Item(Fila + 2, Col + 1) = DgvDatos.Rows(Fila).Cells(Col).Value
+            ' Copiar los datos del DataGridView al libro
+            Dim data(NRow - 1, NCol - 1) As Object
+            For i As Integer = 0 To NRow - 1
+                For j As Integer = 0 To NCol - 1
+                    data(i, j) = dgv.Rows(i).Cells(j).Value
                 Next
             Next
-            'Titulo en negrita, Alineado al centro y que el tamaño de la columna se
-            'ajuste al texto
+            rg = exHoja.Range(exHoja.Cells(2, 1), exHoja.Cells(NRow + 1, NCol))
+            rg.Value = data
 
-            'exHoja.Rows.Item(5).Font.Bold = 1
-            'exHoja.Rows.Item(5).HorizontalAlignment = 3
-            exHoja.Columns.AutoFit()
+            ' Ajustar el ancho de las columnas para que se ajusten al contenido
+            rg = exHoja.Range(exHoja.Cells(1, 1), exHoja.Cells(NRow + 1, NCol))
+            rg.EntireColumn.AutoFit()
 
+            ' Guardar el archivo de Excel y cerrar la aplicación de Excel
+            'exLibro.SaveAs("C:\temp\Transito.xls")
+            'exLibro.Close(True)
+            'exApp.Quit()
 
-
-            'Aplicación visible
-            exApp.Application.Visible = True
-
-            exHoja = Nothing
-            exLibro = Nothing
-            exApp = Nothing
+            MsgBox("Datos exportados exitosamente a Excel.", MsgBoxStyle.Information, "Exportar a Excel")
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error al exportar a Excel")
-
         End Try
-
     End Sub
+
+
     Private Sub FrmTransito_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath.Text = path2
 
@@ -1409,8 +1381,8 @@ Public Class FrmTransito
 
         'Process.Start("C:\Temp\archivo.csv")
 
-        Dim headers = (From header As DataGridViewColumn In DgvDatos.Columns.Cast(Of DataGridViewColumn)() _
-                          Select header.HeaderText).ToArray
+        Dim headers = (From header As DataGridViewColumn In DgvDatos.Columns.Cast(Of DataGridViewColumn)()
+                       Select header.HeaderText).ToArray
         Dim rows = From row As DataGridViewRow In DgvDatos.Rows.Cast(Of DataGridViewRow)() _
                    Where Not row.IsNewRow _
                    Select Array.ConvertAll(row.Cells.Cast(Of DataGridViewCell).ToArray, Function(c) If(c.Value IsNot Nothing, If(TypeOf c.Value Is Date, CType(c.Value, Date).ToString("yyyy/MM/dd"), c.Value.ToString().PadLeft(2, "0"c)), ""))

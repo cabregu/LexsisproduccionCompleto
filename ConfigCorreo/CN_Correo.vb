@@ -2857,28 +2857,32 @@ Public Class CN_Correo
 
     End Function
 
-    Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As DataTable
 
-        'Try
 
-            Dim sql As String = "Select * from cartas where NRO_CART2 LIKE '%" & Socio & "%' ORDER by ID DESC LIMIT 1"
-            Dim dt As New DataTable
-        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-        Dim cm As New MySqlCommand(sql, cn)
-            Dim da As New MySqlDataAdapter(cm)
-            Dim ds As New DataSet
+
+    Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As String
+        Dim resultado As String = ""
+        Try
+            Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE '%" & Socio & "%' ORDER BY ID DESC LIMIT 1"
+            Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+            Dim cm As New MySqlCommand(sql, cn)
             cn.Open()
-            da.Fill(ds, "cartas")
+            Dim result As Object = cm.ExecuteScalar()
+
+            If result IsNot Nothing Then
+                resultado = result.ToString()
+            End If
+
+            Return resultado
             cn.Close()
+        Catch ex As Exception
 
-            dt = ds.Tables("cartas")
-            Return dt
-        'Catch ex As Exception
-
-        'End Try
-
+        End Try
 
     End Function
+
+
+
     Public Shared Function ObtenerMotivoDevoDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select Motivo_devo from devueltas Where nro_carta='" & Carta & "'"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
@@ -2890,6 +2894,17 @@ Public Class CN_Correo
         Return resultado
     End Function
 
+
+    Public Shared Function ObtenerCarteroDeCorreoProduccion(ByVal Carta As String) As String
+        Dim Sql As String = "Select cartero from recorridos Where nro_carta='" & Carta & "'  ORDER BY ID DESC LIMIT 1"
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cmconsult As New MySqlCommand(Sql, cn)
+        cn.Open()
+        Dim resultado As String = ""
+        resultado = cmconsult.ExecuteScalar()
+        cn.Close()
+        Return resultado
+    End Function
     Public Shared Function ObtenerFechaDevoDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select Fech_devo from devueltas Where nro_carta='" & Carta & "'"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
