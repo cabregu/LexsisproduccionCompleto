@@ -414,6 +414,63 @@ Public Class FrmTransito
     End Sub
 
 
+
+    Private Sub ExportarDataGridViewAExcel(ByVal dgv As DataGridView, ByVal camposSeleccionados() As String)
+        Try
+            ' Crear una nueva instancia de Excel
+            Dim exApp As Object = CreateObject("Excel.Application")
+            exApp.Visible = True
+
+            ' Crear un nuevo libro y una nueva hoja
+            Dim exLibro As Object = exApp.Workbooks.Add()
+            Dim exHoja As Object = exLibro.Worksheets.Add()
+
+            ' Establecer el formato de todas las celdas como texto
+            exHoja.Cells.NumberFormat = "@"
+
+            ' Obtener el número de filas y columnas
+            Dim NCol As Integer = camposSeleccionados.Length
+            Dim NRow As Integer = dgv.RowCount
+
+            ' Copiar los nombres de las columnas seleccionadas al libro
+            Dim rg As Object = exHoja.Range(exHoja.Cells(1, 1), exHoja.Cells(1, NCol))
+            For i As Integer = 0 To NCol - 1
+                rg.Cells(1, i + 1).Value = camposSeleccionados(i)
+            Next
+
+            ' Copiar los datos seleccionados del DataGridView al libro
+            Dim data(NRow - 1, NCol - 1) As Object
+            For i As Integer = 0 To NRow - 1
+                For j As Integer = 0 To NCol - 1
+                    data(i, j) = dgv.Rows(i).Cells(camposSeleccionados(j)).Value
+                Next
+            Next
+            rg = exHoja.Range(exHoja.Cells(2, 1), exHoja.Cells(NRow + 1, NCol))
+            rg.Value = data
+
+            ' Ajustar el ancho de las columnas para que se ajusten al contenido
+            rg = exHoja.Range(exHoja.Cells(1, 1), exHoja.Cells(NRow + 1, NCol))
+            rg.EntireColumn.AutoFit()
+
+            ' Guardar el archivo de Excel y cerrar la aplicación de Excel
+            'exLibro.SaveAs("C:\temp\Transito.xls")
+            'exLibro.Close(True)
+            'exApp.Quit()
+
+            MsgBox("Datos exportados exitosamente a Excel.", MsgBoxStyle.Information, "Exportar a Excel")
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error al exportar a Excel")
+        End Try
+    End Sub
+
+
+
+
+
+
+
+
     Private Sub FrmTransito_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath.Text = path2
 
@@ -800,6 +857,10 @@ Public Class FrmTransito
             DRG.Cells("FECHAF").Value = Normalizar(fechaF.ToShortDateString)
 
 
+            If DRG.Cells("ESTADOF").Value = "DEVUELTA" Then
+                DRG.Cells("MOTIVOF").Value = DRG.Cells("TEMA4").Value
+                DRG.Cells("FECHAF").Value = DRG.Cells("FECH4").Value
+            End If
         Next
 
 
@@ -1294,25 +1355,13 @@ Public Class FrmTransito
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btntxt.Click
-        'Dim headers = (From header As DataGridViewColumn In DgvDatos.Columns.Cast(Of DataGridViewColumn)() _
-        '               Select header.HeaderText).ToArray
-        'Dim rows = From row As DataGridViewRow In DgvDatos.Rows.Cast(Of DataGridViewRow)() _
-        '           Where Not row.IsNewRow _
-        '           Select Array.ConvertAll(row.Cells.Cast(Of DataGridViewCell).ToArray, Function(c) If(c.Value IsNot Nothing, c.Value.ToString, ""))
-
-        'Using sw As New IO.StreamWriter("C:\Temp\archivo.csv", False, System.Text.Encoding.GetEncoding(65001))
-
-        '    sw.WriteLine(String.Join(";", headers))
-        '    For Each r In rows
-        '        sw.WriteLine(String.Join(";", r))
-        '    Next
-        'End Using
-
-        'Process.Start("C:\Temp\archivo.csv")
 
         funciontxt("VISITADA")
         funciontxt("ENTREGADA")
         funciontxt("ENT_COD13")
+
+        Dim camposSeleccionados() As String = {"Lote Contra Inte ID", "Socio DESC", "Socio Prepaga", "Socio CONTRATO", "Socio Integrante", "Lote ID", "Ultimo Estado Homolog DESC", "Fecha Ultimo Estado DESC", "Distribucion Empresa DESC", "Zona Envio Creden ID", "Zona Envio Creden DESC", "Grupos Creden", "CONTRA", "LOTE", "NRO_CARTA", "NRO_CART2", "ESTADOF", "MOTIVOF", "FECHAF", "TIPO", "FECHA_TRABAJO", "FECH1", "HISTORICO", "INFORMADO"}
+        ExportarDataGridViewAExcel(DgvDatos, camposSeleccionados)
 
     End Sub
 
