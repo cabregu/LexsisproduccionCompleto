@@ -44,8 +44,16 @@ Public Class FrmPendientes
         fechahoy = Now.ToShortDateString
 
         Dim DtPendiente As DataTable = Nothing
+
+
         If Len(CmbCarteros.Text) > 0 Then
             DtPendiente = ObtenerPendeintesPorCartero(CmbCarteros.Text)
+
+            For i As Integer = DtPendiente.Rows.Count - 1 To 0 Step -1
+                If DtPendiente.Rows(i)("Obs2").ToString().Contains("MODO S") Then
+                    DtPendiente.Rows.RemoveAt(i)
+                End If
+            Next
 
             DgvDatos.DataSource = DtPendiente
 

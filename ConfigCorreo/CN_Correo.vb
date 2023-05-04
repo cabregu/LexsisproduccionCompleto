@@ -3,6 +3,8 @@ Imports System.Transactions
 Imports System.IO
 Imports System.Data.OleDb
 Imports Outlook = Microsoft.Office.Interop.Outlook
+Imports System.Globalization
+
 Public Class CN_Correo
     Public Shared CadenaDeConeccionProduccion As String = ""
     Public Shared CadenaDeConeccionAnterior As String = ""
@@ -715,7 +717,7 @@ Public Class CN_Correo
         Dim ArrMotivos As New ArrayList
         Dim sql As String = "Select nroplanilla from recorridospl where cartero='" & Cartero & "' AND estado='EN_DISTRIBUCION'"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-        Dim cm As New MySqlCommand(Sql, cn)
+        Dim cm As New MySqlCommand(sql, cn)
         Dim da As New MySqlDataAdapter(cm)
         Dim ds As New DataSet
         cn.Open()
@@ -1042,30 +1044,44 @@ Public Class CN_Correo
 
     'funcion string
 
+    'Public Shared Function Converfecha(ByVal valor As String) As String
+
+    '    Try
+    '        Dim año As String = valor.Substring(valor.LastIndexOf("/") + 1, 4)
+    '        Dim mes As String = valor.Substring(3, 2)
+    '        Dim dia As String = valor.Substring(0, 2)
+    '        Dim fecha As String = año & "-" & mes & "-" & dia
+
+    '        If fecha = "1899-12-30" Then
+    '            Return "0000-00-00"
+    '        Else
+    '            If IsDate(fecha) Then
+    '                Return fecha
+    '            Else
+    '                Return "0000-00-00"
+    '            End If
+    '        End If
+
+    '    Catch ex As Exception
+
+    '        Return "0000-00-00"
+    '    End Try
+
+    'End Function
+
     Public Shared Function Converfecha(ByVal valor As String) As String
+        Dim formatos As String() = {"dd/MM/yyyy", "d/MM/yyyy", "dd/M/yyyy", "d/M/yyyy", "dd/MM/yy", "d/MM/yy", "dd/M/yy", "d/M/yy"}
 
-        Try
-            Dim año As String = valor.Substring(valor.LastIndexOf("/") + 1, 4)
-            Dim mes As String = valor.Substring(3, 2)
-            Dim dia As String = valor.Substring(0, 2)
-            Dim fecha As String = año & "-" & mes & "-" & dia
-
-            If fecha = "1899-12-30" Then
-                Return "0000-00-00"
-            Else
-                If IsDate(fecha) Then
-                    Return fecha
-                Else
-                    Return "0000-00-00"
-                End If
-            End If
-
-        Catch ex As Exception
-
+        Dim fecha As DateTime
+        If DateTime.TryParseExact(valor, formatos, CultureInfo.InvariantCulture, DateTimeStyles.None, fecha) Then
+            Return fecha.ToString("yyyy-MM-dd")
+        Else
             Return "0000-00-00"
-        End Try
-
+        End If
     End Function
+
+
+
     Public Shared Function Converfechaescaneo(ByVal valor As String) As String
         Try
             Dim año As String = valor.Substring(valor.LastIndexOf("/") + 1, 4)
@@ -1368,7 +1384,8 @@ Public Class CN_Correo
             Return ""
 
         End If
-   
+
+
 
     End Function
     Public Shared Function ObtenerCantidadArchivosPlanillaLibre(ByVal planilla As String) As String
@@ -3038,6 +3055,8 @@ Public Class CN_Correo
         For Each dr As DataRow In dt.Rows
             dr("Obs2") = ObtenerObs2(dr("nro_carta"))
         Next
+
+
 
 
         Return dt
