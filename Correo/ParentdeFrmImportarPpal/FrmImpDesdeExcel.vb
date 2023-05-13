@@ -547,6 +547,20 @@ Public Class FrmImpDesdeExcel
         dt2.Columns("PROVINCIA").SetOrdinal(5)
 
 
+        Dim domicilios As New Dictionary(Of String, Integer)
+
+        For Each row As DataRow In dt2.Rows
+            Dim domicilio As String = row("DOMI_ENT").ToString().TrimEnd()
+            If domicilios.ContainsKey(domicilio) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
+                domicilios(domicilio) += 1
+                row("OBS2") = "ARM"
+            ElseIf Not domicilios.ContainsKey(domicilio) Then
+                domicilios.Add(domicilio, 1)
+            End If
+        Next
+
+
+
         '*********
         Dgvimportar.DataSource = dt2
 
