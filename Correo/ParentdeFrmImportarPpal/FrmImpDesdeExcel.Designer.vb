@@ -42,6 +42,7 @@ Partial Class FrmImpDesdeExcel
         Me.BtnLista = New System.Windows.Forms.Button()
         Me.BtnNormalizar = New System.Windows.Forms.Button()
         Me.BtnSalir = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvNoUtilizado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -231,6 +232,15 @@ Partial Class FrmImpDesdeExcel
         Me.BtnSalir.TabIndex = 80
         Me.BtnSalir.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(594, 112)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 94
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FrmImpDesdeExcel
         '
         Me.AcceptButton = Me.BtnSeleccionar
@@ -238,6 +248,7 @@ Partial Class FrmImpDesdeExcel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BtnNormalizar)
         Me.Controls.Add(Me.BtnLista)
         Me.Controls.Add(Me.BtnArchivo)
@@ -281,4 +292,5 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents BtnArchivo As System.Windows.Forms.Button
     Friend WithEvents BtnLista As System.Windows.Forms.Button
     Friend WithEvents BtnNormalizar As System.Windows.Forms.Button
+    Friend WithEvents Button1 As Button
 End Class

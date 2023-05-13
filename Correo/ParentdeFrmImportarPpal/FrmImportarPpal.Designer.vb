@@ -43,7 +43,7 @@ Partial Class FrmImportarPpal
         Me.Menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CargarRemitoToolStripMenuItem1, Me.ImportarDesdeXlsToolStripMenuItem, Me.BusquedaExcelsToolStripMenuItem, Me.EtiquetasToolStripMenuItem, Me.ToolStripMenuItem2, Me.EliminarRemitoToolStripMenuItem, Me.AplocativoToolStripMenuItem, Me.ToolStripMenuItem3, Me.ToolStripMenuItem1})
         Me.Menu.Location = New System.Drawing.Point(0, 0)
         Me.Menu.Name = "Menu"
-        Me.Menu.Size = New System.Drawing.Size(1370, 40)
+        Me.Menu.Size = New System.Drawing.Size(1512, 40)
         Me.Menu.TabIndex = 1
         Me.Menu.Text = "MenuStrip1"
         '
@@ -138,7 +138,7 @@ Partial Class FrmImportarPpal
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
-        Me.ClientSize = New System.Drawing.Size(1370, 479)
+        Me.ClientSize = New System.Drawing.Size(1512, 494)
         Me.Controls.Add(Me.Menu)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

@@ -167,27 +167,6 @@ Public Class FrmImpDesdeExcel
     End Sub
 
 
-    'Private Function ObtenerNombrePrimeraHoja(ByVal rutaLibro As String) As String
-    '    Dim app As Excel.Application = Nothing
-    '    Try
-    '        app = New Excel.Application()
-    '        Dim wb As Excel.Workbook = app.Workbooks.Open(rutaLibro)
-    '        Dim ws As Excel.Worksheet = CType(wb.Worksheets.Item(1), Excel.Worksheet)
-    '        Dim name As String = ws.Name
-    '        ws = Nothing
-    '        wb.Close()
-    '        wb = Nothing
-    '        Return name
-    '    Catch ex As Exception
-    '        Throw
-
-    '    Finally
-    '        If (Not app Is Nothing) Then _
-    '            app.Quit()
-    '        Runtime.InteropServices.Marshal.ReleaseComObject(app)
-    '        app = Nothing
-    '    End Try
-    'End Function
     Private Sub BtnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSalir.Click
         Me.Close()
 
@@ -445,6 +424,134 @@ Public Class FrmImpDesdeExcel
             app = Nothing
         End Try
     End Function
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        ImportarExcelDeswiss()
+    End Sub
+
+
+
+    Private Function ImportarExcelDeswiss()
+
+        Dim openFD As New OpenFileDialog()
+        With openFD
+            .Title = "Seleccionar archivos"
+            .Filter = "Todos los archivos (*.xls)|*.xls"
+            .Multiselect = False
+            .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+            If .ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                LeerExcelComoDataTable(.FileName)
+
+            Else
+                openFD.Dispose()
+            End If
+            BtnArchivo.Enabled = True
+        End With
+
+    End Function
+
+
+
+
+    Public Function LeerExcelComoDataTable(ByVal rutaArchivo As String)
+        Dim NombreHoja As String = ObtenerNombrePrimeraHoja(rutaArchivo)
+
+        Dim dt2 As New DataTable
+        Dim strconn As String
+        strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + rutaArchivo + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
+        Dim mconn As New OleDbConnection(strconn)
+        Dim ad As New OleDbDataAdapter("Select * from [" & NombreHoja & "$]", mconn)
+        mconn.Open()
+        ad.Fill(dt2)
+        mconn.Close()
+
+        ' Eliminar espacios en los nombres de los campos
+        For Each column As DataColumn In dt2.Columns
+            column.ColumnName = column.ColumnName.Replace(" ", "")
+        Next
+
+        ' Agregar columna "APELLIDO"
+        dt2.Columns.Add("APELLIDO", GetType(String))
+        dt2.Columns.Add("NRO_CART2", GetType(String))
+        dt2.Columns.Add("OBS2", GetType(String))
+
+        ' Establecer valor de la columna "APELLIDO"
+        For Each row As DataRow In dt2.Rows
+
+            'Juntar Apellido y nombre en uns sola columna ya creada llamada apellido
+            Dim apellidoTitular As String = row("APELLIDO_TITULAR").ToString().TrimEnd()
+            Dim nombreTitular As String = row("NOMBRE_TITULAR").ToString().TrimEnd()
+            Dim calle As String = row("DOMI_ENT").ToString().TrimEnd()
+            calle = calle.Replace("PISO", "").Replace("DEPTO", "").Replace("OF", "")
+            Dim contra As String = row("CONTRA").ToString().TrimEnd()
+            Dim creden As String = row("CREDEN").ToString().TrimEnd()
+            Dim integ As String = row("INTEGRANTES").ToString().TrimEnd()
+            contra = contra.PadLeft(7, "0")
+            creden = creden.PadLeft(7, "0")
+            Dim NroCart2 As String = contra & "-" & creden & "-" & integ
+            Dim locali As String = row("LOCA_DENO_ENT").ToString().TrimEnd().ToUpper()
+            Dim provin As String = row("PROV_DENO_ENT").ToString().TrimEnd().ToUpper()
+            locali = locali.Replace("CIUDAD AUTONOMA BUENOS AIRES", "CAPITAL FEDERAL")
+            Dim cp As String = row("POST").ToString().TrimEnd()
+            Dim empres As String = row("RAZON").ToString().TrimEnd()
+            Dim tele As String = row("TELE").ToString().TrimEnd()
+            Dim planilla As String = row("PLANTILLA").ToString().TrimEnd()
+            Dim correo As String = row("EMPRESA_ENTREGA").ToString().TrimEnd()
+
+
+            '        
+
+            row("APELLIDO") = apellidoTitular & " " & nombreTitular
+            row("DOMI_ENT") = calle
+            row("CREDEN") = creden
+            row("NRO_CART2") = NroCart2.Replace("/", "-")
+            row("LOCA_DENO_ENT") = locali
+            row("PROV_DENO_ENT") = provin
+            row("POST") = cp
+            row("RAZON") = empres
+            row("TELE") = tele
+            row("PLANTILLA") = planilla
+            row("EMPRESA_ENTREGA") = correo
+
+            If row("EMPRESA_ENTREGA") = "SEPRIT" Or row("EMPRESA_ENTREGA") = "CA" Then
+                row("OBS2") = "SEPRIT"
+            End If
+            If row("EMPRESA_ENTREGA") = "DEVOLVER A SWISS" Then
+                row("OBS2") = "DEV A SWISS"
+            End If
+            If row("EMPRESA_ENTREGA") = "SWISS" Then
+                row("OBS2") = "SWISS"
+            End If
+
+
+        Next
+
+
+        dt2.Columns("LOCA_DENO_ENT").ColumnName = "LOCALIDAD"
+        dt2.Columns("PROV_DENO_ENT").ColumnName = "PROVINCIA"
+        dt2.Columns("POST").ColumnName = "CP"
+        dt2.Columns("RAZON").ColumnName = "EMPRESA"
+        dt2.Columns("TELE").ColumnName = "SOCIO"
+        dt2.Columns("PLANTILLA").ColumnName = "OBS3"
+
+
+
+        dt2.Columns.Remove("APELLIDO_TITULAR")
+        dt2.Columns.Remove("NOMBRE_TITULAR")
+
+        ' Establecer posición de la columna "APELLIDO"
+        dt2.Columns("APELLIDO").SetOrdinal(1)
+        dt2.Columns("NRO_CART2").SetOrdinal(2)
+        dt2.Columns("LOCALIDAD").SetOrdinal(4)
+        dt2.Columns("PROVINCIA").SetOrdinal(5)
+
+
+        '*********
+        Dgvimportar.DataSource = dt2
+
+    End Function
+
 
 
 End Class
