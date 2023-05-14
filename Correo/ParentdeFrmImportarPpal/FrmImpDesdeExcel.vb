@@ -470,7 +470,7 @@ Public Class FrmImpDesdeExcel
         For Each column As DataColumn In dt2.Columns
             column.ColumnName = column.ColumnName.Replace(" ", "")
         Next
-
+        '21365
         ' Agregar columna "APELLIDO"
         dt2.Columns.Add("APELLIDO", GetType(String))
         dt2.Columns.Add("NRO_CART2", GetType(String))
