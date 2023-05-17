@@ -475,6 +475,8 @@ Public Class FrmImpDesdeExcel
         dt2.Columns.Add("APELLIDO", GetType(String))
         dt2.Columns.Add("NRO_CART2", GetType(String))
         dt2.Columns.Add("OBS2", GetType(String))
+        dt2.Columns.Add("OBS4", GetType(String))
+        dt2.Columns.Add("OBS", GetType(String))
 
         ' Establecer valor de la columna "APELLIDO"
         For Each row As DataRow In dt2.Rows
@@ -514,6 +516,8 @@ Public Class FrmImpDesdeExcel
             row("PLANTILLA") = planilla
             row("EMPRESA_ENTREGA") = correo
 
+
+
             If row("EMPRESA_ENTREGA") = "SEPRIT" Or row("EMPRESA_ENTREGA") = "CA" Then
                 row("OBS2") = "SEPRIT"
             End If
@@ -523,6 +527,18 @@ Public Class FrmImpDesdeExcel
             If row("EMPRESA_ENTREGA") = "SWISS" Then
                 row("OBS2") = "SWISS"
             End If
+            If row("PLANTILLA").ToString.Contains("Y2") Then
+                row("OBS4") = "Y2"
+            End If
+
+            If row("ARMADO").ToString.Contains("ALTA") Then
+                row("OBS") = "ALTAS"
+            Else
+                row("OBS") = "NOVEDADES"
+            End If
+
+
+            '
 
 
         Next
