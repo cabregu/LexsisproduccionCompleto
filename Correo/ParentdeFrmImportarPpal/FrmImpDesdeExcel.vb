@@ -8,8 +8,8 @@ Public Class FrmImpDesdeExcel
     Public dt As New DataTable
     Public Usuario As String = FrmPpal.Usuario
     Public IMP2 = New Thread(AddressOf PasarDatos)
-    Public NroCarta As Integer
-    'Dim Sel_th As New Thread(AddressOf Insertardesdexls)
+
+    Public NroCart As String
     Dim DtNew As New DataTable
 
 
@@ -48,8 +48,10 @@ Public Class FrmImpDesdeExcel
             Dim CodServ As String = ConfigCorreo.CN_Correo.ObtenerServicio(CmbRemito.Text, CmbCodigo.Text)
             Dim Cantdias As Integer = ConfigCorreo.CN_Correo.ObtenerDiasServicio(CodServ)
             Dim dias As Date = Now.ToShortDateString
-            'DtpFecha.Value = dias.AddDays(Cantdias)
-            BtnSeleccionar.Enabled = True
+
+
+            BtnSeleccionDirecta.Enabled = True
+
             CmbRemito.Enabled = False
 
         End If
@@ -143,11 +145,11 @@ Public Class FrmImpDesdeExcel
         Dgvimportar.DataSource = dt
         LblCant.Text = Dgvimportar.Rows.Count
 
-        NroCarta = ObtenerNroCarta()
+        NroCart = ObtenerNroCarta()
 
         For Each drw As DataGridViewRow In Dgvimportar.Rows
 
-            drw.Cells("NRO_CARTA").Value = NroCarta
+            drw.Cells("NRO_CARTA").Value = NroCart
             drw.Cells("REMITENTE").Value = CmbCodigo.Text
             drw.Cells("TRABAJO").Value = CmbRemito.Text
             drw.Cells("FECH_TRAB").Value = FechaImportacion.ToShortDateString
@@ -156,7 +158,7 @@ Public Class FrmImpDesdeExcel
             drw.Cells("REMITENTE").Style.ForeColor = Color.Red
             drw.Cells("TRABAJO").Style.ForeColor = Color.Red
             drw.Cells("FECH_TRAB").Style.ForeColor = Color.Red
-            NroCarta = NroCarta + 1
+            NroCart = NroCart + 1
 
         Next
 
@@ -259,7 +261,7 @@ Public Class FrmImpDesdeExcel
         End If
 
         If ConfigCorreo.CN_Correo.InstertarCARTAS(Archtxt3) = True Then
-            ActualizarNroCarta(NroCarta)
+            ActualizarNroCarta(NroCart + 1)
             ActualizarRemito(CmbRemito.Text, CmbCodigo.Text, "PEND_IMPR", LblCant.Text)
             If MessageBox.Show(LblCant.Text & " Registros Cargados", LblCant.Text & " Registros Cargados", MessageBoxButtons.OK, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
                 Me.Close()
@@ -603,6 +605,10 @@ Public Class FrmImpDesdeExcel
 
     Private Sub BtnSeleccionDirecta_Click(sender As Object, e As EventArgs) Handles BtnSeleccionDirecta.Click
         ImportarExcelDeswiss()
+        BtnImportar.Enabled = True
+        LblCantidad.Text = Dgvimportar.RowCount
+        MsgBox(NroCart)
+
     End Sub
 
 
@@ -654,6 +660,7 @@ Public Class FrmImpDesdeExcel
         'Agregamos los datos al DataGridView
         Dgvimportar.Rows.Clear()
         Dim NroCarta As Integer = ObtenerNroCarta()
+
         For Each drw As DataRow In dt.Rows
             Dim row As New DataGridViewRow()
             row.CreateCells(Dgvimportar)
@@ -666,12 +673,24 @@ Public Class FrmImpDesdeExcel
                     row.Cells(Dgvimportar.Columns(dt.Columns(i).ColumnName).Index).Value = drw.Item(i)
                 End If
             Next
+
+
             Dgvimportar.Rows.Add(row)
-            NroCarta += 1
+            NroCarta = NroCarta + 1
         Next
+
+
+        For Each drw As DataGridViewRow In Dgvimportar.Rows
+            drw.Cells("NRO").Value = TxtNro.Text
+            NroCart = drw.Cells("NRO_CARTA").Value
+        Next
+
+
+
 
         'Actualizamos la cantidad de filas en el DataGridView
         LblCant.Text = Dgvimportar.Rows.Count.ToString()
+
 
     End Sub
 

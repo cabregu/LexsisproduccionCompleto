@@ -1792,8 +1792,8 @@ Public Class CN_Correo
     End Function
     Public Shared Function ActualizarNroCarta(ByVal NroCarta As String) As Boolean
         'Cargar insert sql
-        Try
-            Dim sqlCarta As String = "UPDATE configuracion SET Desde='" & NroCarta & "'" & " Where Operacion='NRO_CARTA'"
+        'Try
+        Dim sqlCarta As String = "UPDATE configuracion SET Desde='" & NroCarta & "'" & " Where Operacion='NRO_CARTA'"
             Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
             Dim cm As New MySqlCommand(sqlCarta, cn)
             cn.Open()
@@ -1801,9 +1801,9 @@ Public Class CN_Correo
             cn.Close()
             Return True
 
-        Catch ex As Exception
-            Return False
-        End Try
+        'Catch ex As Exception
+        '    Return False
+        'End Try
 
 
     End Function

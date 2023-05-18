@@ -46,6 +46,7 @@ Partial Class FrmImpDesdeExcel
         Me.TxtNro = New System.Windows.Forms.TextBox()
         Me.LblNro = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblCantidad = New System.Windows.Forms.Label()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvNoUtilizado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,10 +55,11 @@ Partial Class FrmImpDesdeExcel
         '
         Me.txtPath.Enabled = False
         Me.txtPath.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPath.Location = New System.Drawing.Point(628, 462)
+        Me.txtPath.Location = New System.Drawing.Point(353, 492)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.Size = New System.Drawing.Size(68, 20)
         Me.txtPath.TabIndex = 71
+        Me.txtPath.Visible = False
         Me.txtPath.WordWrap = False
         '
         'BtnSeleccionar
@@ -206,12 +208,13 @@ Partial Class FrmImpDesdeExcel
         '
         Me.BtnLista.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLista.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnLista.Location = New System.Drawing.Point(6, 128)
+        Me.BtnLista.Location = New System.Drawing.Point(292, 438)
         Me.BtnLista.Name = "BtnLista"
         Me.BtnLista.Size = New System.Drawing.Size(240, 23)
         Me.BtnLista.TabIndex = 92
         Me.BtnLista.Text = "Abrir un Excel con el Lista de campos"
         Me.BtnLista.UseVisualStyleBackColor = True
+        Me.BtnLista.Visible = False
         '
         'BtnNormalizar
         '
@@ -241,9 +244,10 @@ Partial Class FrmImpDesdeExcel
         '
         'BtnSeleccionDirecta
         '
+        Me.BtnSeleccionDirecta.Enabled = False
         Me.BtnSeleccionDirecta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSeleccionDirecta.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnSeleccionDirecta.Location = New System.Drawing.Point(317, 95)
+        Me.BtnSeleccionDirecta.Location = New System.Drawing.Point(6, 128)
         Me.BtnSeleccionDirecta.Name = "BtnSeleccionDirecta"
         Me.BtnSeleccionDirecta.Size = New System.Drawing.Size(147, 23)
         Me.BtnSeleccionDirecta.TabIndex = 94
@@ -252,7 +256,7 @@ Partial Class FrmImpDesdeExcel
         '
         'TxtNro
         '
-        Me.TxtNro.Location = New System.Drawing.Point(364, 28)
+        Me.TxtNro.Location = New System.Drawing.Point(6, 80)
         Me.TxtNro.Name = "TxtNro"
         Me.TxtNro.Size = New System.Drawing.Size(100, 20)
         Me.TxtNro.TabIndex = 95
@@ -262,7 +266,7 @@ Partial Class FrmImpDesdeExcel
         Me.LblNro.AutoSize = True
         Me.LblNro.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblNro.ForeColor = System.Drawing.Color.Maroon
-        Me.LblNro.Location = New System.Drawing.Point(361, 8)
+        Me.LblNro.Location = New System.Drawing.Point(3, 60)
         Me.LblNro.Name = "LblNro"
         Me.LblNro.Size = New System.Drawing.Size(171, 13)
         Me.LblNro.TabIndex = 96
@@ -273,11 +277,22 @@ Partial Class FrmImpDesdeExcel
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Maroon
-        Me.Label1.Location = New System.Drawing.Point(361, 51)
+        Me.Label1.Location = New System.Drawing.Point(3, 103)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 13)
         Me.Label1.TabIndex = 97
         Me.Label1.Text = "D XX-XX"
+        '
+        'LblCantidad
+        '
+        Me.LblCantidad.AutoSize = True
+        Me.LblCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblCantidad.ForeColor = System.Drawing.Color.Maroon
+        Me.LblCantidad.Location = New System.Drawing.Point(723, 438)
+        Me.LblCantidad.Name = "LblCantidad"
+        Me.LblCantidad.Size = New System.Drawing.Size(14, 13)
+        Me.LblCantidad.TabIndex = 98
+        Me.LblCantidad.Text = "0"
         '
         'FrmImpDesdeExcel
         '
@@ -286,6 +301,7 @@ Partial Class FrmImpDesdeExcel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
+        Me.Controls.Add(Me.LblCantidad)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblNro)
         Me.Controls.Add(Me.TxtNro)
@@ -337,4 +353,5 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents TxtNro As TextBox
     Friend WithEvents LblNro As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents LblCantidad As Label
 End Class
