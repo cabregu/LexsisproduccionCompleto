@@ -477,6 +477,7 @@ Public Class FrmImpDesdeExcel
         dt2.Columns.Add("OBS2", GetType(String))
         dt2.Columns.Add("OBS4", GetType(String))
         dt2.Columns.Add("OBS", GetType(String))
+        dt2.Columns.Add("PISO_DEPTO", GetType(String))
 
         ' Establecer valor de la columna "APELLIDO"
         For Each row As DataRow In dt2.Rows
@@ -572,6 +573,19 @@ Public Class FrmImpDesdeExcel
                 row("OBS2") = "ARM"
             ElseIf Not domicilios.ContainsKey(domicilio) Then
                 domicilios.Add(domicilio, 1)
+            End If
+        Next
+
+        Dim fechaLimite As DateTime = DateTime.Now.AddMonths(-2)
+        Dim fechaLimiteStr As String = fechaLimite.ToString("yyyy-MM-dd")
+        Dim DtZonales As DataTable
+        DtZonales = ConsultaZonalesParaImportacionyAsignacion(fechaLimiteStr)
+
+        For Each fila As DataRow In dt2.Rows
+            Dim cp As String = fila("cp").ToString()
+            Dim filasZonales() As DataRow = DtZonales.Select("cp = '" & cp & "'")
+            If filasZonales.Length > 0 AndAlso String.IsNullOrEmpty(fila("OBS2").ToString()) Then
+                fila("piso_depto") = filasZonales(0)("cartero").ToString()
             End If
         Next
 

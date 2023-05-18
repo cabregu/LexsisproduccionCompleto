@@ -2716,6 +2716,28 @@ Public Class CN_Correo
 
 
     'mysql datatble
+
+    Public Shared Function ConsultaZonalesParaImportacionyAsignacion(ByVal Fecha As String) As DataTable
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion & ";Convert Zero Datetime=True")
+        Dim DtResultado As New DataTable
+        Dim sql As String = "SELECT DISTINCT r.cp, r.cartero, r.FECHA_RECORRIDO " &
+                         "FROM correoproduccion.recorridos r " &
+                         "INNER JOIN carterosmail c ON r.cartero = c.codigo " &
+                         "WHERE DATE(r.FECHA_RECORRIDO) > '" & Fecha & "' " &
+                         "GROUP BY r.cp"
+
+
+        Dim cm As New MySqlCommand(sql, cn)
+        Dim da As New MySqlDataAdapter(cm)
+        Dim ds As New DataSet
+        cn.Open()
+        da.Fill(DtResultado)
+        cn.Close()
+
+        Return DtResultado
+
+    End Function
+
     Public Shared Function CargarRemitosPendientes() As DataTable
         Dim sql As String = "Select TipoRemitente, Nro_Remito, Fecha_Retiro, Cliente, Servicio from remitos where Estado='PENDIENTE'"
 
@@ -2874,9 +2896,6 @@ Public Class CN_Correo
 
     End Function
 
-
-
-
     Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As String
         Dim resultado As String = ""
         Try
@@ -2898,8 +2917,6 @@ Public Class CN_Correo
 
     End Function
 
-
-
     Public Shared Function ObtenerMotivoDevoDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select Motivo_devo from devueltas Where nro_carta='" & Carta & "'"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
@@ -2910,7 +2927,6 @@ Public Class CN_Correo
         cn.Close()
         Return resultado
     End Function
-
 
     Public Shared Function ObtenerCarteroDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select cartero from recorridos Where nro_carta='" & Carta & "'  ORDER BY ID DESC LIMIT 1"
@@ -2932,7 +2948,6 @@ Public Class CN_Correo
         cn.Close()
         Return resultado
     End Function
-
     Public Shared Function ObtenerEstadoenRecorrido(ByVal Carta As String) As String
         Dim Sql As String = "Select estado from recorridos Where nro_carta='" & Carta & "' ORDER by ID DESC LIMIT 1"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
