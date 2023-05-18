@@ -42,7 +42,10 @@ Partial Class FrmImpDesdeExcel
         Me.BtnLista = New System.Windows.Forms.Button()
         Me.BtnNormalizar = New System.Windows.Forms.Button()
         Me.BtnSalir = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtnSeleccionDirecta = New System.Windows.Forms.Button()
+        Me.TxtNro = New System.Windows.Forms.TextBox()
+        Me.LblNro = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvNoUtilizado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,22 +54,24 @@ Partial Class FrmImpDesdeExcel
         '
         Me.txtPath.Enabled = False
         Me.txtPath.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPath.Location = New System.Drawing.Point(6, 67)
+        Me.txtPath.Location = New System.Drawing.Point(628, 462)
         Me.txtPath.Name = "txtPath"
-        Me.txtPath.Size = New System.Drawing.Size(342, 20)
+        Me.txtPath.Size = New System.Drawing.Size(68, 20)
         Me.txtPath.TabIndex = 71
+        Me.txtPath.WordWrap = False
         '
         'BtnSeleccionar
         '
         Me.BtnSeleccionar.Enabled = False
         Me.BtnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSeleccionar.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnSeleccionar.Location = New System.Drawing.Point(354, 62)
+        Me.BtnSeleccionar.Location = New System.Drawing.Point(524, 457)
         Me.BtnSeleccionar.Name = "BtnSeleccionar"
         Me.BtnSeleccionar.Size = New System.Drawing.Size(28, 29)
         Me.BtnSeleccionar.TabIndex = 72
         Me.BtnSeleccionar.Text = "S"
         Me.BtnSeleccionar.UseVisualStyleBackColor = True
+        Me.BtnSeleccionar.Visible = False
         '
         'LblCodigo
         '
@@ -124,9 +129,9 @@ Partial Class FrmImpDesdeExcel
         Me.LblFechalimite.ForeColor = System.Drawing.Color.Maroon
         Me.LblFechalimite.Location = New System.Drawing.Point(627, 8)
         Me.LblFechalimite.Name = "LblFechalimite"
-        Me.LblFechalimite.Size = New System.Drawing.Size(42, 13)
+        Me.LblFechalimite.Size = New System.Drawing.Size(109, 13)
         Me.LblFechalimite.TabIndex = 82
-        Me.LblFechalimite.Text = "Fecha"
+        Me.LblFechalimite.Text = "Fecha De Trabajo"
         '
         'BtnImportar
         '
@@ -189,12 +194,13 @@ Partial Class FrmImpDesdeExcel
         Me.BtnArchivo.Enabled = False
         Me.BtnArchivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnArchivo.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnArchivo.Location = New System.Drawing.Point(388, 62)
+        Me.BtnArchivo.Location = New System.Drawing.Point(317, 457)
         Me.BtnArchivo.Name = "BtnArchivo"
         Me.BtnArchivo.Size = New System.Drawing.Size(191, 29)
         Me.BtnArchivo.TabIndex = 87
         Me.BtnArchivo.Text = "Modificar y Reintentar"
         Me.BtnArchivo.UseVisualStyleBackColor = True
+        Me.BtnArchivo.Visible = False
         '
         'BtnLista
         '
@@ -212,13 +218,14 @@ Partial Class FrmImpDesdeExcel
         Me.BtnNormalizar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnNormalizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnNormalizar.Image = Global.Correo.My.Resources.Resources.EXCELFILE
-        Me.BtnNormalizar.Location = New System.Drawing.Point(821, 88)
+        Me.BtnNormalizar.Location = New System.Drawing.Point(573, 440)
         Me.BtnNormalizar.Name = "BtnNormalizar"
         Me.BtnNormalizar.Size = New System.Drawing.Size(49, 62)
         Me.BtnNormalizar.TabIndex = 93
         Me.BtnNormalizar.Text = "Normalizar"
         Me.BtnNormalizar.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.BtnNormalizar.UseVisualStyleBackColor = True
+        Me.BtnNormalizar.Visible = False
         '
         'BtnSalir
         '
@@ -232,14 +239,45 @@ Partial Class FrmImpDesdeExcel
         Me.BtnSalir.TabIndex = 80
         Me.BtnSalir.UseVisualStyleBackColor = True
         '
-        'Button1
+        'BtnSeleccionDirecta
         '
-        Me.Button1.Location = New System.Drawing.Point(594, 112)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 94
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.BtnSeleccionDirecta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSeleccionDirecta.ForeColor = System.Drawing.Color.Maroon
+        Me.BtnSeleccionDirecta.Location = New System.Drawing.Point(317, 95)
+        Me.BtnSeleccionDirecta.Name = "BtnSeleccionDirecta"
+        Me.BtnSeleccionDirecta.Size = New System.Drawing.Size(147, 23)
+        Me.BtnSeleccionDirecta.TabIndex = 94
+        Me.BtnSeleccionDirecta.Text = "Seleccion Directa"
+        Me.BtnSeleccionDirecta.UseVisualStyleBackColor = True
+        '
+        'TxtNro
+        '
+        Me.TxtNro.Location = New System.Drawing.Point(364, 28)
+        Me.TxtNro.Name = "TxtNro"
+        Me.TxtNro.Size = New System.Drawing.Size(100, 20)
+        Me.TxtNro.TabIndex = 95
+        '
+        'LblNro
+        '
+        Me.LblNro.AutoSize = True
+        Me.LblNro.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblNro.ForeColor = System.Drawing.Color.Maroon
+        Me.LblNro.Location = New System.Drawing.Point(361, 8)
+        Me.LblNro.Name = "LblNro"
+        Me.LblNro.Size = New System.Drawing.Size(171, 13)
+        Me.LblNro.TabIndex = 96
+        Me.LblNro.Text = "Fecha del Archivo de trabajo"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Maroon
+        Me.Label1.Location = New System.Drawing.Point(361, 51)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(56, 13)
+        Me.Label1.TabIndex = 97
+        Me.Label1.Text = "D XX-XX"
         '
         'FrmImpDesdeExcel
         '
@@ -248,7 +286,10 @@ Partial Class FrmImpDesdeExcel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblNro)
+        Me.Controls.Add(Me.TxtNro)
+        Me.Controls.Add(Me.BtnSeleccionDirecta)
         Me.Controls.Add(Me.BtnNormalizar)
         Me.Controls.Add(Me.BtnLista)
         Me.Controls.Add(Me.BtnArchivo)
@@ -292,5 +333,8 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents BtnArchivo As System.Windows.Forms.Button
     Friend WithEvents BtnLista As System.Windows.Forms.Button
     Friend WithEvents BtnNormalizar As System.Windows.Forms.Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents BtnSeleccionDirecta As Button
+    Friend WithEvents TxtNro As TextBox
+    Friend WithEvents LblNro As Label
+    Friend WithEvents Label1 As Label
 End Class

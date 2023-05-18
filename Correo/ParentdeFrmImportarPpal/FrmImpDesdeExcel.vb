@@ -10,6 +10,7 @@ Public Class FrmImpDesdeExcel
     Public IMP2 = New Thread(AddressOf PasarDatos)
     Public NroCarta As Integer
     'Dim Sel_th As New Thread(AddressOf Insertardesdexls)
+    Dim DtNew As New DataTable
 
 
 
@@ -23,6 +24,9 @@ Public Class FrmImpDesdeExcel
         For i As Integer = 0 To Servicios.Count - 1
             CmbCodigo.Items.Add(Servicios.Item(i).ToString)
         Next
+
+        Dim fechaTexto As String = DtpFecha.Value.ToString("dd-MM")
+        TxtNro.Text = "D-" & fechaTexto
 
 
 
@@ -425,9 +429,6 @@ Public Class FrmImpDesdeExcel
         End Try
     End Function
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        ImportarExcelDeswiss()
-    End Sub
 
 
 
@@ -441,7 +442,8 @@ Public Class FrmImpDesdeExcel
             .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
             If .ShowDialog = Windows.Forms.DialogResult.OK Then
 
-                LeerExcelComoDataTable(.FileName)
+                DtNew = LeerExcelComoDataTable(.FileName)
+                InsertarDesdeDataTable(DtNew, DtpFecha.Value)
 
             Else
                 openFD.Dispose()
@@ -454,7 +456,7 @@ Public Class FrmImpDesdeExcel
 
 
 
-    Public Function LeerExcelComoDataTable(ByVal rutaArchivo As String)
+    Public Function LeerExcelComoDataTable(ByVal rutaArchivo As String) As DataTable
         Dim NombreHoja As String = ObtenerNombrePrimeraHoja(rutaArchivo)
 
         Dim dt2 As New DataTable
@@ -470,14 +472,17 @@ Public Class FrmImpDesdeExcel
         For Each column As DataColumn In dt2.Columns
             column.ColumnName = column.ColumnName.Replace(" ", "")
         Next
-        '21365
+
         ' Agregar columna "APELLIDO"
         dt2.Columns.Add("APELLIDO", GetType(String))
         dt2.Columns.Add("NRO_CART2", GetType(String))
+        dt2.Columns.Add("PISO_DEPTO", GetType(String))
+        dt2.Columns.Add("NRO", GetType(String))
+        dt2.Columns.Add("OBS", GetType(String))
         dt2.Columns.Add("OBS2", GetType(String))
         dt2.Columns.Add("OBS4", GetType(String))
-        dt2.Columns.Add("OBS", GetType(String))
-        dt2.Columns.Add("PISO_DEPTO", GetType(String))
+
+
 
         ' Establecer valor de la columna "APELLIDO"
         For Each row As DataRow In dt2.Rows
@@ -544,7 +549,7 @@ Public Class FrmImpDesdeExcel
 
         Next
 
-
+        dt2.Columns("DOMI_ENT").ColumnName = "CALLE"
         dt2.Columns("LOCA_DENO_ENT").ColumnName = "LOCALIDAD"
         dt2.Columns("PROV_DENO_ENT").ColumnName = "PROVINCIA"
         dt2.Columns("POST").ColumnName = "CP"
@@ -567,7 +572,7 @@ Public Class FrmImpDesdeExcel
         Dim domicilios As New Dictionary(Of String, Integer)
 
         For Each row As DataRow In dt2.Rows
-            Dim domicilio As String = row("DOMI_ENT").ToString().TrimEnd()
+            Dim domicilio As String = row("CALLE").ToString().TrimEnd()
             If domicilios.ContainsKey(domicilio) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
                 domicilios(domicilio) += 1
                 row("OBS2") = "ARM"
@@ -592,10 +597,83 @@ Public Class FrmImpDesdeExcel
 
 
         '*********
-        Dgvimportar.DataSource = dt2
+        Return dt2
 
     End Function
 
+    Private Sub BtnSeleccionDirecta_Click(sender As Object, e As EventArgs) Handles BtnSeleccionDirecta.Click
+        ImportarExcelDeswiss()
+    End Sub
+
+
+    Private Sub InsertarDesdeDataTable(ByVal dt As DataTable, ByVal FechaImportacion As Date)
+
+        Dim ArrCampos As New ArrayList
+        ArrCampos.Add("APELLIDO")
+        ArrCampos.Add("CALLE")
+        ArrCampos.Add("NRO")
+        ArrCampos.Add("PISO_DEPTO")
+        ArrCampos.Add("CP")
+        ArrCampos.Add("LOCALIDAD")
+        ArrCampos.Add("PROVINCIA")
+        ArrCampos.Add("EMPRESA")
+        ArrCampos.Add("NRO_CART2")
+        ArrCampos.Add("SOCIO")
+        ArrCampos.Add("OBS")
+        ArrCampos.Add("OBS2")
+        ArrCampos.Add("OBS3")
+        ArrCampos.Add("OBS4")
+
+        dt.Columns("APELLIDO").SetOrdinal(1)
+        dt.Columns("CALLE").SetOrdinal(2)
+        dt.Columns("NRO").SetOrdinal(3)
+        dt.Columns("PISO_DEPTO").SetOrdinal(4)
+        dt.Columns("CP").SetOrdinal(5)
+        dt.Columns("LOCALIDAD").SetOrdinal(6)
+        dt.Columns("PROVINCIA").SetOrdinal(7)
+        dt.Columns("EMPRESA").SetOrdinal(8)
+        dt.Columns("NRO_CART2").SetOrdinal(9)
+        dt.Columns("SOCIO").SetOrdinal(10)
+        dt.Columns("OBS").SetOrdinal(11)
+        dt.Columns("OBS2").SetOrdinal(12)
+        dt.Columns("OBS3").SetOrdinal(13)
+        dt.Columns("OBS4").SetOrdinal(14)
+
+        'Agregamos las columnas al DataGridView
+        Dgvimportar.Columns.Clear()
+        Dgvimportar.Columns.Add("NRO_CARTA", "NRO_CARTA")
+        Dgvimportar.Columns.Add("REMITENTE", "REMITENTE")
+        Dgvimportar.Columns.Add("TRABAJO", "TRABAJO")
+        Dgvimportar.Columns.Add("FECH_TRAB", "FECH_TRAB")
+        For Each col As DataColumn In dt.Columns
+            If ArrCampos.Contains(col.ColumnName) Then
+                Dgvimportar.Columns.Add(col.ColumnName, col.ColumnName)
+            End If
+        Next
+
+        'Agregamos los datos al DataGridView
+        Dgvimportar.Rows.Clear()
+        Dim NroCarta As Integer = ObtenerNroCarta()
+        For Each drw As DataRow In dt.Rows
+            Dim row As New DataGridViewRow()
+            row.CreateCells(Dgvimportar)
+            row.Cells(0).Value = NroCarta
+            row.Cells(1).Value = CmbCodigo.Text
+            row.Cells(2).Value = CmbRemito.Text
+            row.Cells(3).Value = FechaImportacion.ToShortDateString
+            For i As Integer = 0 To dt.Columns.Count - 1
+                If ArrCampos.Contains(dt.Columns(i).ColumnName) Then
+                    row.Cells(Dgvimportar.Columns(dt.Columns(i).ColumnName).Index).Value = drw.Item(i)
+                End If
+            Next
+            Dgvimportar.Rows.Add(row)
+            NroCarta += 1
+        Next
+
+        'Actualizamos la cantidad de filas en el DataGridView
+        LblCant.Text = Dgvimportar.Rows.Count.ToString()
+
+    End Sub
 
 
 End Class
