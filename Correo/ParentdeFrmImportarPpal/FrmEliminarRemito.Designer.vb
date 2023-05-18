@@ -22,9 +22,9 @@ Partial Class FrmEliminarRemito
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DGVRemito = New System.Windows.Forms.DataGridView
-        Me.BtnSalir = New System.Windows.Forms.Button
-        Me.BtnEliminar = New System.Windows.Forms.Button
+        Me.DGVRemito = New System.Windows.Forms.DataGridView()
+        Me.BtnSalir = New System.Windows.Forms.Button()
+        Me.BtnEliminar = New System.Windows.Forms.Button()
         CType(Me.DGVRemito, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -68,7 +68,7 @@ Partial Class FrmEliminarRemito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(536, 227)
         Me.Controls.Add(Me.BtnEliminar)
         Me.Controls.Add(Me.BtnSalir)

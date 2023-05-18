@@ -22,52 +22,52 @@ Partial Class FrmCargaManual
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TxtNombre_Apellido = New System.Windows.Forms.TextBox
-        Me.TxtCp = New System.Windows.Forms.TextBox
-        Me.TxtProvincia = New System.Windows.Forms.TextBox
-        Me.TxtNro_Carta2 = New System.Windows.Forms.TextBox
-        Me.TxtCalle = New System.Windows.Forms.TextBox
-        Me.TxtLocalidad = New System.Windows.Forms.TextBox
-        Me.TxtEmpresa = New System.Windows.Forms.TextBox
-        Me.TxtPrecio = New System.Windows.Forms.TextBox
-        Me.LblNombre = New System.Windows.Forms.Label
-        Me.LblCalle = New System.Windows.Forms.Label
-        Me.LblCP = New System.Windows.Forms.Label
-        Me.LblLocalidad = New System.Windows.Forms.Label
-        Me.LblProvincia = New System.Windows.Forms.Label
-        Me.LblEmpresa = New System.Windows.Forms.Label
-        Me.LblNro_Carta2 = New System.Windows.Forms.Label
-        Me.LblPrecio = New System.Windows.Forms.Label
-        Me.LblSocio = New System.Windows.Forms.Label
-        Me.TxtSocio = New System.Windows.Forms.TextBox
-        Me.LvlValor = New System.Windows.Forms.Label
-        Me.TxtValor = New System.Windows.Forms.TextBox
-        Me.LblTipo_Doc = New System.Windows.Forms.Label
-        Me.TxtTipo_Doc = New System.Windows.Forms.TextBox
-        Me.LblCobrar = New System.Windows.Forms.Label
-        Me.TxtCobrar = New System.Windows.Forms.TextBox
-        Me.LblDocumento = New System.Windows.Forms.Label
-        Me.TxtDocumento = New System.Windows.Forms.TextBox
-        Me.LblObs = New System.Windows.Forms.Label
-        Me.TxtObs = New System.Windows.Forms.TextBox
-        Me.LblObs2 = New System.Windows.Forms.Label
-        Me.TxtObs2 = New System.Windows.Forms.TextBox
-        Me.LblObs3 = New System.Windows.Forms.Label
-        Me.TxtObs3 = New System.Windows.Forms.TextBox
-        Me.LblObs4 = New System.Windows.Forms.Label
-        Me.TxtObs4 = New System.Windows.Forms.TextBox
-        Me.TxtNro_Carta = New System.Windows.Forms.TextBox
-        Me.LblNro_Carta = New System.Windows.Forms.Label
-        Me.BtnSalir = New System.Windows.Forms.Button
-        Me.BtnIngresar = New System.Windows.Forms.Button
-        Me.BtnNuevo = New System.Windows.Forms.Button
-        Me.CmbRemitente = New System.Windows.Forms.ComboBox
-        Me.LblServicio = New System.Windows.Forms.Label
-        Me.LblNroTrabajo = New System.Windows.Forms.Label
-        Me.CmbNroTrab = New System.Windows.Forms.ComboBox
-        Me.BtnSeleccionar = New System.Windows.Forms.Button
-        Me.DtFechTrab = New System.Windows.Forms.DateTimePicker
-        Me.LblFecha_Trab = New System.Windows.Forms.Label
+        Me.TxtNombre_Apellido = New System.Windows.Forms.TextBox()
+        Me.TxtCp = New System.Windows.Forms.TextBox()
+        Me.TxtProvincia = New System.Windows.Forms.TextBox()
+        Me.TxtNro_Carta2 = New System.Windows.Forms.TextBox()
+        Me.TxtCalle = New System.Windows.Forms.TextBox()
+        Me.TxtLocalidad = New System.Windows.Forms.TextBox()
+        Me.TxtEmpresa = New System.Windows.Forms.TextBox()
+        Me.TxtPrecio = New System.Windows.Forms.TextBox()
+        Me.LblNombre = New System.Windows.Forms.Label()
+        Me.LblCalle = New System.Windows.Forms.Label()
+        Me.LblCP = New System.Windows.Forms.Label()
+        Me.LblLocalidad = New System.Windows.Forms.Label()
+        Me.LblProvincia = New System.Windows.Forms.Label()
+        Me.LblEmpresa = New System.Windows.Forms.Label()
+        Me.LblNro_Carta2 = New System.Windows.Forms.Label()
+        Me.LblPrecio = New System.Windows.Forms.Label()
+        Me.LblSocio = New System.Windows.Forms.Label()
+        Me.TxtSocio = New System.Windows.Forms.TextBox()
+        Me.LvlValor = New System.Windows.Forms.Label()
+        Me.TxtValor = New System.Windows.Forms.TextBox()
+        Me.LblTipo_Doc = New System.Windows.Forms.Label()
+        Me.TxtTipo_Doc = New System.Windows.Forms.TextBox()
+        Me.LblCobrar = New System.Windows.Forms.Label()
+        Me.TxtCobrar = New System.Windows.Forms.TextBox()
+        Me.LblDocumento = New System.Windows.Forms.Label()
+        Me.TxtDocumento = New System.Windows.Forms.TextBox()
+        Me.LblObs = New System.Windows.Forms.Label()
+        Me.TxtObs = New System.Windows.Forms.TextBox()
+        Me.LblObs2 = New System.Windows.Forms.Label()
+        Me.TxtObs2 = New System.Windows.Forms.TextBox()
+        Me.LblObs3 = New System.Windows.Forms.Label()
+        Me.TxtObs3 = New System.Windows.Forms.TextBox()
+        Me.LblObs4 = New System.Windows.Forms.Label()
+        Me.TxtObs4 = New System.Windows.Forms.TextBox()
+        Me.TxtNro_Carta = New System.Windows.Forms.TextBox()
+        Me.LblNro_Carta = New System.Windows.Forms.Label()
+        Me.BtnSalir = New System.Windows.Forms.Button()
+        Me.BtnIngresar = New System.Windows.Forms.Button()
+        Me.BtnNuevo = New System.Windows.Forms.Button()
+        Me.CmbRemitente = New System.Windows.Forms.ComboBox()
+        Me.LblServicio = New System.Windows.Forms.Label()
+        Me.LblNroTrabajo = New System.Windows.Forms.Label()
+        Me.CmbNroTrab = New System.Windows.Forms.ComboBox()
+        Me.BtnSeleccionar = New System.Windows.Forms.Button()
+        Me.DtFechTrab = New System.Windows.Forms.DateTimePicker()
+        Me.LblFecha_Trab = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TxtNombre_Apellido
@@ -522,7 +522,7 @@ Partial Class FrmCargaManual
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(516, 334)
         Me.Controls.Add(Me.LblFecha_Trab)
         Me.Controls.Add(Me.DtFechTrab)

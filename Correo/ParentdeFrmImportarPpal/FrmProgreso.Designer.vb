@@ -22,10 +22,10 @@ Partial Class FrmProgreso
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
+        Me.components = New System.ComponentModel.Container()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.LblMensaje = New System.Windows.Forms.Label
+        Me.LblMensaje = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ProgressBar1
@@ -53,7 +53,7 @@ Partial Class FrmProgreso
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DarkCyan
+        Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(250, 60)
         Me.Controls.Add(Me.LblMensaje)
         Me.Controls.Add(Me.ProgressBar1)

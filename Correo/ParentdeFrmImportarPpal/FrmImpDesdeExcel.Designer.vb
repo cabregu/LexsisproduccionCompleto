@@ -55,7 +55,7 @@ Partial Class FrmImpDesdeExcel
         '
         Me.txtPath.Enabled = False
         Me.txtPath.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPath.Location = New System.Drawing.Point(353, 492)
+        Me.txtPath.Location = New System.Drawing.Point(317, 492)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.Size = New System.Drawing.Size(68, 20)
         Me.txtPath.TabIndex = 71
@@ -67,7 +67,7 @@ Partial Class FrmImpDesdeExcel
         Me.BtnSeleccionar.Enabled = False
         Me.BtnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSeleccionar.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnSeleccionar.Location = New System.Drawing.Point(524, 457)
+        Me.BtnSeleccionar.Location = New System.Drawing.Point(514, 457)
         Me.BtnSeleccionar.Name = "BtnSeleccionar"
         Me.BtnSeleccionar.Size = New System.Drawing.Size(28, 29)
         Me.BtnSeleccionar.TabIndex = 72
@@ -169,7 +169,7 @@ Partial Class FrmImpDesdeExcel
         Me.Dgvimportar.Location = New System.Drawing.Point(6, 157)
         Me.Dgvimportar.Name = "Dgvimportar"
         Me.Dgvimportar.ReadOnly = True
-        Me.Dgvimportar.Size = New System.Drawing.Size(762, 275)
+        Me.Dgvimportar.Size = New System.Drawing.Size(891, 275)
         Me.Dgvimportar.TabIndex = 85
         '
         'DgvNoUtilizado
@@ -178,12 +178,13 @@ Partial Class FrmImpDesdeExcel
         Me.DgvNoUtilizado.AllowUserToDeleteRows = False
         Me.DgvNoUtilizado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvNoUtilizado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SIN_USAR})
-        Me.DgvNoUtilizado.Location = New System.Drawing.Point(774, 157)
+        Me.DgvNoUtilizado.Location = New System.Drawing.Point(391, 483)
         Me.DgvNoUtilizado.Name = "DgvNoUtilizado"
         Me.DgvNoUtilizado.ReadOnly = True
         Me.DgvNoUtilizado.RowHeadersVisible = False
-        Me.DgvNoUtilizado.Size = New System.Drawing.Size(123, 275)
+        Me.DgvNoUtilizado.Size = New System.Drawing.Size(123, 29)
         Me.DgvNoUtilizado.TabIndex = 86
+        Me.DgvNoUtilizado.Visible = False
         '
         'SIN_USAR
         '
@@ -221,7 +222,7 @@ Partial Class FrmImpDesdeExcel
         Me.BtnNormalizar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnNormalizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnNormalizar.Image = Global.Correo.My.Resources.Resources.EXCELFILE
-        Me.BtnNormalizar.Location = New System.Drawing.Point(573, 440)
+        Me.BtnNormalizar.Location = New System.Drawing.Point(538, 435)
         Me.BtnNormalizar.Name = "BtnNormalizar"
         Me.BtnNormalizar.Size = New System.Drawing.Size(49, 62)
         Me.BtnNormalizar.TabIndex = 93
@@ -288,7 +289,7 @@ Partial Class FrmImpDesdeExcel
         Me.LblCantidad.AutoSize = True
         Me.LblCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblCantidad.ForeColor = System.Drawing.Color.Maroon
-        Me.LblCantidad.Location = New System.Drawing.Point(723, 438)
+        Me.LblCantidad.Location = New System.Drawing.Point(793, 435)
         Me.LblCantidad.Name = "LblCantidad"
         Me.LblCantidad.Size = New System.Drawing.Size(14, 13)
         Me.LblCantidad.TabIndex = 98
@@ -299,7 +300,7 @@ Partial Class FrmImpDesdeExcel
         Me.AcceptButton = Me.BtnSeleccionar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
         Me.Controls.Add(Me.LblCantidad)
         Me.Controls.Add(Me.Label1)

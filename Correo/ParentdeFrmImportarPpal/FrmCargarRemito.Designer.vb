@@ -22,25 +22,25 @@ Partial Class FrmCargarRemito
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.CmbCliente = New System.Windows.Forms.ComboBox
-        Me.CmbRemitente = New System.Windows.Forms.ComboBox
-        Me.TxtNroRemito = New System.Windows.Forms.TextBox
-        Me.DtpFecha_retiro = New System.Windows.Forms.DateTimePicker
-        Me.BtnIngresar = New System.Windows.Forms.Button
-        Me.DGVRemito = New System.Windows.Forms.DataGridView
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Nro_Remito = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Servicio = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.BtnEliminar = New System.Windows.Forms.Button
-        Me.LblCliente = New System.Windows.Forms.Label
-        Me.LblFecha = New System.Windows.Forms.Label
-        Me.LblRemitente = New System.Windows.Forms.Label
-        Me.LblNro = New System.Windows.Forms.Label
-        Me.BtnSalir = New System.Windows.Forms.Button
-        Me.CmbServicio = New System.Windows.Forms.ComboBox
-        Me.LblServicio = New System.Windows.Forms.Label
+        Me.CmbCliente = New System.Windows.Forms.ComboBox()
+        Me.CmbRemitente = New System.Windows.Forms.ComboBox()
+        Me.TxtNroRemito = New System.Windows.Forms.TextBox()
+        Me.DtpFecha_retiro = New System.Windows.Forms.DateTimePicker()
+        Me.BtnIngresar = New System.Windows.Forms.Button()
+        Me.DGVRemito = New System.Windows.Forms.DataGridView()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Nro_Remito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Servicio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BtnEliminar = New System.Windows.Forms.Button()
+        Me.LblCliente = New System.Windows.Forms.Label()
+        Me.LblFecha = New System.Windows.Forms.Label()
+        Me.LblRemitente = New System.Windows.Forms.Label()
+        Me.LblNro = New System.Windows.Forms.Label()
+        Me.BtnSalir = New System.Windows.Forms.Button()
+        Me.CmbServicio = New System.Windows.Forms.ComboBox()
+        Me.LblServicio = New System.Windows.Forms.Label()
         CType(Me.DGVRemito, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -206,7 +206,7 @@ Partial Class FrmCargarRemito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(561, 298)
         Me.Controls.Add(Me.LblServicio)
         Me.Controls.Add(Me.CmbServicio)

@@ -3,6 +3,7 @@ Imports System.Data.OleDb
 Imports System.Threading
 Imports Microsoft.Office.Interop
 Imports System.IO
+Imports System
 
 Public Class FrmImpDesdeExcel
     Public dt As New DataTable
@@ -269,8 +270,9 @@ Public Class FrmImpDesdeExcel
 
         End If
 
+        NroCart = 0
 
-        'ConfigCorreo.CN_Correo.ImportarcionRegistros(dt, CmbRemito.Text, CmbCodigo.Text, DtpFLimite.Value.ToShortDateString, Usuario)
+
     End Sub
 
 
@@ -445,7 +447,11 @@ Public Class FrmImpDesdeExcel
             If .ShowDialog = Windows.Forms.DialogResult.OK Then
 
                 DtNew = LeerExcelComoDataTable(.FileName)
-                InsertarDesdeDataTable(DtNew, DtpFecha.Value)
+
+                If Not IsNothing(DtNew) Then
+                    InsertarDesdeDataTable(DtNew, DtpFecha.Value)
+                End If
+
 
             Else
                 openFD.Dispose()
@@ -475,139 +481,162 @@ Public Class FrmImpDesdeExcel
             column.ColumnName = column.ColumnName.Replace(" ", "")
         Next
 
-        ' Agregar columna "APELLIDO"
-        dt2.Columns.Add("APELLIDO", GetType(String))
-        dt2.Columns.Add("NRO_CART2", GetType(String))
-        dt2.Columns.Add("PISO_DEPTO", GetType(String))
-        dt2.Columns.Add("NRO", GetType(String))
-        dt2.Columns.Add("OBS", GetType(String))
-        dt2.Columns.Add("OBS2", GetType(String))
-        dt2.Columns.Add("OBS4", GetType(String))
+
+        If VerificarCampos(dt2) Then
 
 
 
-        ' Establecer valor de la columna "APELLIDO"
-        For Each row As DataRow In dt2.Rows
-
-            'Juntar Apellido y nombre en uns sola columna ya creada llamada apellido
-            Dim apellidoTitular As String = row("APELLIDO_TITULAR").ToString().TrimEnd()
-            Dim nombreTitular As String = row("NOMBRE_TITULAR").ToString().TrimEnd()
-            Dim calle As String = row("DOMI_ENT").ToString().TrimEnd()
-            calle = calle.Replace("PISO", "").Replace("DEPTO", "").Replace("OF", "")
-            Dim contra As String = row("CONTRA").ToString().TrimEnd()
-            Dim creden As String = row("CREDEN").ToString().TrimEnd()
-            Dim integ As String = row("INTEGRANTES").ToString().TrimEnd()
-            contra = contra.PadLeft(7, "0")
-            creden = creden.PadLeft(7, "0")
-            Dim NroCart2 As String = contra & "-" & creden & "-" & integ
-            Dim locali As String = row("LOCA_DENO_ENT").ToString().TrimEnd().ToUpper()
-            Dim provin As String = row("PROV_DENO_ENT").ToString().TrimEnd().ToUpper()
-            locali = locali.Replace("CIUDAD AUTONOMA BUENOS AIRES", "CAPITAL FEDERAL")
-            Dim cp As String = row("POST").ToString().TrimEnd()
-            Dim empres As String = row("RAZON").ToString().TrimEnd()
-            Dim tele As String = row("TELE").ToString().TrimEnd()
-            Dim planilla As String = row("PLANTILLA").ToString().TrimEnd()
-            Dim correo As String = row("EMPRESA_ENTREGA").ToString().TrimEnd()
 
 
-            '        
-
-            row("APELLIDO") = apellidoTitular & " " & nombreTitular
-            row("DOMI_ENT") = calle
-            row("CREDEN") = creden
-            row("NRO_CART2") = NroCart2.Replace("/", "-")
-            row("LOCA_DENO_ENT") = locali
-            row("PROV_DENO_ENT") = provin
-            row("POST") = cp
-            row("RAZON") = empres
-            row("TELE") = tele
-            row("PLANTILLA") = planilla
-            row("EMPRESA_ENTREGA") = correo
+            ' Agregar columna "APELLIDO"
+            dt2.Columns.Add("APELLIDO", GetType(String))
+            dt2.Columns.Add("NRO_CART2", GetType(String))
+            dt2.Columns.Add("PISO_DEPTO", GetType(String))
+            dt2.Columns.Add("NRO", GetType(String))
+            dt2.Columns.Add("OBS", GetType(String))
+            dt2.Columns.Add("OBS2", GetType(String))
+            dt2.Columns.Add("OBS4", GetType(String))
 
 
 
-            If row("EMPRESA_ENTREGA") = "SEPRIT" Or row("EMPRESA_ENTREGA") = "CA" Then
-                row("OBS2") = "SEPRIT"
-            End If
-            If row("EMPRESA_ENTREGA") = "DEVOLVER A SWISS" Then
-                row("OBS2") = "DEV A SWISS"
-            End If
-            If row("EMPRESA_ENTREGA") = "SWISS" Then
-                row("OBS2") = "SWISS"
-            End If
-            If row("PLANTILLA").ToString.Contains("Y2") Then
-                row("OBS4") = "Y2"
-            End If
+            ' Establecer valor de la columna "APELLIDO"
+            For Each row As DataRow In dt2.Rows
 
-            If row("ARMADO").ToString.Contains("ALTA") Then
-                row("OBS") = "ALTAS"
-            Else
-                row("OBS") = "NOVEDADES"
-            End If
-
-
-            '
-
-
-        Next
-
-        dt2.Columns("DOMI_ENT").ColumnName = "CALLE"
-        dt2.Columns("LOCA_DENO_ENT").ColumnName = "LOCALIDAD"
-        dt2.Columns("PROV_DENO_ENT").ColumnName = "PROVINCIA"
-        dt2.Columns("POST").ColumnName = "CP"
-        dt2.Columns("RAZON").ColumnName = "EMPRESA"
-        dt2.Columns("TELE").ColumnName = "SOCIO"
-        dt2.Columns("PLANTILLA").ColumnName = "OBS3"
+                'Juntar Apellido y nombre en uns sola columna ya creada llamada apellido
+                Dim apellidoTitular As String = row("APELLIDO_TITULAR").ToString().TrimEnd()
+                Dim nombreTitular As String = row("NOMBRE_TITULAR").ToString().TrimEnd()
+                Dim calle As String = row("DOMI_ENT").ToString().TrimEnd()
+                calle = calle.Replace("PISO", "").Replace("DEPTO", "").Replace("OF", "")
+                Dim contra As String = row("CONTRA").ToString().TrimEnd()
+                Dim creden As String = row("CREDEN").ToString().TrimEnd()
+                Dim integ As String = row("INTEGRANTES").ToString().TrimEnd()
+                contra = contra.PadLeft(7, "0")
+                creden = creden.PadLeft(7, "0")
+                Dim NroCart2 As String = contra & "-" & creden & "-" & integ
+                Dim locali As String = row("LOCA_DENO_ENT").ToString().TrimEnd().ToUpper()
+                Dim provin As String = row("PROV_DENO_ENT").ToString().TrimEnd().ToUpper()
+                locali = locali.Replace("CIUDAD AUTONOMA BUENOS AIRES", "CAPITAL FEDERAL")
+                Dim cp As String = row("POST").ToString().TrimEnd()
+                Dim empres As String = row("RAZON").ToString().TrimEnd()
+                Dim tele As String = row("TELE").ToString().TrimEnd()
+                Dim planilla As String = row("PLANTILLA").ToString().TrimEnd()
+                Dim correo As String = row("EMPRESA_ENTREGA").ToString().TrimEnd()
 
 
+                '        
 
-        dt2.Columns.Remove("APELLIDO_TITULAR")
-        dt2.Columns.Remove("NOMBRE_TITULAR")
-
-        ' Establecer posición de la columna "APELLIDO"
-        dt2.Columns("APELLIDO").SetOrdinal(1)
-        dt2.Columns("NRO_CART2").SetOrdinal(2)
-        dt2.Columns("LOCALIDAD").SetOrdinal(4)
-        dt2.Columns("PROVINCIA").SetOrdinal(5)
-
-
-        Dim domicilios As New Dictionary(Of String, Integer)
-
-        For Each row As DataRow In dt2.Rows
-            Dim domicilio As String = row("CALLE").ToString().TrimEnd()
-            If domicilios.ContainsKey(domicilio) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
-                domicilios(domicilio) += 1
-                row("OBS2") = "ARM"
-            ElseIf Not domicilios.ContainsKey(domicilio) Then
-                domicilios.Add(domicilio, 1)
-            End If
-        Next
-
-        Dim fechaLimite As DateTime = DateTime.Now.AddMonths(-2)
-        Dim fechaLimiteStr As String = fechaLimite.ToString("yyyy-MM-dd")
-        Dim DtZonales As DataTable
-        DtZonales = ConsultaZonalesParaImportacionyAsignacion(fechaLimiteStr)
-
-        For Each fila As DataRow In dt2.Rows
-            Dim cp As String = fila("cp").ToString()
-            Dim filasZonales() As DataRow = DtZonales.Select("cp = '" & cp & "'")
-            If filasZonales.Length > 0 AndAlso String.IsNullOrEmpty(fila("OBS2").ToString()) Then
-                fila("piso_depto") = filasZonales(0)("cartero").ToString()
-            End If
-        Next
+                row("APELLIDO") = apellidoTitular & " " & nombreTitular
+                row("DOMI_ENT") = calle
+                row("CREDEN") = creden
+                row("NRO_CART2") = NroCart2.Replace("/", "-")
+                row("LOCA_DENO_ENT") = locali
+                row("PROV_DENO_ENT") = provin
+                row("POST") = cp
+                row("RAZON") = empres
+                row("TELE") = tele
+                row("PLANTILLA") = planilla
+                row("EMPRESA_ENTREGA") = correo
 
 
 
-        '*********
-        Return dt2
+                If row("EMPRESA_ENTREGA") = "SEPRIT" Or row("EMPRESA_ENTREGA") = "CA" Then
+                    row("OBS2") = "SEPRIT"
+                End If
+                If row("EMPRESA_ENTREGA") = "DEVOLVER A SWISS" Then
+                    row("OBS2") = "DEV A SWISS"
+                End If
+                If row("EMPRESA_ENTREGA") = "SWISS" Then
+                    row("OBS2") = "SWISS"
+                End If
+                If row("PLANTILLA").ToString.Contains("Y2") Then
+                    row("OBS4") = "Y2"
+                End If
+
+                If row("ARMADO").ToString.Contains("ALTA") Then
+                    row("OBS") = "ALTAS"
+                Else
+                    row("OBS") = "NOVEDADES"
+                End If
+
+
+                '
+
+
+            Next
+
+            dt2.Columns("DOMI_ENT").ColumnName = "CALLE"
+            dt2.Columns("LOCA_DENO_ENT").ColumnName = "LOCALIDAD"
+            dt2.Columns("PROV_DENO_ENT").ColumnName = "PROVINCIA"
+            dt2.Columns("POST").ColumnName = "CP"
+            dt2.Columns("RAZON").ColumnName = "EMPRESA"
+            dt2.Columns("TELE").ColumnName = "SOCIO"
+            dt2.Columns("PLANTILLA").ColumnName = "OBS3"
+
+
+
+            dt2.Columns.Remove("APELLIDO_TITULAR")
+            dt2.Columns.Remove("NOMBRE_TITULAR")
+
+            ' Establecer posición de la columna "APELLIDO"
+            dt2.Columns("APELLIDO").SetOrdinal(1)
+            dt2.Columns("NRO_CART2").SetOrdinal(2)
+            dt2.Columns("LOCALIDAD").SetOrdinal(4)
+            dt2.Columns("PROVINCIA").SetOrdinal(5)
+
+
+            Dim domicilios As New Dictionary(Of String, Integer)
+
+            For Each row As DataRow In dt2.Rows
+                Dim domicilio As String = row("CALLE").ToString().TrimEnd()
+                If domicilios.ContainsKey(domicilio) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
+                    domicilios(domicilio) += 1
+                    row("OBS2") = "ARM"
+                ElseIf Not domicilios.ContainsKey(domicilio) Then
+                    domicilios.Add(domicilio, 1)
+                End If
+            Next
+
+            Dim fechaLimite As DateTime = DateTime.Now.AddMonths(-2)
+            Dim fechaLimiteStr As String = fechaLimite.ToString("yyyy-MM-dd")
+            Dim DtZonales As DataTable
+            DtZonales = ConsultaZonalesParaImportacionyAsignacion(fechaLimiteStr)
+
+            For Each fila As DataRow In dt2.Rows
+                Dim cp As String = fila("cp").ToString()
+                Dim filasZonales() As DataRow = DtZonales.Select("cp = '" & cp & "'")
+                If filasZonales.Length > 0 AndAlso String.IsNullOrEmpty(fila("OBS2").ToString()) Then
+                    fila("piso_depto") = filasZonales(0)("cartero").ToString()
+                End If
+            Next
+
+
+
+            '*********
+            Return dt2
+
+        End If
 
     End Function
+
+    Private Function VerificarCampos(ByVal tabla As DataTable) As Boolean
+        Dim camposRequeridos As String() = {"CONTRA", "APELLIDO_TITULAR", "NOMBRE_TITULAR", "DOMI_ENT", "LOCA_DENO_ENT", "PROV_DENO_ENT", "POST", "PLAN_CODI", "CREDEN", "INTEGRANTES", "CUENTA", "RAZON", "SUBC", "SUBCTA_DENO", "ARMADO", "PROV_DENO_PAR", "LOCA_DENO_PAR", "CARTI_DENO", "EMPRESA_ENTREGA", "C", "TELE", "PLANTILLA", "FILA", "FILAS", "CAN"}
+
+        For Each campo As String In camposRequeridos
+            If Not tabla.Columns.Contains(campo) Then
+                MsgBox("El campo " & campo & " No se encuentra en el archivo y puede que haya mas campos que no esten verifique el archivo")
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+
+
+
 
     Private Sub BtnSeleccionDirecta_Click(sender As Object, e As EventArgs) Handles BtnSeleccionDirecta.Click
         ImportarExcelDeswiss()
         BtnImportar.Enabled = True
         LblCantidad.Text = Dgvimportar.RowCount
-        MsgBox(NroCart)
 
     End Sub
 
@@ -657,6 +686,7 @@ Public Class FrmImpDesdeExcel
             End If
         Next
 
+
         'Agregamos los datos al DataGridView
         Dgvimportar.Rows.Clear()
         Dim NroCarta As Integer = ObtenerNroCarta()
@@ -680,9 +710,22 @@ Public Class FrmImpDesdeExcel
         Next
 
 
+
+
+
         For Each drw As DataGridViewRow In Dgvimportar.Rows
             drw.Cells("NRO").Value = TxtNro.Text
             NroCart = drw.Cells("NRO_CARTA").Value
+            drw.Cells("NRO_CARTA").Value = NroCart
+            drw.Cells("REMITENTE").Value = CmbCodigo.Text
+            drw.Cells("TRABAJO").Value = CmbRemito.Text
+            drw.Cells("FECH_TRAB").Value = FechaImportacion.ToShortDateString
+
+            drw.Cells("NRO_CARTA").Style.ForeColor = Color.Red
+            drw.Cells("REMITENTE").Style.ForeColor = Color.Red
+            drw.Cells("TRABAJO").Style.ForeColor = Color.Red
+            drw.Cells("FECH_TRAB").Style.ForeColor = Color.Red
+
         Next
 
 
