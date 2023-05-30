@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class SWISSKPAGINACOMPLETA
+Public Class REMITO
     Inherits ReportClass
     
     Public Sub New()
@@ -136,7 +136,7 @@ Public Class CachedSWISSKPAGINACOMPLETA
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As SWISSKPAGINACOMPLETA = New SWISSKPAGINACOMPLETA()
+        Dim rpt As REMITO = New REMITO()
         rpt.Site = Me.Site
         Return rpt
     End Function

@@ -218,7 +218,7 @@
     <Compile Include="Etiquetas\SWISSK.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Etiquetas\SWISSKPAGINACOMPLETA.vb">
+    <Compile Include="Etiquetas\REMITO.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EZTWAIN.VB" />
@@ -849,7 +849,7 @@
     <None Include="Etiquetas\SOBRE_impresionFormatoSwiss_CREDENCIALES.rpt" />
     <None Include="Etiquetas\SOBRE_INGLES.rpt" />
     <None Include="Etiquetas\SWISSK.rpt" />
-    <None Include="Etiquetas\SWISSKPAGINACOMPLETA.rpt" />
+    <None Include="Etiquetas\REMITO.rpt" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
