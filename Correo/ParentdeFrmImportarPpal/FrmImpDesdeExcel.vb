@@ -173,7 +173,6 @@ Public Class FrmImpDesdeExcel
         'End Try
     End Sub
 
-
     Private Sub BtnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSalir.Click
         Me.Close()
 
@@ -433,9 +432,6 @@ Public Class FrmImpDesdeExcel
         End Try
     End Function
 
-
-
-
     Private Function ImportarExcelDeswiss()
 
         Dim openFD As New OpenFileDialog()
@@ -460,9 +456,6 @@ Public Class FrmImpDesdeExcel
         End With
 
     End Function
-
-
-
 
     Public Function LeerExcelComoDataTable(ByVal rutaArchivo As String) As DataTable
         Dim NombreHoja As String = ObtenerNombrePrimeraHoja(rutaArchivo)
@@ -596,22 +589,62 @@ Public Class FrmImpDesdeExcel
                 End If
             Next
 
-            Dim fechaLimite As DateTime = DateTime.Now.AddMonths(-2)
-            Dim fechaLimiteStr As String = fechaLimite.ToString("yyyy-MM-dd")
-            Dim DtZonales As DataTable
-            DtZonales = ConsultaZonalesParaImportacionyAsignacion(fechaLimiteStr)
+            '**********************AsignacionZonal********************
+
 
             For Each fila As DataRow In dt2.Rows
-                Dim cp As String = fila("cp").ToString()
-                Dim filasZonales() As DataRow = DtZonales.Select("cp = '" & cp & "'")
-                If filasZonales.Length > 0 AndAlso String.IsNullOrEmpty(fila("OBS2").ToString()) Then
-                    fila("piso_depto") = filasZonales(0)("cartero").ToString()
+                If fila("obs2").ToString = "" Or fila("obs2").ToString = "ARM" Then
+                    fila("piso_depto") = ConsultaZonalesParaImportacionyAsignacion(fila("cp").ToString())
+                End If
+            Next
+
+            '*********************************modo simple*********************
+
+            Dim registrosPorCP As New Dictionary(Of String, Integer)()
+
+            For Each fila As DataRow In dt2.Rows
+                If Not fila("cp") Is DBNull.Value AndAlso fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "" Then
+                    Dim cp As String = fila("cp").ToString()
+                    If registrosPorCP.ContainsKey(cp) Then
+                        registrosPorCP(cp) += 1
+                    Else
+                        registrosPorCP.Add(cp, 1)
+                    End If
                 End If
             Next
 
 
+            For Each kvp As KeyValuePair(Of String, Integer) In registrosPorCP
+                Dim cp As String = kvp.Key
+                Dim cantidadRegistros As Integer = kvp.Value
+                Dim mitad As Integer = cantidadRegistros \ 2
+                Dim contador As Integer = 0
 
-            '*********
+                For Each fila As DataRow In dt2.Rows
+                    If fila("cp").ToString() = cp AndAlso (fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "") Then
+                        If contador < mitad Then
+                            fila("obs2") = "MODO S"
+                        Else
+                            fila("obs2") = ""
+                        End If
+                        contador += 1
+                    End If
+                Next
+
+                ' Si queda un número impar de registros, asignar el resto como "simple"
+                If contador < cantidadRegistros Then
+                    For Each fila As DataRow In dt2.Rows
+                        If fila("cp").ToString() = cp AndAlso (fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "") Then
+                            fila("obs2") = "MODO S"
+                            contador += 1
+                            If contador >= cantidadRegistros Then
+                                Exit For
+                            End If
+                        End If
+                    Next
+                End If
+            Next
+
             Return dt2
 
         End If
@@ -630,16 +663,12 @@ Public Class FrmImpDesdeExcel
         Return True
     End Function
 
-
-
-
     Private Sub BtnSeleccionDirecta_Click(sender As Object, e As EventArgs) Handles BtnSeleccionDirecta.Click
         ImportarExcelDeswiss()
         BtnImportar.Enabled = True
         LblCantidad.Text = Dgvimportar.RowCount
 
     End Sub
-
 
     Private Sub InsertarDesdeDataTable(ByVal dt As DataTable, ByVal FechaImportacion As Date)
 
@@ -738,4 +767,55 @@ Public Class FrmImpDesdeExcel
     End Sub
 
 
+    Private Sub ExportarDataGridViewAExcel(ByVal dgv As DataGridView)
+        Try
+            ' Crear una nueva instancia de Excel
+            Dim exApp As Object = CreateObject("Excel.Application")
+
+
+            ' Crear un nuevo libro y una nueva hoja
+            Dim exLibro As Object = exApp.Workbooks.Add()
+            Dim exHoja As Object = exLibro.Worksheets.Add()
+
+            ' Establecer el formato de todas las celdas como texto
+            exHoja.Cells.NumberFormat = "@"
+
+            ' Obtener el número de filas y columnas
+            Dim NCol As Integer = dgv.ColumnCount
+            Dim NRow As Integer = dgv.RowCount
+
+            ' Copiar los nombres de las columnas al libro
+            Dim rg As Object = exHoja.Range(exHoja.Cells(1, 1), exHoja.Cells(1, NCol))
+            rg.Value = dgv.Columns.Cast(Of DataGridViewColumn).Select(Function(c) c.HeaderText).ToArray()
+
+            ' Copiar los datos del DataGridView al libro
+            Dim data(NRow - 1, NCol - 1) As Object
+            For i As Integer = 0 To NRow - 1
+                For j As Integer = 0 To NCol - 1
+                    data(i, j) = dgv.Rows(i).Cells(j).Value
+                Next
+            Next
+            rg = exHoja.Range(exHoja.Cells(2, 1), exHoja.Cells(NRow + 1, NCol))
+            rg.Value = data
+
+            ' Ajustar el ancho de las columnas para que se ajusten al contenido
+            rg = exHoja.Range(exHoja.Cells(1, 1), exHoja.Cells(NRow + 1, NCol))
+            rg.EntireColumn.AutoFit()
+
+            ' Guardar el archivo de Excel y cerrar la aplicación de Excel
+            'exLibro.SaveAs("C:\temp\Transito.xls")
+            'exLibro.Close(True)
+            'exApp.Quit()
+
+            exApp.Visible = True
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error al exportar a Excel")
+        End Try
+    End Sub
+
+    Private Sub BtnExcel_Click(sender As Object, e As EventArgs) Handles BtnExcel.Click
+        ExportarDataGridViewAExcel(Dgvimportar)
+    End Sub
 End Class

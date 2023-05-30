@@ -2717,26 +2717,22 @@ Public Class CN_Correo
 
     'mysql datatble
 
-    Public Shared Function ConsultaZonalesParaImportacionyAsignacion(ByVal Fecha As String) As DataTable
+    Public Shared Function ConsultaZonalesParaImportacionyAsignacion(ByVal cp As String) As String
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion & ";Convert Zero Datetime=True")
-        Dim DtResultado As New DataTable
-        Dim sql As String = "SELECT DISTINCT r.cp, r.cartero, r.FECHA_RECORRIDO " &
-                         "FROM correoproduccion.recorridos r " &
-                         "INNER JOIN carterosmail c ON r.cartero = c.codigo " &
-                         "WHERE DATE(r.FECHA_RECORRIDO) > '" & Fecha & "' " &
-                         "GROUP BY r.cp"
-
+        Dim sql As String = "SELECT nombreetiqueta FROM asignaciones WHERE cp = '" & cp & "'"
 
         Dim cm As New MySqlCommand(sql, cn)
-        Dim da As New MySqlDataAdapter(cm)
-        Dim ds As New DataSet
         cn.Open()
-        da.Fill(DtResultado)
+        Dim result As Object = cm.ExecuteScalar()
         cn.Close()
 
-        Return DtResultado
-
+        If result IsNot Nothing Then
+            Return result.ToString()
+        Else
+            Return String.Empty
+        End If
     End Function
+
 
     Public Shared Function CargarRemitosPendientes() As DataTable
         Dim sql As String = "Select TipoRemitente, Nro_Remito, Fecha_Retiro, Cliente, Servicio from remitos where Estado='PENDIENTE'"

@@ -47,6 +47,7 @@ Partial Class FrmImpDesdeExcel
         Me.LblNro = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblCantidad = New System.Windows.Forms.Label()
+        Me.BtnExcel = New System.Windows.Forms.Button()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvNoUtilizado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -224,7 +225,7 @@ Partial Class FrmImpDesdeExcel
         Me.BtnNormalizar.Image = Global.Correo.My.Resources.Resources.EXCELFILE
         Me.BtnNormalizar.Location = New System.Drawing.Point(538, 435)
         Me.BtnNormalizar.Name = "BtnNormalizar"
-        Me.BtnNormalizar.Size = New System.Drawing.Size(49, 62)
+        Me.BtnNormalizar.Size = New System.Drawing.Size(82, 62)
         Me.BtnNormalizar.TabIndex = 93
         Me.BtnNormalizar.Text = "Normalizar"
         Me.BtnNormalizar.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -295,6 +296,18 @@ Partial Class FrmImpDesdeExcel
         Me.LblCantidad.TabIndex = 98
         Me.LblCantidad.Text = "0"
         '
+        'BtnExcel
+        '
+        Me.BtnExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BtnExcel.Image = Global.Correo.My.Resources.Resources.table_excel
+        Me.BtnExcel.Location = New System.Drawing.Point(847, 103)
+        Me.BtnExcel.Name = "BtnExcel"
+        Me.BtnExcel.Size = New System.Drawing.Size(47, 48)
+        Me.BtnExcel.TabIndex = 99
+        Me.BtnExcel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.BtnExcel.UseVisualStyleBackColor = True
+        '
         'FrmImpDesdeExcel
         '
         Me.AcceptButton = Me.BtnSeleccionar
@@ -302,6 +315,7 @@ Partial Class FrmImpDesdeExcel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
+        Me.Controls.Add(Me.BtnExcel)
         Me.Controls.Add(Me.LblCantidad)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblNro)
@@ -355,4 +369,5 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents LblNro As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents LblCantidad As Label
+    Friend WithEvents BtnExcel As Button
 End Class
