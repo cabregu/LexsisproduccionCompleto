@@ -125,6 +125,102 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Etiquetas\ACUSE SWISS.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ACUSE_FACT-EMPRESA.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ACUSE_MARKETING.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\AR hoja completa.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\AR MKTG2020  sin detalle.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\AR MKTG2020.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ARM GRANDE.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ARM.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ARMADO CREDENCIALES2021 III.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ARMADO_CREDENCIALES2021  II.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ARMADO_CREDENCIALES2021.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ARM_CARATULA.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\AVISO LEXS.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\CARATULA MKTG2020  2.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\CARATULA MKTG2020.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\Copia de ARM.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\Copia de ETIQUETA_MODO_S.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETA REMITENTE LEXS.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETA REMITENTE SWISS.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETACAMPOS.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETA_Datos_Basicos.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETA_MARKETING.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETA_MODO_S.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ETIQUETA_RR.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\ExcelACUSE_LEXS2021.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\FACTURACION_EMPRESA.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SOBRE_CORREOARG_CREDENCIALES.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SOBRE_CORREOARG_deFacturacion.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SOBRE_impresionFormatoSwiss_CREDENCIALES.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SOBRE_INGLES.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SWISSK.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SWISSKPAGINACOMPLETA.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EZTWAIN.VB" />
     <Compile Include="FrmAPruebaBackup.Designer.vb">
       <DependentUpon>FrmAPruebaBackup.vb</DependentUpon>
@@ -721,6 +817,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Etiquetas\ACUSE SWISS.rpt" />
+    <None Include="Etiquetas\ACUSE_FACT-EMPRESA.rpt" />
+    <None Include="Etiquetas\ACUSE_MARKETING.rpt" />
+    <None Include="Etiquetas\AR hoja completa.rpt" />
+    <None Include="Etiquetas\AR MKTG2020  sin detalle.rpt" />
+    <None Include="Etiquetas\AR MKTG2020.rpt" />
+    <None Include="Etiquetas\ARM GRANDE.rpt" />
+    <None Include="Etiquetas\ARM.rpt" />
+    <None Include="Etiquetas\ARMADO CREDENCIALES2021 III.rpt" />
+    <None Include="Etiquetas\ARMADO_CREDENCIALES2021  II.rpt" />
+    <None Include="Etiquetas\ARMADO_CREDENCIALES2021.rpt" />
+    <None Include="Etiquetas\ARM_CARATULA.rpt" />
+    <None Include="Etiquetas\AVISO LEXS.rpt" />
+    <None Include="Etiquetas\CARATULA MKTG2020  2.rpt" />
+    <None Include="Etiquetas\CARATULA MKTG2020.rpt" />
+    <None Include="Etiquetas\Copia de ARM.rpt" />
+    <None Include="Etiquetas\Copia de ARMADO CREDENCIALES2021 III.rpt" />
+    <None Include="Etiquetas\Copia de ETIQUETA_MODO_S.rpt" />
+    <None Include="Etiquetas\ETIQUETA REMITENTE LEXS.rpt" />
+    <None Include="Etiquetas\ETIQUETA REMITENTE SWISS.rpt" />
+    <None Include="Etiquetas\ETIQUETACAMPOS.rpt" />
+    <None Include="Etiquetas\ETIQUETA_Datos_Basicos.rpt" />
+    <None Include="Etiquetas\ETIQUETA_MARKETING.rpt" />
+    <None Include="Etiquetas\ETIQUETA_MODO_S.rpt" />
+    <None Include="Etiquetas\ETIQUETA_RR.rpt" />
+    <None Include="Etiquetas\ExcelACUSE_LEXS2021.rpt" />
+    <None Include="Etiquetas\FACTURACION_EMPRESA.rpt" />
+    <None Include="Etiquetas\SOBRE_CORREOARG_CREDENCIALES.rpt" />
+    <None Include="Etiquetas\SOBRE_CORREOARG_deFacturacion.rpt" />
+    <None Include="Etiquetas\SOBRE_impresionFormatoSwiss_CREDENCIALES.rpt" />
+    <None Include="Etiquetas\SOBRE_INGLES.rpt" />
+    <None Include="Etiquetas\SWISSK.rpt" />
+    <None Include="Etiquetas\SWISSKPAGINACOMPLETA.rpt" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
