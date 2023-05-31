@@ -19,22 +19,22 @@ Partial Class FrmEstadistica
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DgvResultado1 = New System.Windows.Forms.DataGridView
-        Me.BtnConsultar = New System.Windows.Forms.Button
-        Me.LblCantidad = New System.Windows.Forms.Label
-        Me.Btnxls = New System.Windows.Forms.Button
-        Me.Dgvcontador = New System.Windows.Forms.DataGridView
-        Me.Btnxls2 = New System.Windows.Forms.Button
-        Me.DtpDesde = New System.Windows.Forms.DateTimePicker
-        Me.DtpHasta = New System.Windows.Forms.DateTimePicker
-        Me.LblDe = New System.Windows.Forms.Label
-        Me.LblA = New System.Windows.Forms.Label
-        Me.BtnPlanilla = New System.Windows.Forms.Button
-        Me.DgvPlanilla = New System.Windows.Forms.DataGridView
-        Me.Xls3 = New System.Windows.Forms.Button
-        Me.DgvCarteros = New System.Windows.Forms.DataGridView
-        Me.BtnCarteros = New System.Windows.Forms.Button
-        Me.DgvEstados = New System.Windows.Forms.DataGridView
+        Me.DgvResultado1 = New System.Windows.Forms.DataGridView()
+        Me.BtnConsultar = New System.Windows.Forms.Button()
+        Me.LblCantidad = New System.Windows.Forms.Label()
+        Me.Btnxls = New System.Windows.Forms.Button()
+        Me.Dgvcontador = New System.Windows.Forms.DataGridView()
+        Me.Btnxls2 = New System.Windows.Forms.Button()
+        Me.DtpDesde = New System.Windows.Forms.DateTimePicker()
+        Me.DtpHasta = New System.Windows.Forms.DateTimePicker()
+        Me.LblDe = New System.Windows.Forms.Label()
+        Me.LblA = New System.Windows.Forms.Label()
+        Me.BtnPlanilla = New System.Windows.Forms.Button()
+        Me.DgvPlanilla = New System.Windows.Forms.DataGridView()
+        Me.Xls3 = New System.Windows.Forms.Button()
+        Me.DgvCarteros = New System.Windows.Forms.DataGridView()
+        Me.BtnCarteros = New System.Windows.Forms.Button()
+        Me.DgvEstados = New System.Windows.Forms.DataGridView()
         CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Gb.SuspendLayout()
         CType(Me.DgvResultado1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -46,11 +46,11 @@ Partial Class FrmEstadistica
         '
         'PBLogo
         '
-        Me.PBLogo.Location = New System.Drawing.Point(5, 706)
+        Me.PBLogo.Location = New System.Drawing.Point(5, 699)
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(1329, 706)
+        Me.BtnSalir.Location = New System.Drawing.Point(1323, 699)
         '
         'Gb
         '
@@ -70,7 +70,7 @@ Partial Class FrmEstadistica
         Me.Gb.Controls.Add(Me.BtnConsultar)
         Me.Gb.Controls.Add(Me.LblCantidad)
         Me.Gb.Controls.Add(Me.Btnxls)
-        Me.Gb.Size = New System.Drawing.Size(1376, 757)
+        Me.Gb.Size = New System.Drawing.Size(1370, 750)
         Me.Gb.Controls.SetChildIndex(Me.Btnxls, 0)
         Me.Gb.Controls.SetChildIndex(Me.LblCantidad, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnConsultar, 0)
@@ -245,7 +245,7 @@ Partial Class FrmEstadistica
         'FrmEstadistica
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(1376, 756)
+        Me.ClientSize = New System.Drawing.Size(1370, 749)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "FrmEstadistica"

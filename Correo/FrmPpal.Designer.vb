@@ -424,15 +424,15 @@ Partial Class FrmPpal
         Me.LblEscaneo.ForeColor = System.Drawing.Color.Maroon
         Me.LblEscaneo.Location = New System.Drawing.Point(16, 8)
         Me.LblEscaneo.Name = "LblEscaneo"
-        Me.LblEscaneo.Size = New System.Drawing.Size(53, 16)
+        Me.LblEscaneo.Size = New System.Drawing.Size(46, 16)
         Me.LblEscaneo.TabIndex = 0
-        Me.LblEscaneo.Text = "Escaneo"
+        Me.LblEscaneo.Text = "Remito"
         '
         'BtnEscaneo
         '
         Me.BtnEscaneo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnEscaneo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BtnEscaneo.Image = Global.Correo.My.Resources.Resources.índice1
+        Me.BtnEscaneo.Image = Global.Correo.My.Resources.Resources.remito
         Me.BtnEscaneo.Location = New System.Drawing.Point(12, 32)
         Me.BtnEscaneo.Name = "BtnEscaneo"
         Me.BtnEscaneo.Size = New System.Drawing.Size(53, 38)

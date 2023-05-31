@@ -48,7 +48,7 @@ Partial Class FrmCargarRemito
         '
         Me.CmbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbCliente.FormattingEnabled = True
-        Me.CmbCliente.Location = New System.Drawing.Point(257, 24)
+        Me.CmbCliente.Location = New System.Drawing.Point(257, 26)
         Me.CmbCliente.Name = "CmbCliente"
         Me.CmbCliente.Size = New System.Drawing.Size(139, 21)
         Me.CmbCliente.TabIndex = 0
@@ -57,7 +57,7 @@ Partial Class FrmCargarRemito
         '
         Me.CmbRemitente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbRemitente.FormattingEnabled = True
-        Me.CmbRemitente.Location = New System.Drawing.Point(447, 23)
+        Me.CmbRemitente.Location = New System.Drawing.Point(447, 25)
         Me.CmbRemitente.Name = "CmbRemitente"
         Me.CmbRemitente.Size = New System.Drawing.Size(109, 21)
         Me.CmbRemitente.TabIndex = 1
@@ -65,21 +65,21 @@ Partial Class FrmCargarRemito
         'TxtNroRemito
         '
         Me.TxtNroRemito.Enabled = False
-        Me.TxtNroRemito.Location = New System.Drawing.Point(257, 74)
+        Me.TxtNroRemito.Location = New System.Drawing.Point(257, 76)
         Me.TxtNroRemito.Name = "TxtNroRemito"
         Me.TxtNroRemito.Size = New System.Drawing.Size(91, 20)
         Me.TxtNroRemito.TabIndex = 2
         '
         'DtpFecha_retiro
         '
-        Me.DtpFecha_retiro.Location = New System.Drawing.Point(12, 24)
+        Me.DtpFecha_retiro.Location = New System.Drawing.Point(12, 26)
         Me.DtpFecha_retiro.Name = "DtpFecha_retiro"
         Me.DtpFecha_retiro.Size = New System.Drawing.Size(209, 20)
         Me.DtpFecha_retiro.TabIndex = 3
         '
         'BtnIngresar
         '
-        Me.BtnIngresar.Location = New System.Drawing.Point(447, 73)
+        Me.BtnIngresar.Location = New System.Drawing.Point(481, 75)
         Me.BtnIngresar.Name = "BtnIngresar"
         Me.BtnIngresar.Size = New System.Drawing.Size(71, 24)
         Me.BtnIngresar.TabIndex = 4
@@ -92,11 +92,11 @@ Partial Class FrmCargarRemito
         Me.DGVRemito.AllowUserToDeleteRows = False
         Me.DGVRemito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVRemito.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Cliente, Me.Tipo, Me.Nro_Remito, Me.Servicio})
-        Me.DGVRemito.Location = New System.Drawing.Point(12, 103)
+        Me.DGVRemito.Location = New System.Drawing.Point(12, 105)
         Me.DGVRemito.Name = "DGVRemito"
         Me.DGVRemito.ReadOnly = True
         Me.DGVRemito.RowTemplate.Height = 25
-        Me.DGVRemito.Size = New System.Drawing.Size(544, 165)
+        Me.DGVRemito.Size = New System.Drawing.Size(544, 73)
         Me.DGVRemito.TabIndex = 5
         '
         'Fecha
@@ -131,7 +131,7 @@ Partial Class FrmCargarRemito
         '
         'BtnEliminar
         '
-        Me.BtnEliminar.Location = New System.Drawing.Point(12, 274)
+        Me.BtnEliminar.Location = New System.Drawing.Point(12, 184)
         Me.BtnEliminar.Name = "BtnEliminar"
         Me.BtnEliminar.Size = New System.Drawing.Size(109, 20)
         Me.BtnEliminar.TabIndex = 6
@@ -141,7 +141,7 @@ Partial Class FrmCargarRemito
         'LblCliente
         '
         Me.LblCliente.AutoSize = True
-        Me.LblCliente.Location = New System.Drawing.Point(254, 5)
+        Me.LblCliente.Location = New System.Drawing.Point(254, 7)
         Me.LblCliente.Name = "LblCliente"
         Me.LblCliente.Size = New System.Drawing.Size(39, 13)
         Me.LblCliente.TabIndex = 7
@@ -150,7 +150,7 @@ Partial Class FrmCargarRemito
         'LblFecha
         '
         Me.LblFecha.AutoSize = True
-        Me.LblFecha.Location = New System.Drawing.Point(12, 7)
+        Me.LblFecha.Location = New System.Drawing.Point(12, 9)
         Me.LblFecha.Name = "LblFecha"
         Me.LblFecha.Size = New System.Drawing.Size(78, 13)
         Me.LblFecha.TabIndex = 8
@@ -159,7 +159,7 @@ Partial Class FrmCargarRemito
         'LblRemitente
         '
         Me.LblRemitente.AutoSize = True
-        Me.LblRemitente.Location = New System.Drawing.Point(444, 5)
+        Me.LblRemitente.Location = New System.Drawing.Point(444, 7)
         Me.LblRemitente.Name = "LblRemitente"
         Me.LblRemitente.Size = New System.Drawing.Size(55, 13)
         Me.LblRemitente.TabIndex = 9
@@ -168,7 +168,7 @@ Partial Class FrmCargarRemito
         'LblNro
         '
         Me.LblNro.AutoSize = True
-        Me.LblNro.Location = New System.Drawing.Point(254, 57)
+        Me.LblNro.Location = New System.Drawing.Point(254, 59)
         Me.LblNro.Name = "LblNro"
         Me.LblNro.Size = New System.Drawing.Size(75, 13)
         Me.LblNro.TabIndex = 10
@@ -176,7 +176,7 @@ Partial Class FrmCargarRemito
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(481, 274)
+        Me.BtnSalir.Location = New System.Drawing.Point(481, 184)
         Me.BtnSalir.Name = "BtnSalir"
         Me.BtnSalir.Size = New System.Drawing.Size(75, 20)
         Me.BtnSalir.TabIndex = 11
@@ -188,7 +188,7 @@ Partial Class FrmCargarRemito
         Me.CmbServicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbServicio.Enabled = False
         Me.CmbServicio.FormattingEnabled = True
-        Me.CmbServicio.Location = New System.Drawing.Point(12, 76)
+        Me.CmbServicio.Location = New System.Drawing.Point(12, 78)
         Me.CmbServicio.Name = "CmbServicio"
         Me.CmbServicio.Size = New System.Drawing.Size(151, 21)
         Me.CmbServicio.TabIndex = 12
@@ -196,7 +196,7 @@ Partial Class FrmCargarRemito
         'LblServicio
         '
         Me.LblServicio.AutoSize = True
-        Me.LblServicio.Location = New System.Drawing.Point(12, 57)
+        Me.LblServicio.Location = New System.Drawing.Point(12, 59)
         Me.LblServicio.Name = "LblServicio"
         Me.LblServicio.Size = New System.Drawing.Size(75, 13)
         Me.LblServicio.TabIndex = 13
@@ -207,7 +207,7 @@ Partial Class FrmCargarRemito
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
-        Me.ClientSize = New System.Drawing.Size(561, 298)
+        Me.ClientSize = New System.Drawing.Size(571, 230)
         Me.Controls.Add(Me.LblServicio)
         Me.Controls.Add(Me.CmbServicio)
         Me.Controls.Add(Me.BtnSalir)
