@@ -1060,7 +1060,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RemitoLexs.png" />
-    <None Include="Resources\REMITO LEXS.png" />
     <Content Include="Resources\remito.png" />
     <None Include="EXCELFILE.png" />
     <Content Include="lexs.ico" />

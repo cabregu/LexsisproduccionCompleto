@@ -20,7 +20,7 @@ Partial Class FrmRemitosLexs
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.BtnNuevo = New System.Windows.Forms.Button()
-        Me.TxtPlanillaDevo = New System.Windows.Forms.TextBox()
+        Me.TxtRemito = New System.Windows.Forms.TextBox()
         Me.CmbDesde = New System.Windows.Forms.ComboBox()
         Me.DtpDesde = New System.Windows.Forms.DateTimePicker()
         Me.PbRemito = New System.Windows.Forms.PictureBox()
@@ -44,13 +44,13 @@ Partial Class FrmRemitosLexs
         Me.Gb.Controls.Add(Me.PbRemito)
         Me.Gb.Controls.Add(Me.DtpDesde)
         Me.Gb.Controls.Add(Me.CmbDesde)
-        Me.Gb.Controls.Add(Me.TxtPlanillaDevo)
+        Me.Gb.Controls.Add(Me.TxtRemito)
         Me.Gb.Controls.Add(Me.BtnNuevo)
         Me.Gb.Size = New System.Drawing.Size(1193, 1062)
         Me.Gb.Controls.SetChildIndex(Me.PBLogo, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnSalir, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnNuevo, 0)
-        Me.Gb.Controls.SetChildIndex(Me.TxtPlanillaDevo, 0)
+        Me.Gb.Controls.SetChildIndex(Me.TxtRemito, 0)
         Me.Gb.Controls.SetChildIndex(Me.CmbDesde, 0)
         Me.Gb.Controls.SetChildIndex(Me.DtpDesde, 0)
         Me.Gb.Controls.SetChildIndex(Me.PbRemito, 0)
@@ -67,19 +67,20 @@ Partial Class FrmRemitosLexs
         Me.BtnNuevo.Text = "Nuevo"
         Me.BtnNuevo.UseVisualStyleBackColor = False
         '
-        'TxtPlanillaDevo
+        'TxtRemito
         '
-        Me.TxtPlanillaDevo.Enabled = False
-        Me.TxtPlanillaDevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPlanillaDevo.Location = New System.Drawing.Point(98, 59)
-        Me.TxtPlanillaDevo.Name = "TxtPlanillaDevo"
-        Me.TxtPlanillaDevo.Size = New System.Drawing.Size(80, 20)
-        Me.TxtPlanillaDevo.TabIndex = 62
+        Me.TxtRemito.Enabled = False
+        Me.TxtRemito.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtRemito.Location = New System.Drawing.Point(98, 59)
+        Me.TxtRemito.Name = "TxtRemito"
+        Me.TxtRemito.Size = New System.Drawing.Size(120, 20)
+        Me.TxtRemito.TabIndex = 62
+        Me.TxtRemito.Text = "1122246"
         '
         'CmbDesde
         '
         Me.CmbDesde.FormattingEnabled = True
-        Me.CmbDesde.Location = New System.Drawing.Point(199, 58)
+        Me.CmbDesde.Location = New System.Drawing.Point(272, 59)
         Me.CmbDesde.Name = "CmbDesde"
         Me.CmbDesde.Size = New System.Drawing.Size(121, 21)
         Me.CmbDesde.TabIndex = 106
@@ -127,7 +128,7 @@ Partial Class FrmRemitosLexs
     End Sub
 
     Friend WithEvents BtnNuevo As Button
-    Friend WithEvents TxtPlanillaDevo As TextBox
+    Friend WithEvents TxtRemito As TextBox
     Friend WithEvents CmbDesde As ComboBox
     Friend WithEvents DtpDesde As DateTimePicker
     Friend WithEvents PbRemito As PictureBox
