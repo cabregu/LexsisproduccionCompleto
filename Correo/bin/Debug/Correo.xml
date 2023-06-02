@@ -297,6 +297,11 @@ Correo
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Correo.My.Resources.Resources.remito">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Correo.My.Resources.Resources.storage">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.

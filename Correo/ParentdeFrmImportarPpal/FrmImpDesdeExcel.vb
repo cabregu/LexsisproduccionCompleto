@@ -577,15 +577,23 @@ Public Class FrmImpDesdeExcel
             dt2.Columns("PROVINCIA").SetOrdinal(5)
 
 
-            Dim domicilios As New Dictionary(Of String, Integer)
+            '++++++++++++++++++++++++++++FALTA DIVISION POR EMPRESA +++++++++++++++++++
+
+            Dim domicilios As New Dictionary(Of String, Dictionary(Of String, Integer))
 
             For Each row As DataRow In dt2.Rows
                 Dim domicilio As String = row("CALLE").ToString().TrimEnd()
-                If domicilios.ContainsKey(domicilio) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
-                    domicilios(domicilio) += 1
-                    row("OBS2") = "ARM"
-                ElseIf Not domicilios.ContainsKey(domicilio) Then
-                    domicilios.Add(domicilio, 1)
+                Dim empresa As String = row("EMPRESA").ToString().TrimEnd()
+
+                If domicilios.ContainsKey(domicilio) Then
+                    If domicilios(domicilio).ContainsKey(empresa) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
+                        domicilios(domicilio)(empresa) += 1
+                        row("OBS2") = "ARM"
+                    ElseIf Not domicilios(domicilio).ContainsKey(empresa) Then
+                        domicilios(domicilio).Add(empresa, 1)
+                    End If
+                Else
+                    domicilios.Add(domicilio, New Dictionary(Of String, Integer) From {{empresa, 1}})
                 End If
             Next
 
