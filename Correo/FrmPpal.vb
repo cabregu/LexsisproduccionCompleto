@@ -25,7 +25,7 @@ Public Class FrmPpal
     'Dim frMot As FrmMotivos
 
     'grupo superior
-    Dim frmprec As FrmPreciosd
+    Dim frmprec As FrmPrecios
     Dim frmcost As FrmConfirmacionAcuse
     Dim frmprov As FrmProveedores
     Dim frmcart As FrmCarteros
