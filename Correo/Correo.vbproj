@@ -282,6 +282,12 @@
     <Compile Include="GrupoSuperior\FrmEstado1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GrupoSuperior\FrmRemitosLexs.Designer.vb">
+      <DependentUpon>FrmRemitosLexs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GrupoSuperior\FrmRemitosLexs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Individuales\FrmCargaFeriado.Designer.vb">
       <DependentUpon>FrmCargaFeriado.vb</DependentUpon>
     </Compile>
@@ -406,12 +412,6 @@
       <DependentUpon>FrmListadoPiezas.vb</DependentUpon>
     </Compile>
     <Compile Include="GrupoInferior\FrmListadoPiezas.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GrupoInferior\FrmRemitos.Designer.vb">
-      <DependentUpon>FrmRemitos.vb</DependentUpon>
-    </Compile>
-    <Compile Include="GrupoInferior\FrmRemitos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GrupoInferior\FrmTransito.Designer.vb">
@@ -625,6 +625,9 @@
       <DependentUpon>FrmConsultasXls.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="GrupoSuperior\FrmRemitosLexs.resx">
+      <DependentUpon>FrmRemitosLexs.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Individuales\FrmCargaFeriado.resx">
       <DependentUpon>FrmCargaFeriado.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -699,10 +702,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GrupoInferior\FrmListadoPiezas.resx">
       <DependentUpon>FrmListadoPiezas.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GrupoInferior\FrmRemitos.resx">
-      <DependentUpon>FrmRemitos.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GrupoInferior\FrmTransito.resx">

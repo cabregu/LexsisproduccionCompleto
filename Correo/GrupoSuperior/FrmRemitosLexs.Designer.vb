@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmTermometro
+Partial Class FrmRemitosLexs
     Inherits Correo.FrmPlantilla
 
     'Form invalida a Dispose para limpiar la lista de componentes.
@@ -25,24 +25,23 @@ Partial Class FrmTermometro
         '
         'PBLogo
         '
-        Me.PBLogo.Location = New System.Drawing.Point(5, 447)
+        Me.PBLogo.Location = New System.Drawing.Point(5, 1011)
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(658, 447)
+        Me.BtnSalir.Location = New System.Drawing.Point(1146, 1011)
         '
         'Gb
         '
-        Me.Gb.Location = New System.Drawing.Point(2, 3)
-        Me.Gb.Size = New System.Drawing.Size(705, 498)
+        Me.Gb.Size = New System.Drawing.Size(1193, 1062)
         '
-        'FrmTermometro
+        'FrmRemitosLexs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(699, 471)
+        Me.ClientSize = New System.Drawing.Size(1193, 1061)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Name = "FrmTermometro"
-        Me.Text = "Termometro"
+        Me.Location = New System.Drawing.Point(0, 0)
+        Me.Name = "FrmRemitosLexs"
         CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Gb.ResumeLayout(False)
         Me.ResumeLayout(False)

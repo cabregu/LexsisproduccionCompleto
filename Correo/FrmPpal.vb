@@ -20,13 +20,12 @@ Public Class FrmPpal
     Dim frmentreg As FrmEntregadas
     Dim frmvisit As FrmVisitadas
     Dim frmpendientes As FrmPendientes
-    Dim frmterm As FrmTermometro
     Dim frmRptZon As FrmReporteZonal
     Dim frmTrs As FrmAnalizarBases
     'Dim frMot As FrmMotivos
 
     'grupo superior
-    Dim frmprec As FrmPrecios
+    Dim frmprec As FrmPreciosd
     Dim frmcost As FrmConfirmacionAcuse
     Dim frmprov As FrmProveedores
     Dim frmcart As FrmCarteros
@@ -45,7 +44,7 @@ Public Class FrmPpal
     Dim frmingreman As FrmIngresoManual
     Dim frmimpr As FrmImprimir
     Dim frmconf As FrmConfiguracion
-    Dim FrmEscan As FrmEscaneo
+    Dim FrmEscan As FrmRemitosLexs
     Dim FrmConultXls As FrmConsultasXls
     Dim FrmConfEntreDevoSucu As FrmEntreSucuDevoSucu
     Dim FrmListaPiez As FrmListadoPiezas
@@ -351,22 +350,13 @@ Public Class FrmPpal
     'Private Sub BtnActualizarPresis_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     '    If MessageBox.Show("Se va a analizar la base de Para Visitadas Entregadas", "Presione Yes y espere", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
-
     '        ImportarDbf(TxtCant.Text)
     '    End If
-
     '    If MessageBox.Show("Procesar Base de Escaneo esto puede demorar", "Procesar base de escaneo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
     '        ImportarDbf2()
 
-
     '    End If
-
-
-
-
-
-
 
     'End Sub
 
@@ -374,7 +364,8 @@ Public Class FrmPpal
 
         FrmEscan = Nothing
         If FrmEscan Is Nothing Then
-            FrmEscan = New FrmEscaneo
+            FrmEscan = New FrmRemitosLexs
+
             FrmEscan.Show()
             Me.Visible = False
         ElseIf FrmEscan.IsDisposed Then
