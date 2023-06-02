@@ -22,17 +22,17 @@ Partial Class FrmimprimirEtiqueta
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.CmbRemitoPendiente = New System.Windows.Forms.ComboBox
-        Me.LblRemitoPendiente = New System.Windows.Forms.Label
-        Me.TxtPath = New System.Windows.Forms.TextBox
-        Me.LblPath = New System.Windows.Forms.Label
-        Me.DgvImprimir = New System.Windows.Forms.DataGridView
-        Me.LblRemitente = New System.Windows.Forms.Label
-        Me.CmbRemitente = New System.Windows.Forms.ComboBox
-        Me.LblCant = New System.Windows.Forms.Label
-        Me.BtnSelectEtic = New System.Windows.Forms.Button
-        Me.Btnimprimir = New System.Windows.Forms.Button
-        Me.BtnCambiarEstado = New System.Windows.Forms.Button
+        Me.CmbRemitoPendiente = New System.Windows.Forms.ComboBox()
+        Me.LblRemitoPendiente = New System.Windows.Forms.Label()
+        Me.TxtPath = New System.Windows.Forms.TextBox()
+        Me.LblPath = New System.Windows.Forms.Label()
+        Me.DgvImprimir = New System.Windows.Forms.DataGridView()
+        Me.LblRemitente = New System.Windows.Forms.Label()
+        Me.CmbRemitente = New System.Windows.Forms.ComboBox()
+        Me.LblCant = New System.Windows.Forms.Label()
+        Me.BtnSelectEtic = New System.Windows.Forms.Button()
+        Me.Btnimprimir = New System.Windows.Forms.Button()
+        Me.BtnCambiarEstado = New System.Windows.Forms.Button()
         CType(Me.DgvImprimir, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -153,7 +153,7 @@ Partial Class FrmimprimirEtiqueta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(919, 396)
         Me.Controls.Add(Me.BtnCambiarEstado)
         Me.Controls.Add(Me.LblCant)
