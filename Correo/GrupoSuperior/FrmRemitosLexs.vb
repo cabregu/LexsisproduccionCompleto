@@ -151,6 +151,7 @@ Public Class FrmRemitosLexs
 
         GuardarPictureBoxComoPDF(PbRemito, "C:\temp\OrdenDeRetiro_" & TxtRemito.Text & "_" & DtpDesde.Value.ToShortDateString.Replace("/", "-") & ".pdf", TxtRemito.Text, CmbRemitente.Text, DtpDesde.Value.ToShortDateString)
         ConfigCorreo.CN_Correo.ActualizarNroRemitoConfig(NroRemito + 1)
+        Me.Close()
 
     End Sub
     Private Sub CmbRemitente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbRemitente.SelectedIndexChanged
