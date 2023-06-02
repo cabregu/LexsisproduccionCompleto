@@ -198,3 +198,9 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.exe
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.pdb
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\PdfSharp.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\PdfSharp.xml
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\de\PdfSharp.Charting.resources.dll

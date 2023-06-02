@@ -242,6 +242,11 @@ Correo
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Correo.My.Resources.Resources.PasteSpecial_32x32">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Correo.My.Resources.Resources.Print">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
@@ -303,6 +308,11 @@ Correo
 </summary>
 </member>
 <member name="P:Correo.My.Resources.Resources.RemitoLexs">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Correo.My.Resources.Resources.Save_32x32">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>

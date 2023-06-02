@@ -20,11 +20,13 @@ Partial Class FrmRemitosLexs
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.BtnNuevo = New System.Windows.Forms.Button()
-        Me.TxtRemito = New System.Windows.Forms.TextBox()
-        Me.CmbDesde = New System.Windows.Forms.ComboBox()
         Me.DtpDesde = New System.Windows.Forms.DateTimePicker()
         Me.PbRemito = New System.Windows.Forms.PictureBox()
-        Me.BtnDibujar = New System.Windows.Forms.Button()
+        Me.BtnConfirmar = New System.Windows.Forms.Button()
+        Me.TxtRemito = New System.Windows.Forms.TextBox()
+        Me.CmbRemitente = New System.Windows.Forms.ComboBox()
+        Me.BtnPegar = New System.Windows.Forms.Button()
+        Me.BtnGuardar = New System.Windows.Forms.Button()
         CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Gb.SuspendLayout()
         CType(Me.PbRemito, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -32,33 +34,37 @@ Partial Class FrmRemitosLexs
         '
         'PBLogo
         '
-        Me.PBLogo.Location = New System.Drawing.Point(5, 1011)
+        Me.PBLogo.Location = New System.Drawing.Point(5, 699)
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(1146, 1011)
+        Me.BtnSalir.Location = New System.Drawing.Point(1254, 699)
         '
         'Gb
         '
-        Me.Gb.Controls.Add(Me.BtnDibujar)
+        Me.Gb.Controls.Add(Me.BtnGuardar)
+        Me.Gb.Controls.Add(Me.BtnPegar)
+        Me.Gb.Controls.Add(Me.CmbRemitente)
+        Me.Gb.Controls.Add(Me.TxtRemito)
+        Me.Gb.Controls.Add(Me.BtnConfirmar)
         Me.Gb.Controls.Add(Me.PbRemito)
         Me.Gb.Controls.Add(Me.DtpDesde)
-        Me.Gb.Controls.Add(Me.CmbDesde)
-        Me.Gb.Controls.Add(Me.TxtRemito)
         Me.Gb.Controls.Add(Me.BtnNuevo)
-        Me.Gb.Size = New System.Drawing.Size(1193, 1062)
+        Me.Gb.Size = New System.Drawing.Size(1301, 750)
         Me.Gb.Controls.SetChildIndex(Me.PBLogo, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnSalir, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnNuevo, 0)
-        Me.Gb.Controls.SetChildIndex(Me.TxtRemito, 0)
-        Me.Gb.Controls.SetChildIndex(Me.CmbDesde, 0)
         Me.Gb.Controls.SetChildIndex(Me.DtpDesde, 0)
         Me.Gb.Controls.SetChildIndex(Me.PbRemito, 0)
-        Me.Gb.Controls.SetChildIndex(Me.BtnDibujar, 0)
+        Me.Gb.Controls.SetChildIndex(Me.BtnConfirmar, 0)
+        Me.Gb.Controls.SetChildIndex(Me.TxtRemito, 0)
+        Me.Gb.Controls.SetChildIndex(Me.CmbRemitente, 0)
+        Me.Gb.Controls.SetChildIndex(Me.BtnPegar, 0)
+        Me.Gb.Controls.SetChildIndex(Me.BtnGuardar, 0)
         '
         'BtnNuevo
         '
-        Me.BtnNuevo.BackColor = System.Drawing.Color.SpringGreen
+        Me.BtnNuevo.BackColor = System.Drawing.Color.Teal
         Me.BtnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnNuevo.Location = New System.Drawing.Point(12, 39)
         Me.BtnNuevo.Name = "BtnNuevo"
@@ -67,55 +73,85 @@ Partial Class FrmRemitosLexs
         Me.BtnNuevo.Text = "Nuevo"
         Me.BtnNuevo.UseVisualStyleBackColor = False
         '
-        'TxtRemito
-        '
-        Me.TxtRemito.Enabled = False
-        Me.TxtRemito.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtRemito.Location = New System.Drawing.Point(98, 59)
-        Me.TxtRemito.Name = "TxtRemito"
-        Me.TxtRemito.Size = New System.Drawing.Size(120, 20)
-        Me.TxtRemito.TabIndex = 62
-        Me.TxtRemito.Text = "1122246"
-        '
-        'CmbDesde
-        '
-        Me.CmbDesde.FormattingEnabled = True
-        Me.CmbDesde.Location = New System.Drawing.Point(272, 59)
-        Me.CmbDesde.Name = "CmbDesde"
-        Me.CmbDesde.Size = New System.Drawing.Size(121, 21)
-        Me.CmbDesde.TabIndex = 106
-        '
         'DtpDesde
         '
-        Me.DtpDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DtpDesde.Location = New System.Drawing.Point(492, 51)
+        Me.DtpDesde.Enabled = False
+        Me.DtpDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!)
+        Me.DtpDesde.Location = New System.Drawing.Point(458, 48)
         Me.DtpDesde.Name = "DtpDesde"
-        Me.DtpDesde.Size = New System.Drawing.Size(350, 26)
+        Me.DtpDesde.Size = New System.Drawing.Size(350, 29)
         Me.DtpDesde.TabIndex = 107
         '
         'PbRemito
         '
         Me.PbRemito.Location = New System.Drawing.Point(12, 109)
         Me.PbRemito.Name = "PbRemito"
-        Me.PbRemito.Size = New System.Drawing.Size(1100, 600)
+        Me.PbRemito.Size = New System.Drawing.Size(1100, 500)
         Me.PbRemito.TabIndex = 108
         Me.PbRemito.TabStop = False
         '
-        'BtnDibujar
+        'BtnConfirmar
         '
-        Me.BtnDibujar.BackColor = System.Drawing.Color.Teal
-        Me.BtnDibujar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnDibujar.Location = New System.Drawing.Point(1032, 47)
-        Me.BtnDibujar.Name = "BtnDibujar"
-        Me.BtnDibujar.Size = New System.Drawing.Size(80, 40)
-        Me.BtnDibujar.TabIndex = 109
-        Me.BtnDibujar.Text = "Dibujar"
-        Me.BtnDibujar.UseVisualStyleBackColor = False
+        Me.BtnConfirmar.BackColor = System.Drawing.Color.Teal
+        Me.BtnConfirmar.Enabled = False
+        Me.BtnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnConfirmar.Image = Global.Correo.My.Resources.Resources.tick
+        Me.BtnConfirmar.Location = New System.Drawing.Point(830, 44)
+        Me.BtnConfirmar.Name = "BtnConfirmar"
+        Me.BtnConfirmar.Size = New System.Drawing.Size(80, 40)
+        Me.BtnConfirmar.TabIndex = 109
+        Me.BtnConfirmar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnConfirmar.UseVisualStyleBackColor = False
+        '
+        'TxtRemito
+        '
+        Me.TxtRemito.Enabled = False
+        Me.TxtRemito.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtRemito.Location = New System.Drawing.Point(115, 46)
+        Me.TxtRemito.Name = "TxtRemito"
+        Me.TxtRemito.Size = New System.Drawing.Size(150, 31)
+        Me.TxtRemito.TabIndex = 283
+        '
+        'CmbRemitente
+        '
+        Me.CmbRemitente.Enabled = False
+        Me.CmbRemitente.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbRemitente.FormattingEnabled = True
+        Me.CmbRemitente.Location = New System.Drawing.Point(290, 47)
+        Me.CmbRemitente.Name = "CmbRemitente"
+        Me.CmbRemitente.Size = New System.Drawing.Size(150, 32)
+        Me.CmbRemitente.TabIndex = 284
+        '
+        'BtnPegar
+        '
+        Me.BtnPegar.BackColor = System.Drawing.Color.Transparent
+        Me.BtnPegar.Enabled = False
+        Me.BtnPegar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnPegar.Image = Global.Correo.My.Resources.Resources.PasteSpecial_32x32
+        Me.BtnPegar.Location = New System.Drawing.Point(916, 44)
+        Me.BtnPegar.Name = "BtnPegar"
+        Me.BtnPegar.Size = New System.Drawing.Size(80, 40)
+        Me.BtnPegar.TabIndex = 286
+        Me.BtnPegar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnPegar.UseVisualStyleBackColor = False
+        '
+        'BtnGuardar
+        '
+        Me.BtnGuardar.BackColor = System.Drawing.Color.Transparent
+        Me.BtnGuardar.Enabled = False
+        Me.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnGuardar.Image = Global.Correo.My.Resources.Resources.Save_32x32
+        Me.BtnGuardar.Location = New System.Drawing.Point(899, 615)
+        Me.BtnGuardar.Name = "BtnGuardar"
+        Me.BtnGuardar.Size = New System.Drawing.Size(80, 40)
+        Me.BtnGuardar.TabIndex = 287
+        Me.BtnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnGuardar.UseVisualStyleBackColor = False
         '
         'FrmRemitosLexs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(1193, 1061)
+        Me.ClientSize = New System.Drawing.Size(1301, 749)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "FrmRemitosLexs"
@@ -128,9 +164,11 @@ Partial Class FrmRemitosLexs
     End Sub
 
     Friend WithEvents BtnNuevo As Button
-    Friend WithEvents TxtRemito As TextBox
-    Friend WithEvents CmbDesde As ComboBox
     Friend WithEvents DtpDesde As DateTimePicker
     Friend WithEvents PbRemito As PictureBox
-    Friend WithEvents BtnDibujar As Button
+    Friend WithEvents BtnConfirmar As Button
+    Friend WithEvents TxtRemito As TextBox
+    Friend WithEvents CmbRemitente As ComboBox
+    Friend WithEvents BtnPegar As Button
+    Friend WithEvents BtnGuardar As Button
 End Class

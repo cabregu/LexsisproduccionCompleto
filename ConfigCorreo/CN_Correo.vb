@@ -1024,6 +1024,19 @@ Public Class CN_Correo
 
     End Function
 
+    Public Shared Function ObtenerNroPlanillaOrdenDeRetiro() As Integer
+        'Cargar insert sql
+        Dim sqlNumero As String = "Select Desde From configuracion Where Operacion='NUMEROORDENDERETIRO'"
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sqlNumero, cn)
+        Dim Numero As Integer
+        cn.Open()
+        Numero = cm.ExecuteScalar
+        cn.Close()
+        Return Numero
+
+    End Function
+
     Public Shared Function ActualizarMotivos(ByVal IDMotivo As Integer, ByVal Motivo As String, ByVal reprogramacion As String, ByVal ident As Integer) As Boolean
         Dim sql As String = "UPDATE motivos SET idMotivo='" & IDMotivo & "', " & "Motivo= '" & Motivo & "', " & "reprogramacion='" & reprogramacion & "' WHERE id=" & ident & ""
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
@@ -2219,6 +2232,26 @@ Public Class CN_Correo
         End Try
 
     End Function
+
+    Public Shared Function ActualizarNroRemitoConfig(ByVal NUMERO As Integer) As Boolean
+        Try
+            'NRO_PLANILLA_ESCANER
+            'Cargar insert sql
+            Dim sqlCarta As String = "UPDATE configuracion SET desde='" & NUMERO & "'" & " Where operacion='NUMEROORDENDERETIRO'"
+            Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+            Dim cm As New MySqlCommand(sqlCarta, cn)
+            cn.Open()
+            cm.ExecuteNonQuery()
+            cn.Close()
+            Return True
+
+        Catch ex As Exception
+            Return False
+
+        End Try
+
+    End Function
+
     Public Shared Function ActualizarNroPlaniEscaner(ByVal NUMERO As Integer) As Boolean
         Try
             'NRO_PLANILLA_ESCANER
@@ -2342,6 +2375,24 @@ Public Class CN_Correo
 
 
     End Function
+
+
+    Public Shared Sub InsertarRemitoLexs(nroRemito As String, remitente As String, fecha As String, archivoBytes As Byte())
+        Dim sqlInsert As String = "INSERT INTO remitoslexs (NroRemito, Remitente, Fecha, Archivo) VALUES ('" & nroRemito & "', '" & remitente & "', '" & fecha & "', @Archivo)"
+
+        Using connection As New MySqlConnection(CadenaDeConeccionProduccion)
+            Using command As New MySqlCommand(sqlInsert, connection)
+                command.Parameters.AddWithValue("@Archivo", archivoBytes)
+
+                connection.Open()
+                command.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
+
+
+
+
 
     Public Shared Function VerifiVisitadaRECRED(ByVal NroCarta As String) As Boolean
         Dim Sql As String = "Select nro_carta from visitadas Where nro_carta='" & NroCarta & "' and Remitente='SWRECR'"

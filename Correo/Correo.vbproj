@@ -91,6 +91,12 @@
     <Reference Include="mysql.data">
       <HintPath>..\v2\mysql.data.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -861,6 +867,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="ReporteDS.xsc">
       <DependentUpon>ReporteDS.xsd</DependentUpon>
     </None>
@@ -1059,7 +1066,10 @@
     <None Include="Resources\R8.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Save_32x32.png" />
     <None Include="Resources\RemitoLexs.png" />
+    <None Include="Resources\PasteSpecial_32x32.png" />
+    <None Include="Resources\m_RemitoLexs.png" />
     <Content Include="Resources\remito.png" />
     <None Include="EXCELFILE.png" />
     <Content Include="lexs.ico" />
