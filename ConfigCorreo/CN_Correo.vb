@@ -3804,12 +3804,17 @@ Public Class CN_Correo
         ActualizarPorCartaRecorridoDevoEntre(NroCarta, Estado, Fecha)
     End Function
     Public Shared Function ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(ByVal NroCarta As String, ByVal Campo As String, ByVal Dato As String)
-        Dim sql As String = "UPDATE Cartas SET " & Campo & "='" & Dato & "' WHERE Nro_carta=" & NroCarta & " ORDER by ID DESC LIMIT 1"
-        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-        Dim cm As New MySqlCommand(sql, cn)
-        cn.Open()
-        cm.ExecuteNonQuery()
-        cn.Close()
+        Try
+            Dim sql As String = "UPDATE Cartas SET " & Campo & "='" & Dato & "' WHERE Nro_carta=" & NroCarta & " ORDER by ID DESC LIMIT 1"
+            Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+            Dim cm As New MySqlCommand(sql, cn)
+            cn.Open()
+            cm.ExecuteNonQuery()
+            cn.Close()
+        Catch ex As Exception
+
+        End Try
+
 
     End Function
 
