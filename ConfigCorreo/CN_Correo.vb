@@ -4,6 +4,8 @@ Imports System.IO
 Imports System.Data.OleDb
 Imports Outlook = Microsoft.Office.Interop.Outlook
 Imports System.Globalization
+Imports System.Text.RegularExpressions
+
 
 Public Class CN_Correo
     Public Shared CadenaDeConeccionProduccion As String = ""
@@ -2943,10 +2945,31 @@ Public Class CN_Correo
 
     End Function
 
+    'Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As String
+    '    Dim resultado As String = ""
+    '    Try
+    '        Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE '%" & Socio & "%' ORDER BY ID DESC LIMIT 1"
+    '        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+    '        Dim cm As New MySqlCommand(sql, cn)
+    '        cn.Open()
+    '        Dim result As Object = cm.ExecuteScalar()
+
+    '        If result IsNot Nothing Then
+    '            resultado = result.ToString()
+    '        End If
+
+    '        Return resultado
+    '        cn.Close()
+    '    Catch ex As Exception
+
+    '    End Try
+
+    'End Function
     Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As String
-        Dim resultado As String = ""
+
         Try
-            Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE '%" & Socio & "%' ORDER BY ID DESC LIMIT 1"
+            Dim resultado As String = ""
+            Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE CONCAT('%" & Socio & "-%') ORDER BY ID DESC LIMIT 1"
             Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
             Dim cm As New MySqlCommand(sql, cn)
             cn.Open()
@@ -2955,14 +2978,19 @@ Public Class CN_Correo
             If result IsNot Nothing Then
                 resultado = result.ToString()
             End If
+            cn.Close()
 
             Return resultado
-            cn.Close()
+
         Catch ex As Exception
 
         End Try
 
+
     End Function
+
+
+
 
     Public Shared Function ObtenerMotivoDevoDeCorreoProduccion(ByVal Carta As String) As String
         Dim Sql As String = "Select Motivo_devo from devueltas Where nro_carta='" & Carta & "'"

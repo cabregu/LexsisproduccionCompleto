@@ -11,10 +11,6 @@ Public Class FrmTransito
     Public path2 As String = ""
 
 
-
-    Private Sub BtnSeleccionar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
     Private Sub BtnExcel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExcel.Click
         Dim frmOpcion As FrmOpcionesDeTransito
         frmOpcion = Nothing
@@ -268,10 +264,6 @@ Public Class FrmTransito
         End Try
 
     End Function
-    Private Sub BTNCOLUMNAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-
-    End Sub
 
     Private Sub BNBUSCAR_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BNBUSCAR.Click
 
@@ -294,36 +286,38 @@ Public Class FrmTransito
 
         For Each DRW As DataGridViewRow In DgvDatos.Rows
 
-            Dim result As String = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(DRW.Cells("contra").Value & "-" & DRW.Cells("lote").Value)
+            Dim result As String = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(DRW.Cells("contra").Value)
             If result <> "" Then
+                If result.Contains(DRW.Cells("lote").Value.ToString().TrimStart("0"c)) Then
 
-                Dim values() As String = result.Split(";")
+                    Dim values() As String = result.Split(";")
 
-            'If values.Length = 12 Then ' Verificamos que tengamos los 12 valores esperados
-            DRW.Cells("Nro_Carta").Value = values(0)
-                DRW.Cells("REMITENTE").Value = values(1)
-                DRW.Cells("FECH_TRAB").Value = values(2)
-                DRW.Cells("APELLIDO").Value = values(3)
-                DRW.Cells("CALLE").Value = values(4)
-                DRW.Cells("CP").Value = values(5)
-                DRW.Cells("LOCALIDAD").Value = values(6)
-                DRW.Cells("PROVINCIA").Value = values(7)
-                DRW.Cells("ESTADO").Value = values(8)
-                DRW.Cells("NRO_PLANIL").Value = values(9)
-                DRW.Cells("CARTERO").Value = ObtenerCarteroDeCorreoProduccion(values(0))
-                DRW.Cells("NRO_CART2").Value = values(10)
-                DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(values(0))
-                DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
-            'End If
+                    'If values.Length = 12 Then ' Verificamos que tengamos los 12 valores esperados
+                    DRW.Cells("Nro_Carta").Value = values(0)
+                    DRW.Cells("REMITENTE").Value = values(1)
+                    DRW.Cells("FECH_TRAB").Value = values(2)
+                    DRW.Cells("APELLIDO").Value = values(3)
+                    DRW.Cells("CALLE").Value = values(4)
+                    DRW.Cells("CP").Value = values(5)
+                    DRW.Cells("LOCALIDAD").Value = values(6)
+                    DRW.Cells("PROVINCIA").Value = values(7)
+                    DRW.Cells("ESTADO").Value = values(8)
+                    DRW.Cells("NRO_PLANIL").Value = values(9)
+                    DRW.Cells("CARTERO").Value = ObtenerCarteroDeCorreoProduccion(values(0))
+                    DRW.Cells("NRO_CART2").Value = values(10)
+                    DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(values(0))
+                    DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
+                    'End If
 
-            Numero = Numero + 1
-            'Actualiza la barra de progreso en el subproceso UI usando Invoke
-            Me.Invoke(Sub()
-                          PgbAnalisis.Value = Numero
-                      End Sub)
+                    Numero = Numero + 1
+                    'Actualiza la barra de progreso en el subproceso UI usando Invoke
+                    Me.Invoke(Sub()
+                                  PgbAnalisis.Value = Numero
+                              End Sub)
+
+                End If
 
             End If
-
         Next
 
         'Habilita el botón cuando el procesamiento ha terminado
@@ -331,7 +325,6 @@ Public Class FrmTransito
 
 
     End Sub
-
 
 
     Private Function BuscarEntregadasPlanilladasvisitadasRecorrido(ByVal Carta As String) As String
@@ -351,11 +344,6 @@ Public Class FrmTransito
 
 
     End Function
-
-
-
-
-
 
     Private Sub BtnEstados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEstados.Click
         FechasEntregadas()
@@ -465,19 +453,8 @@ Public Class FrmTransito
     End Sub
 
 
-
-
-
-
-
-
     Private Sub FrmTransito_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath.Text = path2
-
-        'Dim fecha As Date = Now
-        'fecha = fecha.AddDays(-60)
-        ''dtpfecha.Value = fecha
-
 
     End Sub
     Private Shared Function Normalizar(ByVal Dato As String) As String
@@ -894,9 +871,12 @@ Public Class FrmTransito
 
         Estados()
 
+        For Each drw As DataGridViewRow In DgvDatos.Rows
+            Dim FechaVisitada As String = Normalizar(VerificarSiFueVisitada(drw.Cells("contra").Value, drw.Cells("lote").Value))
 
-        'filtrarEstados()
+            drw.Cells("FECH1").Value = FechaVisitada
 
+        Next
     End Sub
     Private Sub BtnConfirmar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnConfirmar.Click
 
@@ -1215,7 +1195,7 @@ Public Class FrmTransito
 
 
     End Function
-    Private Sub Btncargacompleta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btncargacompleta.Click
+    Private Sub Btncargacompleta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim CADENASTRIM As System.Text.StringBuilder
         CADENASTRIM = CargarArchivo2()
 
@@ -1229,7 +1209,7 @@ Public Class FrmTransito
             MsgBox("OK")
         End If
     End Sub
-    Private Sub BtnAnalizar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAnalizar.Click
+    Private Sub BtnAnalizar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         EntregadasCod13()
     End Sub
     'Private Sub BtnHistorico_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnHistorico.Click
@@ -1257,20 +1237,12 @@ Public Class FrmTransito
         Next
         MsgBox("ok")
     End Function
-    Private Sub BtnBase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBase.Click
+    Private Sub BtnBase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         CheckForIllegalCrossThreadCalls = False
         Dim thread As New Threading.Thread(AddressOf Actualizarsocio)
         thread.Start()
     End Sub
-    Private Sub Btn7Digitos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn7Digitos.Click
 
-        For Each drw As DataGridViewRow In DgvDatos.Rows
-
-            drw.Cells(Trim(CmColumnas.SelectedItem.ToString)).Value = Retornode7digitos(Trim(drw.Cells(CmColumnas.SelectedItem.ToString).Value))
-
-        Next
-
-    End Sub
     Private Function Retornode7digitos(ByVal Nro As String) As String
 
         If Len(Nro) = 2 Then
@@ -1293,66 +1265,6 @@ Public Class FrmTransito
         End If
         Return Nro
     End Function
-    Private Sub BtnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAdd.Click
-        If TxtItem1.Text = "" Then
-            TxtItem1.Text = CmColumnas.SelectedItem.ToString()
-            TxtItem1.Enabled = False
-
-        Else
-            TxtItem2.Text = CmColumnas.SelectedItem.ToString()
-            TxtItem2.Enabled = False
-            CmColumnas.Enabled = False
-            BtnAdd.Enabled = False
-        End If
-
-
-    End Sub
-    Private Sub Btnjuntar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btnjuntar.Click
-
-
-        DgvDatos.Columns.Add("CONTRA", "CONTRA")
-        DgvDatos.Columns.Add("LOTE", "LOTE")
-        DgvDatos.Columns.Add("NRO_CARTA", "NRO_CARTA")
-        DgvDatos.Columns.Add("REMITENTE", "REMITENTE")
-        DgvDatos.Columns.Add("FECH_TRAB", "FECH_TRAB")
-        DgvDatos.Columns.Add("APELLIDO", "APELLIDO")
-        DgvDatos.Columns.Add("CALLE", "CALLE")
-        DgvDatos.Columns.Add("CP", "CP")
-        DgvDatos.Columns.Add("LOCALIDAD", "LOCALIDAD")
-        DgvDatos.Columns.Add("PROVINCIA", "PROVINCIA")
-        DgvDatos.Columns.Add("FECHA_ENTR", "FECHA_ENTR")
-        DgvDatos.Columns.Add("NRO_PLANIL", "NRO_PLANIL")
-        DgvDatos.Columns.Add("FECH_PLANI", "FECH_PLANI")
-        DgvDatos.Columns.Add("ESTADO", "ESTADO")
-        DgvDatos.Columns.Add("CARTERO", "CARTERO")
-        DgvDatos.Columns.Add("TEMA4", "TEMA4")
-        DgvDatos.Columns.Add("FECH4", "FECH4")
-        DgvDatos.Columns.Add("NRO_CART2", "NRO_CART2")
-
-        For Each drw As DataGridViewRow In DgvDatos.Rows
-            drw.Cells("CONTRA").Value = drw.Cells(TxtItem1.Text).Value
-            drw.Cells("LOTE").Value = drw.Cells(TxtItem2.Text).Value
-        Next
-
-
-    End Sub
-    'Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    Dim Fechatransito As String = VerificarSiFueEntregadaEnTransito("", "")
-
-    '    MsgBox(Fechatransito)
-    'End Sub
-
-
-
-    Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnObtenerFecha1.Click
-        For Each drw As DataGridViewRow In DgvDatos.Rows
-            Dim FechaVisitada As String = Normalizar(VerificarSiFueVisitada(drw.Cells("contra").Value, drw.Cells("lote").Value))
-
-            drw.Cells("FECH1").Value = FechaVisitada
-
-        Next
-
-    End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btntxt.Click
 
@@ -1407,33 +1319,13 @@ Public Class FrmTransito
 
     End Function
 
-
-
-
-
-
     Private Sub Btncsv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btncsv.Click
 
-        'Dim headers = (From header As DataGridViewColumn In DgvDatos.Columns.Cast(Of DataGridViewColumn)() _
-        '               Select header.HeaderText).ToArray
-        'Dim rows = From row As DataGridViewRow In DgvDatos.Rows.Cast(Of DataGridViewRow)() _
-        '           Where Not row.IsNewRow _
-        '           Select Array.ConvertAll(row.Cells.Cast(Of DataGridViewCell).ToArray, Function(c) If(c.Value IsNot Nothing, c.Value.ToString, ""))
-
-        'Using sw As New IO.StreamWriter("C:\Temp\archivo.csv", False, System.Text.Encoding.GetEncoding(65001))
-
-        '    sw.WriteLine(String.Join(";", headers))
-        '    For Each r In rows
-        '        sw.WriteLine(String.Join(";", r))
-        '    Next
-        'End Using
-
-        'Process.Start("C:\Temp\archivo.csv")
 
         Dim headers = (From header As DataGridViewColumn In DgvDatos.Columns.Cast(Of DataGridViewColumn)()
                        Select header.HeaderText).ToArray
-        Dim rows = From row As DataGridViewRow In DgvDatos.Rows.Cast(Of DataGridViewRow)() _
-                   Where Not row.IsNewRow _
+        Dim rows = From row As DataGridViewRow In DgvDatos.Rows.Cast(Of DataGridViewRow)()
+                   Where Not row.IsNewRow
                    Select Array.ConvertAll(row.Cells.Cast(Of DataGridViewCell).ToArray, Function(c) If(c.Value IsNot Nothing, If(TypeOf c.Value Is Date, CType(c.Value, Date).ToString("yyyy/MM/dd"), c.Value.ToString().PadLeft(2, "0"c)), ""))
 
         Using sw As New IO.StreamWriter("C:\Temp\archivo.txt", False, System.Text.Encoding.GetEncoding(65001))
@@ -1445,7 +1337,6 @@ Public Class FrmTransito
 
         Process.Start("C:\Temp\archivo.txt")
 
-
-
     End Sub
+
 End Class
