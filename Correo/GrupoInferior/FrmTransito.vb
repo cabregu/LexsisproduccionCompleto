@@ -309,6 +309,7 @@ Public Class FrmTransito
                     DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
                     'End If
 
+
                     Numero = Numero + 1
                     'Actualiza la barra de progreso en el subproceso UI usando Invoke
                     Me.Invoke(Sub()
