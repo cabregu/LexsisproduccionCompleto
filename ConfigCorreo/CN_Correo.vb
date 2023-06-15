@@ -3858,8 +3858,8 @@ Public Class CN_Correo
             Dim cm As New MySqlCommand(sql, cn)
             cm.ExecuteNonQuery()
 
-            If Campo = "Nro_cart2" Then
-                Dim sql2 As String = "UPDATE recorridos SET nro_carta2='" & Dato & "' WHERE Nro_carta=" & NroCarta
+            If Campo = "NRO_CART2" Then
+                Dim sql2 As String = "UPDATE recorridos SET NRO_CARTA2='" & Dato & "' WHERE NRO_CARTA=" & NroCarta
                 Dim cm2 As New MySqlCommand(sql2, cn)
                 cm2.ExecuteNonQuery()
             End If

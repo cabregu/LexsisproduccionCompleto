@@ -1,10 +1,12 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
+Imports System.Threading
 
 
 Public Class FrmEntreSucuDevoSucu
 
-    
+
+
 
     Private Sub BtncargarDatos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtncargarDatos.Click
         If ChkOtro.Checked = True Then
@@ -180,34 +182,74 @@ Public Class FrmEntreSucuDevoSucu
 
 
 
+    'Private Sub BtnActualizarOtroDato_Click(sender As System.Object, e As System.EventArgs) Handles BtnActualizarOtroDato.Click
+
+    '    Dim Numero As Integer = 0
+    '    PgbAnalisis.Minimum = 0
+    '    PgbAnalisis.Maximum = DgvControl.Rows.Count
+
+    '    Dim CampoActualizar As String = ""
+
+    '    For Each dc As DataGridViewColumn In DgvControl.Columns
+    '        If dc.Name.ToString <> "NRO_CARTA" Then
+    '            CampoActualizar = dc.Name.ToString
+    '        End If
+
+    '    Next
+
+    '    If DgvControl.RowCount > 0 Then
+    '        For Each drwg As DataGridViewRow In DgvControl.Rows
+    '            ConfigCorreo.CN_Correo.ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(drwg.Cells("Nro_carta").Value, CampoActualizar, drwg.Cells(CampoActualizar).Value)
+
+
+    '            Numero = Numero + 1
+    '            PgbAnalisis.Value = Numero
+    '        Next
+    '    End If
+
+    '    DgvControl.DataSource = Nothing
+    '    txtPath.Text = ""
+
+
+    'End Sub
     Private Sub BtnActualizarOtroDato_Click(sender As System.Object, e As System.EventArgs) Handles BtnActualizarOtroDato.Click
-
-        Dim Numero As Integer = 0
-        PgbAnalisis.Minimum = 0
-        PgbAnalisis.Maximum = DgvControl.Rows.Count
-
         Dim CampoActualizar As String = ""
 
         For Each dc As DataGridViewColumn In DgvControl.Columns
             If dc.Name.ToString <> "NRO_CARTA" Then
                 CampoActualizar = dc.Name.ToString
             End If
-
         Next
-   
+
+        Dim actualizaciones As New List(Of KeyValuePair(Of Object, Object))()
+
         If DgvControl.RowCount > 0 Then
             For Each drwg As DataGridViewRow In DgvControl.Rows
-                ConfigCorreo.CN_Correo.ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(drwg.Cells("Nro_carta").Value, CampoActualizar, drwg.Cells(CampoActualizar).Value)
-
-
-                Numero = Numero + 1
-                PgbAnalisis.Value = Numero
+                actualizaciones.Add(New KeyValuePair(Of Object, Object)(drwg.Cells("Nro_carta").Value, drwg.Cells(CampoActualizar).Value))
             Next
         End If
 
-        DgvControl.DataSource = Nothing
-        txtPath.Text = ""
-
-
+        ' Crear un nuevo hilo para la actualización
+        Dim updateThread As New Thread(Sub() RealizarActualizaciones(actualizaciones, CampoActualizar))
+        updateThread.Start()
     End Sub
+
+    Private Sub RealizarActualizaciones(actualizaciones As List(Of KeyValuePair(Of Object, Object)), campoActualizar As String)
+        Dim Numero As Integer = 0
+        PgbAnalisis.Invoke(Sub() PgbAnalisis.Minimum = 0)
+        PgbAnalisis.Invoke(Sub() PgbAnalisis.Maximum = actualizaciones.Count)
+
+        For Each actualizacion As KeyValuePair(Of Object, Object) In actualizaciones
+            ConfigCorreo.CN_Correo.ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(actualizacion.Key, campoActualizar, actualizacion.Value)
+
+            Numero += 1
+            PgbAnalisis.Invoke(Sub() PgbAnalisis.Value = Numero)
+        Next
+
+        ' Actualizar el DataGridView después de la actualización en el hilo principal
+        DgvControl.Invoke(Sub() DgvControl.DataSource = Nothing)
+        txtPath.Invoke(Sub() txtPath.Text = "")
+    End Sub
+
+
 End Class
