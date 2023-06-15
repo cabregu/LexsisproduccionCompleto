@@ -151,6 +151,7 @@ Public Class FrmTransito
             dt2.Columns.Add("APELLIDO")
             dt2.Columns.Add("CALLE")
             dt2.Columns.Add("CP")
+            dt2.Columns.Add("PISO_DEPTO")
             dt2.Columns.Add("LOCALIDAD")
             dt2.Columns.Add("PROVINCIA")
             dt2.Columns.Add("FECHA_ENTR")
@@ -160,6 +161,7 @@ Public Class FrmTransito
             dt2.Columns.Add("CARTERO")
             dt2.Columns.Add("TEMA4")
             dt2.Columns.Add("FECH4")
+            dt2.Columns.Add("OBS2")
             dt2.Columns.Add("NRO_CART2")
 
             For Each dr As DataRow In dt2.Rows
@@ -276,56 +278,128 @@ Public Class FrmTransito
 
     End Sub
 
+    'Private Sub ProcesarDatos()
+    '    Dim Numero As Integer = 0
+    '    Me.Invoke(Sub()
+    '                  PgbAnalisis.Minimum = 0
+    '                  PgbAnalisis.Maximum = DgvDatos.Rows.Count
+    '              End Sub)
+    '    For Each DRW As DataGridViewRow In DgvDatos.Rows
+
+    '        Dim result As String = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(DRW.Cells("contra").Value)
+    '        If result <> "" Then
+    '            If result.Contains(DRW.Cells("lote").Value.ToString().TrimStart("0"c)) Then
+
+    '                Dim values() As String = result.Split(";")
+
+    '                'If values.Length = 12 Then ' Verificamos que tengamos los 12 valores esperados
+    '                DRW.Cells("Nro_Carta").Value = values(0)
+    '                DRW.Cells("REMITENTE").Value = values(1)
+    '                DRW.Cells("FECH_TRAB").Value = values(2)
+    '                DRW.Cells("APELLIDO").Value = values(3)
+    '                DRW.Cells("CALLE").Value = values(4)
+    '                DRW.Cells("CP").Value = values(5)
+    '                DRW.Cells("PISO_DEPTO").Value = values(6)
+    '                DRW.Cells("LOCALIDAD").Value = values(7)
+    '                DRW.Cells("PROVINCIA").Value = values(8)
+    '                DRW.Cells("ESTADO").Value = values(9)
+    '                DRW.Cells("OBS2").Value = values(10)
+    '                DRW.Cells("CARTERO").Value = ObtenerCarteroDeCorreoProduccion(values(0))
+    '                DRW.Cells("NRO_CART2").Value = values(11)
+    '                DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(values(0))
+    '                DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
+    '                'End If
+
+    '                Numero = Numero + 1
+    '                'Actualiza la barra de progreso en el subproceso UI usando Invoke
+    '                Me.Invoke(Sub()
+    '                              PgbAnalisis.Value = Numero
+    '                          End Sub)
+
+    '            End If
+
+    '        End If
+    '    Next
+
+    '    'Habilita el botón cuando el procesamiento ha terminado
+    '    Me.Invoke(Sub() BNBUSCAR.Enabled = True)
+
+
+    'End Sub
+
     Private Sub ProcesarDatos()
+
+        'EL CODIGO EXISTE PERO NO LO BUSCA DEBO ENCONTRAR EL ERROR ANTES DEL PROXIMO TRANSITO ESTE TRANSITO ES EL 09-06-2023 EL CODIGO QUE NO ENCUENTRA ES 7723
+
+
         Dim Numero As Integer = 0
+        Dim resultadosPrevios As New Dictionary(Of Integer, String)()
 
         Me.Invoke(Sub()
                       PgbAnalisis.Minimum = 0
                       PgbAnalisis.Maximum = DgvDatos.Rows.Count
                   End Sub)
 
+        Dim result As String
+
         For Each DRW As DataGridViewRow In DgvDatos.Rows
+            Dim numeroCarta As Integer = CInt(DRW.Cells("contra").Value)
+            If resultadosPrevios.ContainsKey(numeroCarta) Then
+                result = resultadosPrevios(numeroCarta)
 
-            Dim result As String = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(DRW.Cells("contra").Value)
+                Dim values() As String = result.Split(";")
+                AsignarValoresCeldas(DRW, values)
+
+
+                Numero = Numero + 1
+                Me.Invoke(Sub()
+                              PgbAnalisis.Value = Numero
+                          End Sub)
+                Continue For
+            End If
+
+            result = ConfigCorreo.CN_Correo.ObtenerPorNrocartaCorreoProduccion(numeroCarta, DRW.Cells("lote").Value.ToString().TrimStart("0"c))
             If result <> "" Then
-                If result.Contains(DRW.Cells("lote").Value.ToString().TrimStart("0"c)) Then
-
-                    Dim values() As String = result.Split(";")
-
-                    'If values.Length = 12 Then ' Verificamos que tengamos los 12 valores esperados
-                    DRW.Cells("Nro_Carta").Value = values(0)
-                    DRW.Cells("REMITENTE").Value = values(1)
-                    DRW.Cells("FECH_TRAB").Value = values(2)
-                    DRW.Cells("APELLIDO").Value = values(3)
-                    DRW.Cells("CALLE").Value = values(4)
-                    DRW.Cells("CP").Value = values(5)
-                    DRW.Cells("LOCALIDAD").Value = values(6)
-                    DRW.Cells("PROVINCIA").Value = values(7)
-                    DRW.Cells("ESTADO").Value = values(8)
-                    DRW.Cells("NRO_PLANIL").Value = values(9)
-                    DRW.Cells("CARTERO").Value = ObtenerCarteroDeCorreoProduccion(values(0))
-                    DRW.Cells("NRO_CART2").Value = values(10)
-                    DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(values(0))
-                    DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
-                    'End If
 
 
-                    Numero = Numero + 1
-                    'Actualiza la barra de progreso en el subproceso UI usando Invoke
-                    Me.Invoke(Sub()
-                                  PgbAnalisis.Value = Numero
-                              End Sub)
 
-                End If
+                Dim values() As String = result.Split(";")
+                AsignarValoresCeldas(DRW, values)
+                resultadosPrevios.Add(numeroCarta, result)
 
+
+                Numero = Numero + 1
+                Me.Invoke(Sub()
+                              PgbAnalisis.Value = Numero
+                          End Sub)
             End If
         Next
 
-        'Habilita el botón cuando el procesamiento ha terminado
-        Me.Invoke(Sub() BNBUSCAR.Enabled = True)
-
-
+        Me.Invoke(Sub()
+                      BNBUSCAR.Enabled = True
+                  End Sub)
     End Sub
+
+    Private Sub AsignarValoresCeldas(DRW As DataGridViewRow, values() As String)
+        DRW.Cells("Nro_Carta").Value = values(0)
+        DRW.Cells("REMITENTE").Value = values(1)
+        DRW.Cells("FECH_TRAB").Value = values(2)
+        DRW.Cells("APELLIDO").Value = values(3)
+        DRW.Cells("CALLE").Value = values(4)
+        DRW.Cells("CP").Value = values(5)
+        DRW.Cells("PISO_DEPTO").Value = values(6)
+        DRW.Cells("LOCALIDAD").Value = values(7)
+        DRW.Cells("PROVINCIA").Value = values(8)
+        DRW.Cells("ESTADO").Value = values(9)
+        DRW.Cells("OBS2").Value = values(10)
+        DRW.Cells("CARTERO").Value = ObtenerCarteroDeCorreoProduccion(values(0))
+        DRW.Cells("NRO_CART2").Value = values(11)
+        DRW.Cells("TEMA4").Value = ObtenerMotivoDevoDeCorreoProduccion(values(0))
+        DRW.Cells("FECH4").Value = ObtenerFechaDevoDeCorreoProduccion(values(0))
+    End Sub
+
+
+
 
 
     Private Function BuscarEntregadasPlanilladasvisitadasRecorrido(ByVal Carta As String) As String
@@ -474,171 +548,30 @@ Public Class FrmTransito
     End Function
     Private Sub Estados()
 
-        Dim DTCRITERIOS As DataTable = Nothing
-
-
-        '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        For Each dgvfechas As DataGridViewRow In DgvDatos.Rows
-
-            If Not IsDBNull(dgvfechas.Cells("ESTADOF").Value) Then
-
-                If dgvfechas.Cells("ESTADOF").Value = "ENTREGADA" Or dgvfechas.Cells("ESTADOF").Value = "DEVUELTA" Or dgvfechas.Cells("ESTADOF").Value = "CONF.ENTRE" Then
-                Else
-                    Dim fecha_swiss As Date = dgvfechas.Cells("Fecha Ultimo Estado DESC").Value
-                    If Not IsDBNull(dgvfechas.Cells("FECH_TRAB").Value) Then
-                        Dim fecha_lexs As Date = dgvfechas.Cells("FECH_TRAB").Value
-                        fecha_swiss.ToShortDateString()
-                        fecha_lexs.ToShortDateString()
-                        dgvfechas.Cells("ESTADOF").Value = DiferenciaFechas(fecha_swiss, fecha_lexs)
-                    End If
-                End If
-
-            End If
-        Next
-        '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-        For Each DRG As DataGridViewRow In DgvDatos.Rows
-            If Not IsDBNull(DRG.Cells("ESTADOF").Value) Then
-
-
-                If Len(DRG.Cells("ESTADOF").Value) > 0 Then
-                    DTCRITERIOS = ObtenerCRITERIOS(DRG.Cells("ESTADOF").Value)
-
-                    If DTCRITERIOS.Rows.Count > 0 Then
-                        If DTCRITERIOS.Rows(0)("CON_CRITERIO").ToString = "NO" Then
-
-                            If DRG.Cells("ESTADOF").Value = "" Then
-                                DRG.Cells("ESTADOF").Value = DTCRITERIOS.Rows(0)("PASAR_A").ToString
-                                If DTCRITERIOS.Rows(0)("PASAR_A").ToString = "DEVUELTA" Then
-                                    DRG.Cells("MOTIVOF").Value = DRG.Cells("TEMA4").Value
-                                    DRG.Cells("FECHAF").Value = DRG.Cells("FECH4").Value
-
-                                    If DRG.Cells("TEMA4").Value = "" Then
-                                        Dim FECHADEV As Date = DRG.Cells("FECH_TRAB").Value
-                                        FECHADEV.AddDays(7)
-                                        FECHADEV.ToShortDateString()
-
-                                        If FECHADEV <= Now.ToShortDateString Then
-                                            DRG.Cells("MOTIVOF").Value = "7-AUSENCIA"
-                                            DRG.Cells("FECHAF").Value = FECHADEV
-                                        Else
-                                            DRG.Cells("MOTIVOF").Value = "7-AUSENCIA"
-                                            DRG.Cells("FECHAF").Value = Now.ToShortDateString
-                                        End If
-
-
-                                    End If
-
-                                End If
-                            End If
-
-
-                        ElseIf DRG.Cells("ESTADO").Value = "Distrib." Then
-                            If DRG.Cells("ESTADOF").Value = "" Then
-                                Dim FECHATRAB As Date = DRG.Cells("FECH_TRAB").Value
-                                Dim fechahoy1 As Date = Now.ToShortDateString
-                                Dim fechahoy2 As Date = Now.ToShortDateString
-                                Dim fechahoy3 As Date = Now.ToShortDateString
-                                fechahoy1 = fechahoy1.AddDays(-13)
-
-                                If FECHATRAB <= fechahoy1 Then
-                                    DRG.Cells("ESTADOF").Value = "ENT_COD13"
-                                ElseIf FECHATRAB <= fechahoy2 And FECHATRAB > fechahoy1 Then
-                                    DRG.Cells("ESTADOF").Value = "EN_RENDICION"
-                                Else
-                                    DRG.Cells("ESTADOF").Value = "EN_PROCESO"
-                                End If
-
-
-                            End If
-
-
-
-                        ElseIf DRG.Cells("ESTADO").Value = "ESP. PROG." Then
-                            If DRG.Cells("ESTADOF").Value = "" Then
-                                Dim FECHATRAB As Date = DRG.Cells("FECH_TRAB").Value
-                                Dim fechahoy1 As Date = Now.ToShortDateString
-                                Dim fechahoy2 As Date = Now.ToShortDateString
-                                Dim fechahoy3 As Date = Now.ToShortDateString
-                                fechahoy1 = fechahoy1.AddDays(-17)
-
-                                If FECHATRAB <= fechahoy1 Then
-                                    DRG.Cells("ESTADOF").Value = "ENT_COD13"
-                                ElseIf FECHATRAB <= fechahoy2 And FECHATRAB > fechahoy1 Then
-                                    DRG.Cells("ESTADOF").Value = "EN_RENDICION"
-                                Else
-                                    DRG.Cells("ESTADOF").Value = "EN_PROCESO"
-                                End If
-                            End If
-
-
-                        ElseIf DRG.Cells("ESTADO").Value = "REPROG" Then
-                            If DRG.Cells("ESTADOF").Value = "" Then
-                                Dim FECHATRAB As Date = DRG.Cells("FECH_TRAB").Value
-                                Dim fechahoy1 As Date = Now.ToShortDateString
-                                fechahoy1 = fechahoy1.AddDays(-13)
-                                If FECHATRAB <= fechahoy1 Then
-                                    DRG.Cells("ESTADOF").Value = "EN_RENDICION"
-                                Else
-                                    DRG.Cells("ESTADOF").Value = "EN_PROCESO"
-                                End If
-                            End If
-
-
-                        End If
-                    End If
-                End If
-                Try
-
-
-                    If DRG.Cells("PROVINCIA").Value = "REDESPACHO" Then
-                        DRG.Cells("TIPO").Value = "REDESPACHO"
-                        Dim FECHATRAB As Date = DRG.Cells("FECH_TRAB").Value.ToString
-                        FECHATRAB.ToShortDateString()
-
-                        DRG.Cells("FECHA_TRABAJO").Value = Normalizar(FECHATRAB)
-
-                    End If
-
-                Catch ex As Exception
-
-                End Try
-            End If
-        Next
-
-
-        For Each DRGAR As DataGridViewRow In DgvDatos.Rows
-
-            If Not IsDBNull(DRGAR.Cells("CARTERO").Value) Then
-                If DRGAR.Cells("CARTERO").Value = "AR MAESTRO" Then
-                    If DRGAR.Cells("ESTADO").Value <> "DEVUELTA" And DRGAR.Cells("ESTADO").Value <> "DEVOLUCION" Then
-                        If DRGAR.Cells("CP").Value >= 1000 And DRGAR.Cells("CP").Value <= 1890 Then
-                            DRGAR.Cells("ESTADOF").Value = "ENTREGADA"
-                        Else
-                            DRGAR.Cells("ESTADOF").Value = "EN_RENDICION"
-                        End If
-                    End If
-                End If
-            End If
-
-            If IsDBNull(DRGAR.Cells("NRO_CARTA").Value) Then
-                DRGAR.Cells("ESTADOF").Value = "NO_HAY_INGRESO"
-            Else
-                If DRGAR.Cells("NRO_CARTA").Value = "" Then
-                    DRGAR.Cells("ESTADOF").Value = "NO_HAY_INGRESO"
-                End If
-            End If
-
-        Next
-
         For Each drw As DataGridViewRow In DgvDatos.Rows
-            Dim FechaVisitada As String = Normalizar(VerificarSiFueVisitada(drw.Cells("contra").Value, drw.Cells("lote").Value))
+            Dim estado As Object = drw.Cells("ESTADO").Value
 
-            drw.Cells("FECH1").Value = FechaVisitada
-
+            If estado IsNot DBNull.Value AndAlso estado IsNot Nothing Then
+                Select Case estado.ToString()
+                    Case "DEVO_SUCU", "PARA_DEVOLUCION"
+                        drw.Cells("ESTADOF").Value = "EN_DEVOLUCION"
+                    Case "ENTRE_SUCU", "ENTREGADA", "PLANILLADA"
+                        drw.Cells("ESTADOF").Value = "ENTREGADA"
+                    Case "EN_DISTRIBUCION", "PARA_REPROGRAMACION", "ESP_PROG"
+                        drw.Cells("ESTADOF").Value = "EN_RENDICION"
+                    Case "DEVUELTA"
+                        drw.Cells("ESTADOF").Value = "DEVUELTA"
+                        drw.Cells("MOTIVOF").Value = drw.Cells("TEMA4").Value
+                        drw.Cells("FECHAF").Value = drw.Cells("FECH4").Value
+                    Case ""
+                        drw.Cells("ESTADOF").Value = "NO_HAY_INGRESO"
+                End Select
+            Else
+                drw.Cells("ESTADOF").Value = "NO_HAY_INGRESO"
+            End If
         Next
+
+
 
 
     End Sub
@@ -870,14 +803,14 @@ Public Class FrmTransito
     End Function
     Private Sub BtnAnalisisEstados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAnalisisEstados.Click
 
+
         Estados()
 
         For Each drw As DataGridViewRow In DgvDatos.Rows
             Dim FechaVisitada As String = Normalizar(VerificarSiFueVisitada(drw.Cells("contra").Value, drw.Cells("lote").Value))
-
             drw.Cells("FECH1").Value = FechaVisitada
-
         Next
+
     End Sub
     Private Sub BtnConfirmar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnConfirmar.Click
 

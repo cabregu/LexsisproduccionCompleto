@@ -2946,9 +2946,10 @@ Public Class CN_Correo
     End Function
 
     'Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As String
-    '    Dim resultado As String = ""
+
     '    Try
-    '        Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE '%" & Socio & "%' ORDER BY ID DESC LIMIT 1"
+    '        Dim resultado As String = ""
+    '        Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', PISO_DEPTO, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE CONCAT('" & Socio & "-%') ORDER BY ID DESC LIMIT 1"
     '        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
     '        Dim cm As New MySqlCommand(sql, cn)
     '        cn.Open()
@@ -2957,21 +2958,28 @@ Public Class CN_Correo
     '        If result IsNot Nothing Then
     '            resultado = result.ToString()
     '        End If
+    '        cn.Close()
 
     '        Return resultado
-    '        cn.Close()
+
     '    Catch ex As Exception
 
     '    End Try
 
-    'End Function
-    Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String) As String
 
+    'End Function
+
+    Public Shared Function ObtenerPorNrocartaCorreoProduccion(ByVal Socio As String, ByVal Lote As String) As String
         Try
             Dim resultado As String = ""
-            Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE NRO_CART2 LIKE CONCAT('%" & Socio & "-%') ORDER BY ID DESC LIMIT 1"
+
+            Dim sql As String = "SELECT CONCAT(Nro_carta, ';', REMITENTE, ';', FECH_TRAB, ';', APELLIDO, ';', CALLE, ';', CP, ';', PISO_DEPTO, ';', LOCALIDAD, ';', PROVINCIA, ';', ESTADO, ';', OBS2, ';', NRO_CART2) FROM cartas WHERE TRIM(LEADING '0' FROM SUBSTRING_INDEX(NRO_CART2, '-', 1)) = @Socio AND TRIM(LEADING '0' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(NRO_CART2, '-', -2), '-', 1)) = @Lote ORDER BY ID DESC LIMIT 1"
+
             Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
             Dim cm As New MySqlCommand(sql, cn)
+            cm.Parameters.AddWithValue("@Socio", Socio)
+            cm.Parameters.AddWithValue("@Lote", Lote)
+
             cn.Open()
             Dim result As Object = cm.ExecuteScalar()
 
@@ -2981,14 +2989,10 @@ Public Class CN_Correo
             cn.Close()
 
             Return resultado
-
         Catch ex As Exception
-
+            ' Manejar la excepción aquí o imprimir un mensaje de error
         End Try
-
-
     End Function
-
 
 
 
@@ -3831,20 +3835,41 @@ Public Class CN_Correo
 
         ActualizarPorCartaRecorridoDevoEntre(NroCarta, Estado, Fecha)
     End Function
-    Public Shared Function ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(ByVal NroCarta As String, ByVal Campo As String, ByVal Dato As String)
+    'Public Shared Function ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(ByVal NroCarta As String, ByVal Campo As String, ByVal Dato As String)
+    '    Try
+    '        Dim sql As String = "UPDATE Cartas SET " & Campo & "='" & Dato & "' WHERE Nro_carta=" & NroCarta & " ORDER by ID DESC LIMIT 1"
+    '        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+    '        Dim cm As New MySqlCommand(sql, cn)
+    '        cn.Open()
+    '        cm.ExecuteNonQuery()
+    '        cn.Close()
+    '    Catch ex As Exception
+
+    '    End Try
+
+
+    'End Function
+
+    Public Shared Sub ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico(ByVal NroCarta As String, ByVal Campo As String, ByVal Dato As String)
         Try
-            Dim sql As String = "UPDATE Cartas SET " & Campo & "='" & Dato & "' WHERE Nro_carta=" & NroCarta & " ORDER by ID DESC LIMIT 1"
             Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-            Dim cm As New MySqlCommand(sql, cn)
             cn.Open()
+            Dim sql As String = "UPDATE Cartas SET " & Campo & "='" & Dato & "' WHERE Nro_carta=" & NroCarta
+            Dim cm As New MySqlCommand(sql, cn)
             cm.ExecuteNonQuery()
+
+            If Campo = "Nro_cart2" Then
+                Dim sql2 As String = "UPDATE recorridos SET nro_carta2='" & Dato & "' WHERE Nro_carta=" & NroCarta
+                Dim cm2 As New MySqlCommand(sql2, cn)
+                cm2.ExecuteNonQuery()
+            End If
+
             cn.Close()
         Catch ex As Exception
 
         End Try
+    End Sub
 
-
-    End Function
 
     Private Shared Function ActualizarPorCartaRecorridoDevoEntre(ByVal NroCarta As String, ByVal Estado As String, ByVal Fecha As String) As Boolean
         Dim Fechadate As Date
