@@ -26,6 +26,12 @@ Public Class FrmRemitosLexs
         PbRemito.Image = imagenPrincipal
         PbRemito.SizeMode = PictureBoxSizeMode.AutoSize
 
+
+        Dim Dt As New DataTable
+        Dt = ConfigCorreo.CN_Correo.ObtenerRemitosLexs
+        DgvRemitos.DataSource = Dt
+
+
     End Sub
 
     Private Sub BtnDibujar_Click(sender As Object, e As EventArgs) Handles BtnConfirmar.Click
@@ -162,8 +168,6 @@ Public Class FrmRemitosLexs
 
     End Sub
 
-
-
     Private Sub GuardarPictureBoxComoPDF(pictureBox As PictureBox, rutaArchivo As String, nroRemito As String, remitente As String, fecha As String)
         Dim document As New PdfDocument()
         Dim page As PdfPage = document.AddPage()
@@ -180,10 +184,7 @@ Public Class FrmRemitosLexs
         document.Save(rutaArchivo)
         document.Close()
 
-
-        Dim archivoBytes As Byte() = imageStream.ToArray()
-
-
+        Dim archivoBytes As Byte() = File.ReadAllBytes(rutaArchivo)
 
         Dim formatosFecha() As String = {"dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy"} ' Lista de posibles formatos de fecha
         Dim fechaObjeto As DateTime
@@ -194,10 +195,7 @@ Public Class FrmRemitosLexs
         Next
         Dim fechaFormateada As String = fechaObjeto.ToString("yyyy-MM-dd")
         ConfigCorreo.CN_Correo.InsertarRemitoLexs(nroRemito, remitente, fechaFormateada, archivoBytes)
-
-
     End Sub
-
 
 
     Private Function CalculateProportionalSize(originalSize As Size, maxSize As Size) As Size
@@ -210,6 +208,37 @@ Public Class FrmRemitosLexs
     End Function
 
 
+    Private Sub VerArchivo(ByVal numeroRemito As String)
+        ' Llamar a la función para obtener los archivos por número de remito
+        Dim archivos As List(Of Byte()) = ConfigCorreo.CN_Correo.ObtenerArchivosPorNroRemito(numeroRemito)
+
+        If archivos.Count > 0 Then
+            ' Crear una corriente de memoria a partir de los bytes del archivo
+            Using memoryStream As New MemoryStream(archivos(0))
+                ' Guardar el archivo temporalmente en el disco
+                Dim tempFilePath As String = Path.ChangeExtension(Path.GetTempFileName(), ".pdf")
+                File.WriteAllBytes(tempFilePath, memoryStream.ToArray())
+
+                ' Abrir el archivo PDF con el visor de PDF predeterminado del sistema
+                Process.Start(New ProcessStartInfo With {
+                .FileName = tempFilePath,
+                .UseShellExecute = True
+            })
+            End Using
+        Else
+            MsgBox("No se encontraron archivos para el número de remito especificado.")
+        End If
+    End Sub
+
+    Private Sub DgvRemitos_DoubleClick(sender As Object, e As EventArgs) Handles DgvRemitos.DoubleClick
 
 
+
+        Dim N As String = DgvRemitos.SelectedCells(0).RowIndex.ToString
+        Dim Remito As String = DgvRemitos.Rows(N).Cells("Nroremito").Value
+        VerArchivo(Remito)
+
+
+
+    End Sub
 End Class

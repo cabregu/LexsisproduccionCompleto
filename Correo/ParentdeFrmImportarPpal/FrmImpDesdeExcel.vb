@@ -36,11 +36,24 @@ Public Class FrmImpDesdeExcel
         Dim ArrServicios As New ArrayList
         ArrServicios = ConfigCorreo.CN_Correo.RemitosdeCte(CmbCodigo.Text)
         CmbRemito.Items.Clear()
+        Dim ArrServiciosremitoslexs As New ArrayList
+        ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbCodigo.Text)
+
         For i As Integer = 0 To ArrServicios.Count - 1
             CmbRemito.Items.Add(ArrServicios.Item(i).ToString)
         Next
+
+        For i As Integer = 0 To ArrServiciosremitoslexs.Count - 1
+            CmbRemito.Items.Add(ArrServiciosremitoslexs.Item(i).ToString)
+        Next
+
+
         CmbRemito.Enabled = True
         CmbCodigo.Enabled = False
+
+
+
+
 
     End Sub
     Private Sub CmbRemito_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmbRemito.SelectedIndexChanged

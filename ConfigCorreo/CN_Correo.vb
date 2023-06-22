@@ -357,9 +357,26 @@ Public Class CN_Correo
         Next
         Return ArrServicios
 
+    End Function
 
+
+    Public Shared Function RemitosdeCteremitosLexs(ByVal Servicio As String) As ArrayList
+        Dim ArrServicios As New ArrayList
+        Dim sqln As String = "SELECT NroRemito FROM remitoslexs WHERE Remitente ='" & Servicio & "'"
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sqln, cn)
+        Dim da As New MySqlDataAdapter(cm)
+        Dim ds As New DataSet
+        cn.Open()
+        da.Fill(ds, "remitoslexs")
+        cn.Close()
+        For Each row As DataRow In ds.Tables("remitoslexs").Rows
+            ArrServicios.Add(row("NroRemito"))
+        Next
+        Return ArrServicios
 
     End Function
+
     Public Shared Function CargarTodoslosremitente() As ArrayList
         Dim ArrListaRemitentes As New ArrayList
         Dim Consultasql As String = "Select Remitente From remitentes"
@@ -2378,6 +2395,24 @@ Public Class CN_Correo
 
     End Function
 
+    Public Shared Function ObtenerRemitosLexs() As DataTable
+        Dim sqlSelect As String = "SELECT NroRemito, DATE_FORMAT(Fecha, '%d/%m/%Y') AS FechaFormateada FROM remitoslexs ORDER BY Fecha DESC"
+
+        Dim dataTable As New DataTable()
+
+        Using connection As New MySqlConnection(CadenaDeConeccionProduccion)
+            Using command As New MySqlCommand(sqlSelect, connection)
+                connection.Open()
+
+                Using adapter As New MySqlDataAdapter(command)
+                    adapter.Fill(dataTable)
+                End Using
+            End Using
+        End Using
+
+        Return dataTable
+    End Function
+
 
     Public Shared Sub InsertarRemitoLexs(nroRemito As String, remitente As String, fecha As String, archivoBytes As Byte())
         Dim sqlInsert As String = "INSERT INTO remitoslexs (NroRemito, Remitente, Fecha, Archivo) VALUES ('" & nroRemito & "', '" & remitente & "', '" & fecha & "', @Archivo)"
@@ -2391,6 +2426,29 @@ Public Class CN_Correo
             End Using
         End Using
     End Sub
+
+
+    Public Shared Function ObtenerArchivosPorNroRemito(nroRemito As String) As List(Of Byte())
+        Dim archivos As New List(Of Byte())
+
+        Dim sqlSelect As String = "SELECT Archivo FROM remitoslexs WHERE NroRemito = @NroRemito"
+        Using connection As New MySqlConnection(CadenaDeConeccionProduccion)
+            Using command As New MySqlCommand(sqlSelect, connection)
+                command.Parameters.AddWithValue("@NroRemito", nroRemito)
+
+                connection.Open()
+
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    While reader.Read()
+                        Dim archivoBytes As Byte() = DirectCast(reader("Archivo"), Byte())
+                        archivos.Add(archivoBytes)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        Return archivos
+    End Function
 
 
 

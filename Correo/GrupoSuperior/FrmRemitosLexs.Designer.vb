@@ -27,9 +27,11 @@ Partial Class FrmRemitosLexs
         Me.CmbRemitente = New System.Windows.Forms.ComboBox()
         Me.BtnPegar = New System.Windows.Forms.Button()
         Me.BtnGuardar = New System.Windows.Forms.Button()
+        Me.DgvRemitos = New System.Windows.Forms.DataGridView()
         CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Gb.SuspendLayout()
         CType(Me.PbRemito, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvRemitos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PBLogo
@@ -38,10 +40,11 @@ Partial Class FrmRemitosLexs
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(1254, 699)
+        Me.BtnSalir.Location = New System.Drawing.Point(1350, 699)
         '
         'Gb
         '
+        Me.Gb.Controls.Add(Me.DgvRemitos)
         Me.Gb.Controls.Add(Me.BtnGuardar)
         Me.Gb.Controls.Add(Me.BtnPegar)
         Me.Gb.Controls.Add(Me.CmbRemitente)
@@ -50,7 +53,7 @@ Partial Class FrmRemitosLexs
         Me.Gb.Controls.Add(Me.PbRemito)
         Me.Gb.Controls.Add(Me.DtpDesde)
         Me.Gb.Controls.Add(Me.BtnNuevo)
-        Me.Gb.Size = New System.Drawing.Size(1301, 750)
+        Me.Gb.Size = New System.Drawing.Size(1397, 750)
         Me.Gb.Controls.SetChildIndex(Me.PBLogo, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnSalir, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnNuevo, 0)
@@ -61,6 +64,7 @@ Partial Class FrmRemitosLexs
         Me.Gb.Controls.SetChildIndex(Me.CmbRemitente, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnPegar, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnGuardar, 0)
+        Me.Gb.Controls.SetChildIndex(Me.DgvRemitos, 0)
         '
         'BtnNuevo
         '
@@ -148,10 +152,21 @@ Partial Class FrmRemitosLexs
         Me.BtnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BtnGuardar.UseVisualStyleBackColor = False
         '
+        'DgvRemitos
+        '
+        Me.DgvRemitos.AllowUserToAddRows = False
+        Me.DgvRemitos.AllowUserToDeleteRows = False
+        Me.DgvRemitos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvRemitos.Location = New System.Drawing.Point(1118, 109)
+        Me.DgvRemitos.Name = "DgvRemitos"
+        Me.DgvRemitos.ReadOnly = True
+        Me.DgvRemitos.Size = New System.Drawing.Size(250, 500)
+        Me.DgvRemitos.TabIndex = 288
+        '
         'FrmRemitosLexs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(1301, 749)
+        Me.ClientSize = New System.Drawing.Size(1397, 749)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "FrmRemitosLexs"
@@ -159,6 +174,7 @@ Partial Class FrmRemitosLexs
         Me.Gb.ResumeLayout(False)
         Me.Gb.PerformLayout()
         CType(Me.PbRemito, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvRemitos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -171,4 +187,5 @@ Partial Class FrmRemitosLexs
     Friend WithEvents CmbRemitente As ComboBox
     Friend WithEvents BtnPegar As Button
     Friend WithEvents BtnGuardar As Button
+    Friend WithEvents DgvRemitos As DataGridView
 End Class
