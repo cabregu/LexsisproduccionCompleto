@@ -30,14 +30,35 @@
         Me.Close()
     End Sub
     Private Sub CmbRemitente_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmbRemitente.SelectedIndexChanged
-        Dim ArrayPendImpr As New ArrayList
-        ArrayPendImpr = ConfigCorreo.CN_Correo.ObtenerRemitosPendientesImpresion(CmbRemitente.Text)
+        'Dim ArrayPendImpr As New ArrayList
+        'ArrayPendImpr = ConfigCorreo.CN_Correo.ObtenerRemitosPendientesImpresion(CmbRemitente.Text)
 
-        CmbRemitoPendiente.Items.Clear()
-        For i As Integer = 0 To ArrayPendImpr.Count - 1
-            CmbRemitoPendiente.Items.Add(ArrayPendImpr.Item(i).ToString)
+        'CmbRemitoPendiente.Items.Clear()
+        'For i As Integer = 0 To ArrayPendImpr.Count - 1
+        '    CmbRemitoPendiente.Items.Add(ArrayPendImpr.Item(i).ToString)
+        'Next
+        'CmbRemitente.Enabled = False
+
+
+        Dim ArrServicios As New ArrayList
+        ArrServicios = ConfigCorreo.CN_Correo.ObtenerRemitosPendientesImpresion(CmbRemitente.Text)
+
+        Dim ArrServiciosremitoslexs As New ArrayList
+        ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbRemitente.Text)
+
+        For i As Integer = 0 To ArrServicios.Count - 1
+            CmbRemitoPendiente.Items.Add(ArrServicios.Item(i).ToString)
         Next
+
+        For i As Integer = 0 To ArrServiciosremitoslexs.Count - 1
+            CmbRemitoPendiente.Items.Add(ArrServiciosremitoslexs.Item(i).ToString)
+        Next
+
+
         CmbRemitente.Enabled = False
+        CmbRemitoPendiente.Enabled = True
+
+
     End Sub
     Private Sub FrmimprimirEtiqueta_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim ArrayRemitentes As New ArrayList
@@ -46,6 +67,9 @@
         For i As Integer = 0 To ArrayRemitentes.Count - 1
             CmbRemitente.Items.Add(ArrayRemitentes.Item(i).ToString)
         Next
+
+
+
     End Sub
 
   

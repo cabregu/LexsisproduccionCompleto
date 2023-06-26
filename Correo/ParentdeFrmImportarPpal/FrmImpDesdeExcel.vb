@@ -522,7 +522,14 @@ Public Class FrmImpDesdeExcel
                 Dim locali As String = row("LOCA_DENO_ENT").ToString().TrimEnd().ToUpper()
                 Dim provin As String = row("PROV_DENO_ENT").ToString().TrimEnd().ToUpper()
                 locali = locali.Replace("CIUDAD AUTONOMA BUENOS AIRES", "CAPITAL FEDERAL")
+
                 Dim cp As String = row("POST").ToString().TrimEnd()
+
+                If Not IsNumeric(cp) Then
+                    cp = "0000"
+                End If
+
+
                 Dim empres As String = row("RAZON").ToString().TrimEnd()
                 Dim tele As String = row("TELE").ToString().TrimEnd()
                 Dim planilla As String = row("PLANTILLA").ToString().TrimEnd()
