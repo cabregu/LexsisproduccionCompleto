@@ -71,13 +71,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Bytescout.BarCodeReader.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CrystalDecisions.Windows.Forms.dll</HintPath>
-    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Interop.MSO_TO_OOLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Interop.MSO_TO_OOLib.dll</HintPath>
@@ -225,6 +222,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Etiquetas\SWISSK.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Etiquetas\SWISSKPAGINACOMPLETA.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="EZTWAIN.VB" />
@@ -831,6 +831,7 @@
     <None Include="Etiquetas\ARM GRANDE.rpt" />
     <None Include="Etiquetas\ARM.rpt" />
     <None Include="Etiquetas\ARMADO CREDENCIALES2021 III.rpt" />
+    <None Include="Etiquetas\ARMADO CREDENCIALES2023k.rpt" />
     <None Include="Etiquetas\ARMADO_CREDENCIALES2021  II.rpt" />
     <None Include="Etiquetas\ARMADO_CREDENCIALES2021.rpt" />
     <None Include="Etiquetas\ARM_CARATULA.rpt" />
@@ -855,6 +856,7 @@
     <None Include="Etiquetas\SOBRE_impresionFormatoSwiss_CREDENCIALES.rpt" />
     <None Include="Etiquetas\SOBRE_INGLES.rpt" />
     <None Include="Etiquetas\SWISSK.rpt" />
+    <None Include="Etiquetas\SWISSKPAGINACOMPLETA.rpt" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

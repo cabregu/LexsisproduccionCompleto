@@ -2396,8 +2396,7 @@ Public Class CN_Correo
     End Function
 
     Public Shared Function ObtenerRemitosLexs() As DataTable
-        Dim sqlSelect As String = "SELECT NroRemito, DATE_FORMAT(Fecha, '%d/%m/%Y') AS FechaFormateada FROM 
-ORDER BY Fecha DESC"
+        Dim sqlSelect As String = "SELECT NroRemito, DATE_FORMAT(Fecha, '%d/%m/%Y') AS FechaFormateada FROM remitoslexs ORDER BY Fecha DESC"
 
 
         Dim dataTable As New DataTable()
