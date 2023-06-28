@@ -134,59 +134,59 @@ Public Class FrmZonales
         'End Try
 
     End Function
-    
-
-    Public Shared Sub BajarExceldesdeDatatable(ByVal NroPLanil As String, ByVal dt As DataTable, ByVal Mail As String)
-
-        Try
-            Dim ArrArchivos As New ArrayList
-
-            'Dim strFile As String = MYFilelocation
-            Dim excel As New Microsoft.Office.Interop.Excel.ApplicationClass
-            Dim wBook As Microsoft.Office.Interop.Excel.Workbook
-            Dim wSheet As Microsoft.Office.Interop.Excel.Worksheet
-
-            wBook = excel.Workbooks.Add()
-            wSheet = wBook.ActiveSheet()
-
-            Dim dc As System.Data.DataColumn
-            Dim dr As System.Data.DataRow
-            Dim colIndex As Integer = 0
-            Dim rowIndex As Integer = 0
-
-            For Each dc In dt.Columns
-                colIndex = colIndex + 1
-                excel.Cells(1, colIndex) = dc.ColumnName
-            Next
-
-            For Each dr In dt.Rows
-                rowIndex = rowIndex + 1
-                colIndex = 0
-                For Each dc In dt.Columns
-                    colIndex = colIndex + 1
-                    excel.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
-                Next
-            Next
-            Dim Servico As String
-            Servico = ConfigCorreo.CN_Correo.ObtenerservicioSimpleyconacuse(NroPLanil)
-
-            Dim FechaTx As String = Now.ToShortDateString
-            FechaTx = FechaTx.Replace("/", "-")
-            wSheet.Columns.AutoFit()
-            wBook.SaveAs("C:\temp\PlanillaZonal" & "_" & NroPLanil & "_" & FechaTx & "_" & Servico & ".xls")
-            ArrArchivos.Add("C:\temp\PlanillaZonal" & "_" & NroPLanil & "_" & FechaTx & "_" & Servico & ".xls")
-            wBook.Close()
-
-            enviaCorreo(ArrArchivos, "Archivos Zonal", Mail)
 
 
+    'Public Shared Sub BajarExceldesdeDatatable(ByVal NroPLanil As String, ByVal dt As DataTable, ByVal Mail As String)
 
-        Catch ex As Exception
-            MessageBox.Show("there was an issue Exporting to Excel" & ex.ToString)
-        End Try
+    '    Try
+    '        Dim ArrArchivos As New ArrayList
+
+    '        'Dim strFile As String = MYFilelocation
+    '        Dim excel As New Microsoft.Office.Interop.Excel.ApplicationClass
+    '        Dim wBook As Microsoft.Office.Interop.Excel.Workbook
+    '        Dim wSheet As Microsoft.Office.Interop.Excel.Worksheet
+
+    '        wBook = excel.Workbooks.Add()
+    '        wSheet = wBook.ActiveSheet()
+
+    '        Dim dc As System.Data.DataColumn
+    '        Dim dr As System.Data.DataRow
+    '        Dim colIndex As Integer = 0
+    '        Dim rowIndex As Integer = 0
+
+    '        For Each dc In dt.Columns
+    '            colIndex = colIndex + 1
+    '            excel.Cells(1, colIndex) = dc.ColumnName
+    '        Next
+
+    '        For Each dr In dt.Rows
+    '            rowIndex = rowIndex + 1
+    '            colIndex = 0
+    '            For Each dc In dt.Columns
+    '                colIndex = colIndex + 1
+    '                excel.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
+    '            Next
+    '        Next
+    '        Dim Servico As String
+    '        Servico = ConfigCorreo.CN_Correo.ObtenerservicioSimpleyconacuse(NroPLanil)
+
+    '        Dim FechaTx As String = Now.ToShortDateString
+    '        FechaTx = FechaTx.Replace("/", "-")
+    '        wSheet.Columns.AutoFit()
+    '        wBook.SaveAs("C:\temp\PlanillaZonal" & "_" & NroPLanil & "_" & FechaTx & "_" & Servico & ".xls")
+    '        ArrArchivos.Add("C:\temp\PlanillaZonal" & "_" & NroPLanil & "_" & FechaTx & "_" & Servico & ".xls")
+    '        wBook.Close()
+
+    '        enviaCorreo(ArrArchivos, "Archivos Zonal", Mail)
 
 
-    End Sub
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("there was an issue Exporting to Excel" & ex.ToString)
+    '    End Try
+
+
+    'End Sub
 
 
     Private Sub BtnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGenerar.Click
@@ -197,7 +197,7 @@ Public Class FrmZonales
                 For i As Integer = 0 To ArrPlanillaZonal.Count - 1
                     Dim dt As New DataTable
                     dt = ConfigCorreo.CN_Correo.CargarPlanillasParaEnviar(ArrPlanillaZonal.Item(i).ToString)
-                    BajarExceldesdeDatatable(ArrPlanillaZonal.Item(i).ToString, dt, TxtEnvio.Text)
+                    'BajarExceldesdeDatatable(ArrPlanillaZonal.Item(i).ToString, dt, TxtEnvio.Text)
                 Next
                 BtnTerminar.Enabled = True
                 BtnGenerar.Enabled = False

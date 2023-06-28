@@ -257,93 +257,93 @@ Public Class FrmImprimirPlanificacion
                 Dim DTrec As New DataTable
                 DTrec = ConfigCorreo.CN_Correo.ObtenerRecorridoDeRemitenteYplanilla(txtrecorrido.Text, CmbRemitentes.Text)
 
-                BajarExceldesdeDatatable(DTrec, txtfecha.Text, txcaminante.Text, txtrecorrido.Text)
+                'BajarExceldesdeDatatable(DTrec, txtfecha.Text, txcaminante.Text, txtrecorrido.Text)
             End If
         Else
 
             Dim DTrecpl As New DataTable
             DTrecpl = ConfigCorreo.CN_Correo.ObtenerRecorridoDeplanilla(txtrecorrido.Text)
 
-            BajarExceldesdeDatatable(DTrecpl, txtfecha.Text, txcaminante.Text, txtrecorrido.Text)
+            'BajarExceldesdeDatatable(DTrecpl, txtfecha.Text, txcaminante.Text, txtrecorrido.Text)
         End If
     End Sub
-    Public Shared Sub BajarExceldesdeDatatable(ByVal dt As DataTable, ByVal fecha As Date, ByVal Cartero As String, ByVal Planilla As String)
+    'Public Shared Sub BajarExceldesdeDatatable(ByVal dt As DataTable, ByVal fecha As Date, ByVal Cartero As String, ByVal Planilla As String)
 
-        Try
+    '    Try
 
-            'Dim strFile As String = MYFilelocation
-            Dim excel As New Microsoft.Office.Interop.Excel.ApplicationClass
-            Dim wBook As Microsoft.Office.Interop.Excel.Workbook
-            Dim wSheet As Microsoft.Office.Interop.Excel.Worksheet
-
-
-
-            wBook = excel.Workbooks.Add()
-            wSheet = wBook.ActiveSheet()
-            wSheet.PageSetup.PaperSize = Microsoft.Office.Interop.Excel.XlPaperSize.xlPaperA4
-            wSheet.PageSetup.Zoom = 75
-
-
-            Dim dc As System.Data.DataColumn
-            Dim dr As System.Data.DataRow
-            Dim colIndex As Integer = 0
-            Dim rowIndex As Integer = 3
-
-            excel.Cells(2, 2) = "FECHA: " & fecha.ToShortDateString
-            excel.Cells(3, 2) = "CARTERO: " & Cartero
-            excel.Cells(1, 1) = "NRO PLANILLA: " & Planilla
-
-            excel.Cells(4, 4) = "FIRMA / LL"
-            excel.Cells(4, 5) = "ACLARACION / LD"
-            excel.Cells(4, 6) = "DNI / RELACION C/TITULAR"
-            excel.Cells(4, 7) = "AVISO / OBSERVACIONES"
-            excel.Cells(4, 4).borders.LineStyle = 12
-            excel.Cells(4, 5).borders.LineStyle = 12
-            excel.Cells(4, 6).borders.LineStyle = 12
-            excel.Cells(4, 7).borders.LineStyle = 12
+    '        'Dim strFile As String = MYFilelocation
+    '        Dim excel As New Microsoft.Office.Interop.Excel.ApplicationClass
+    '        Dim wBook As Microsoft.Office.Interop.Excel.Workbook
+    '        Dim wSheet As Microsoft.Office.Interop.Excel.Worksheet
 
 
 
+    '        wBook = excel.Workbooks.Add()
+    '        wSheet = wBook.ActiveSheet()
+    '        wSheet.PageSetup.PaperSize = Microsoft.Office.Interop.Excel.XlPaperSize.xlPaperA4
+    '        wSheet.PageSetup.Zoom = 75
 
-            For Each dc In dt.Columns
-                colIndex = colIndex + 1
-                excel.Cells(4, colIndex) = dc.ColumnName
-                excel.Cells(4, colIndex).borders.LineStyle = 12
-            Next
 
-            For Each dr In dt.Rows
-                rowIndex = rowIndex + 1
-                colIndex = 0
-                For Each dc In dt.Columns
-                    colIndex = colIndex + 1
-                    excel.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
-                    excel.Cells(rowIndex + 1, colIndex).borders.LineStyle = 12
-                    excel.Cells(rowIndex + 1, colIndex + 1).borders.LineStyle = 12
-                    excel.Cells(rowIndex + 1, colIndex + 2).borders.LineStyle = 12
-                    excel.Cells(rowIndex + 1, colIndex + 3).borders.LineStyle = 12
-                    excel.Cells(rowIndex + 1, colIndex + 4).borders.LineStyle = 12
-                Next
-            Next
+    '        Dim dc As System.Data.DataColumn
+    '        Dim dr As System.Data.DataRow
+    '        Dim colIndex As Integer = 0
+    '        Dim rowIndex As Integer = 3
 
-            excel.Cells.RowHeight = 20
+    '        excel.Cells(2, 2) = "FECHA: " & fecha.ToShortDateString
+    '        excel.Cells(3, 2) = "CARTERO: " & Cartero
+    '        excel.Cells(1, 1) = "NRO PLANILLA: " & Planilla
 
-            excel.Visible = True
-            wSheet.Columns.AutoFit()
-            wSheet.Columns("B").ColumnWidth = 45
-            wSheet.Columns("A").ColumnWidth = 10
+    '        excel.Cells(4, 4) = "FIRMA / LL"
+    '        excel.Cells(4, 5) = "ACLARACION / LD"
+    '        excel.Cells(4, 6) = "DNI / RELACION C/TITULAR"
+    '        excel.Cells(4, 7) = "AVISO / OBSERVACIONES"
+    '        excel.Cells(4, 4).borders.LineStyle = 12
+    '        excel.Cells(4, 5).borders.LineStyle = 12
+    '        excel.Cells(4, 6).borders.LineStyle = 12
+    '        excel.Cells(4, 7).borders.LineStyle = 12
 
 
 
-            excel = Nothing
-            wBook = Nothing
-            wSheet = Nothing
 
-        Catch ex As Exception
-            MessageBox.Show("there was an issue Exporting to Excel" & ex.ToString)
-        End Try
+    '        For Each dc In dt.Columns
+    '            colIndex = colIndex + 1
+    '            excel.Cells(4, colIndex) = dc.ColumnName
+    '            excel.Cells(4, colIndex).borders.LineStyle = 12
+    '        Next
+
+    '        For Each dr In dt.Rows
+    '            rowIndex = rowIndex + 1
+    '            colIndex = 0
+    '            For Each dc In dt.Columns
+    '                colIndex = colIndex + 1
+    '                excel.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
+    '                excel.Cells(rowIndex + 1, colIndex).borders.LineStyle = 12
+    '                excel.Cells(rowIndex + 1, colIndex + 1).borders.LineStyle = 12
+    '                excel.Cells(rowIndex + 1, colIndex + 2).borders.LineStyle = 12
+    '                excel.Cells(rowIndex + 1, colIndex + 3).borders.LineStyle = 12
+    '                excel.Cells(rowIndex + 1, colIndex + 4).borders.LineStyle = 12
+    '            Next
+    '        Next
+
+    '        excel.Cells.RowHeight = 20
+
+    '        excel.Visible = True
+    '        wSheet.Columns.AutoFit()
+    '        wSheet.Columns("B").ColumnWidth = 45
+    '        wSheet.Columns("A").ColumnWidth = 10
 
 
-    End Sub
+
+    '        excel = Nothing
+    '        wBook = Nothing
+    '        wSheet = Nothing
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("there was an issue Exporting to Excel" & ex.ToString)
+    '    End Try
+
+
+    'End Sub
     Private Sub BtnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAgregar.Click
 
         If DgvContenido.RowCount > 0 Then

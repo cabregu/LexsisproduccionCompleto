@@ -205,8 +205,4 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\C
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.pdb
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\Microsoft.Office.Interop.Outlook.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\stdole.dll
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\office.dll
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\Microsoft.Office.Interop.Outlook.xml
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\office.xml

@@ -106,7 +106,6 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\Bytesco
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\ConfigCorreo.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Windows.Forms.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\Interop.MSO_TO_OOLib.dll
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\Microsoft.Office.Interop.Excel.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\mysql.data.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\PdfSharp.Charting.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\PdfSharp.dll
@@ -196,11 +195,9 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.exe
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.pdb
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\Microsoft.Office.Interop.Outlook.dll
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\office.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\stdole.dll
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\Microsoft.Office.Interop.Outlook.xml
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\office.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.ReportSource.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Shared.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.CrystalReports.Design.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Web.dll
