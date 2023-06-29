@@ -200,3 +200,8 @@ C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\Microso
 C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\office.dll
 C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\Microsoft.Office.Interop.Outlook.xml
 C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\office.xml
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.CrystalReports.Design.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.ReportSource.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Shared.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Windows.Forms.dll
