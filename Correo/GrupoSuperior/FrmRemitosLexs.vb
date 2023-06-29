@@ -62,8 +62,8 @@ Public Class FrmRemitosLexs
         Dim numero As String = TxtRemito.Text
         Dim fecha As Date = DtpDesde.Value
         Dim empresa As String = "SWISS MEDICAL"
-        Dim direccion As String = "VIAMONTE 44456"
-        Dim codigoPostal As String = "1254"
+        Dim direccion As String = "ARMADO Y DISTRIBUCION"
+        Dim sector As String = "SECTOR CREDENCIALES AT:ROMINA ARRIETA"
 
         ' Configura la fuente y el color del texto
         Dim fuente As New Font("Arial", 12, FontStyle.Bold)
@@ -88,8 +88,8 @@ Public Class FrmRemitosLexs
             textoPosicion = New PointF(201, 160)
             g.DrawString(direccion, fuente, New SolidBrush(colorTexto), textoPosicion)
 
-            textoPosicion = New PointF(201, 178)
-            g.DrawString(codigoPostal, fuente, New SolidBrush(colorTexto), textoPosicion)
+            textoPosicion = New PointF(218, 198)
+            g.DrawString(sector, fuente, New SolidBrush(colorTexto), textoPosicion)
 
             ' Dibujar la fecha en la posición deseada
             Dim fechaPosicion As New PointF(546, 106)
