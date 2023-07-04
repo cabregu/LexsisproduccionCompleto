@@ -2862,6 +2862,21 @@ Public Class CN_Correo
         End If
     End Function
 
+    Public Shared Function ConsultaAsignacionSeprit(ByVal cp As String) As String
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion & ";Convert Zero Datetime=True")
+        Dim sql As String = "SELECT Item FROM asignaciones_seprit WHERE cp = '" & cp & "'"
+
+        Dim cm As New MySqlCommand(sql, cn)
+        cn.Open()
+        Dim result As Object = cm.ExecuteScalar()
+        cn.Close()
+
+        If result IsNot Nothing Then
+            Return result.ToString()
+        Else
+            Return String.Empty
+        End If
+    End Function
 
     Public Shared Function CargarRemitosPendientes() As DataTable
         Dim sql As String = "Select TipoRemitente, Nro_Remito, Fecha_Retiro, Cliente, Servicio from remitos where Estado='PENDIENTE'"

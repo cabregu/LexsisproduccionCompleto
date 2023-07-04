@@ -81,4 +81,28 @@
         End If
 
     End Sub
+
+    Private Sub BtnArm_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub BtnModoS_Click(sender As Object, e As EventArgs) Handles BtnModoS.Click
+        FiltrarYMostrarDatos(DtImprimir, DgvImprimir)
+    End Sub
+
+    Private Function FiltrarYMostrarDatos(ByVal dtOriginal As DataTable, ByVal dgvDestino As DataGridView) As DataTable
+        ' Filtrar los datos por el campo "OBS" igual a "MODO S"
+        Dim dtFiltrado As DataTable = dtOriginal.Clone()
+        Dim rows As DataRow() = dtOriginal.Select("OBS = 'MODO S'")
+        For Each row As DataRow In rows
+            dtFiltrado.ImportRow(row)
+        Next
+
+        ' Mostrar los datos filtrados en el DataGridView
+        dgvDestino.DataSource = dtFiltrado
+
+        Return dtFiltrado
+    End Function
+
+
 End Class

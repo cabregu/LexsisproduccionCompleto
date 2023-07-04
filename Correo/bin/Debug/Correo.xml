@@ -112,6 +112,16 @@ Correo
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Correo.My.Resources.Resources.BOProduct_32x32">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Correo.My.Resources.Resources.BOProductGroup_32x32">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Correo.My.Resources.Resources.brain_trainer">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.

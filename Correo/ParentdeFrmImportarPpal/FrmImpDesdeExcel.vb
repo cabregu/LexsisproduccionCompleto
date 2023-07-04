@@ -553,7 +553,8 @@ Public Class FrmImpDesdeExcel
 
 
                 If row("EMPRESA_ENTREGA") = "SEPRIT" Or row("EMPRESA_ENTREGA") = "CA" Then
-                    row("OBS2") = "SEPRIT"
+                    row("OBS2") = ConsultaAsignacionSeprit(cp)
+
                 End If
                 If row("EMPRESA_ENTREGA") = "DEVOLVER A SWISS" Then
                     row("OBS2") = "DEV A SWISS"
@@ -619,10 +620,11 @@ Public Class FrmImpDesdeExcel
                 Dim empresa As String = row("EMPRESA").ToString().TrimEnd()
                 Dim clave As String = domicilio & "-" & empresa
 
-                If Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 Then
+                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 Then
                     row("OBS2") = "ARM"
                 End If
             Next
+
 
             '**********************AsignacionZonal********************
 
@@ -638,7 +640,7 @@ Public Class FrmImpDesdeExcel
             Dim registrosPorCP As New Dictionary(Of String, Integer)()
 
             For Each fila As DataRow In dt2.Rows
-                If Not fila("cp") Is DBNull.Value AndAlso fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "" Then
+                If Not fila("cp") Is DBNull.Value AndAlso Convert.ToInt32(fila("cp")) > 2000 AndAlso (fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "") Then
                     Dim cp As String = fila("cp").ToString()
                     If registrosPorCP.ContainsKey(cp) Then
                         registrosPorCP(cp) += 1
@@ -648,7 +650,6 @@ Public Class FrmImpDesdeExcel
                 End If
             Next
 
-
             For Each kvp As KeyValuePair(Of String, Integer) In registrosPorCP
                 Dim cp As String = kvp.Key
                 Dim cantidadRegistros As Integer = kvp.Value
@@ -657,12 +658,15 @@ Public Class FrmImpDesdeExcel
 
                 For Each fila As DataRow In dt2.Rows
                     If fila("cp").ToString() = cp AndAlso (fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "") Then
-                        If contador < mitad Then
-                            fila("obs2") = "MODO S"
-                        Else
-                            fila("obs2") = ""
+                        ' Verificar si el campo "cp" es mayor que 2000 antes de aplicar el filtro
+                        If Convert.ToInt32(fila("cp")) > 2000 Then
+                            If contador < mitad Then
+                                fila("obs2") = "MODO S"
+                            Else
+                                fila("obs2") = ""
+                            End If
+                            contador += 1
                         End If
-                        contador += 1
                     End If
                 Next
 
@@ -670,15 +674,19 @@ Public Class FrmImpDesdeExcel
                 If contador < cantidadRegistros Then
                     For Each fila As DataRow In dt2.Rows
                         If fila("cp").ToString() = cp AndAlso (fila("obs2") Is DBNull.Value OrElse fila("obs2").ToString() = "") Then
-                            fila("obs2") = "MODO S"
-                            contador += 1
-                            If contador >= cantidadRegistros Then
-                                Exit For
+                            ' Verificar si el campo "cp" es mayor que 2000 antes de aplicar el filtro
+                            If Convert.ToInt32(fila("cp")) > 2000 Then
+                                fila("obs2") = "MODO S"
+                                contador += 1
+                                If contador >= cantidadRegistros Then
+                                    Exit For
+                                End If
                             End If
                         End If
                     Next
                 End If
             Next
+
 
             Return dt2
 
