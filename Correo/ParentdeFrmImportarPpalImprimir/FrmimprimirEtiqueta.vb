@@ -8,6 +8,9 @@
             DtImprimir = ConfigCorreo.CN_Correo.LlenarDatatableImprimir(CmbRemitoPendiente.Text)
             DgvImprimir.DataSource = DtImprimir
             LblCant.Text = DgvImprimir.RowCount
+            BtnArm.Enabled = True
+            BtnModoS.Enabled = True
+
         End If
     End Sub
     Private Sub BtnSelectEtic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSelectEtic.Click
@@ -87,7 +90,11 @@
     End Sub
 
     Private Sub BtnModoS_Click(sender As Object, e As EventArgs) Handles BtnModoS.Click
+        BtnCambiarEstado.Enabled = False
         FiltrarYMostrarDatos(DtImprimir, DgvImprimir)
+    End Sub
+    Private Sub BtnArm_Click_1(sender As Object, e As EventArgs) Handles BtnArm.Click
+        BtnCambiarEstado.Enabled = False
     End Sub
 
     Private Function FiltrarYMostrarDatos(ByVal dtOriginal As DataTable, ByVal dgvDestino As DataGridView) As DataTable
