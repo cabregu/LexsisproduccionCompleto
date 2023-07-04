@@ -194,7 +194,7 @@ Public Class FrmRemitosLexs
             End If
         Next
         Dim fechaFormateada As String = fechaObjeto.ToString("yyyy-MM-dd")
-        ConfigCorreo.CN_Correo.InsertarRemitoLexs(nroRemito, remitente, fechaFormateada, archivoBytes)
+        ConfigCorreo.CN_Correo.InsertarRemitoLexs(nroRemito, remitente, fechaFormateada, archivoBytes, "Ingresado")
     End Sub
 
 

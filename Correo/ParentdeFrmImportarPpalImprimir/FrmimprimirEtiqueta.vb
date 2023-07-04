@@ -30,30 +30,14 @@
         Me.Close()
     End Sub
     Private Sub CmbRemitente_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmbRemitente.SelectedIndexChanged
-        'Dim ArrayPendImpr As New ArrayList
-        'ArrayPendImpr = ConfigCorreo.CN_Correo.ObtenerRemitosPendientesImpresion(CmbRemitente.Text)
 
-        'CmbRemitoPendiente.Items.Clear()
-        'For i As Integer = 0 To ArrayPendImpr.Count - 1
-        '    CmbRemitoPendiente.Items.Add(ArrayPendImpr.Item(i).ToString)
-        'Next
-        'CmbRemitente.Enabled = False
-
-
-        Dim ArrServicios As New ArrayList
-        ArrServicios = ConfigCorreo.CN_Correo.ObtenerRemitosPendientesImpresion(CmbRemitente.Text)
 
         Dim ArrServiciosremitoslexs As New ArrayList
         ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbRemitente.Text)
 
-        For i As Integer = 0 To ArrServicios.Count - 1
-            CmbRemitoPendiente.Items.Add(ArrServicios.Item(i).ToString)
-        Next
-
         For i As Integer = 0 To ArrServiciosremitoslexs.Count - 1
             CmbRemitoPendiente.Items.Add(ArrServiciosremitoslexs.Item(i).ToString)
         Next
-
 
         CmbRemitente.Enabled = False
         CmbRemitoPendiente.Enabled = True
@@ -77,20 +61,20 @@
 
         FrmReportEtiquetas.EtiquetaSeleccionada = TxtPath.Text
         FrmReportEtiquetas.DTRegImprimir = DtImprimir
-        'FrmReportEtiquetas.RemitenteNombre = CmbRemitente.Text
-        'FrmReportEtiquetas.RemitoNro = CmbRemitoPendiente.Text
         FrmReportEtiquetas.Cant = DgvImprimir.Rows.Count
-
         FrmReportEtiquetas.Show()
+
     End Sub
 
     Private Sub BtnCambiarEstado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCambiarEstado.Click
         If CmbRemitente.Text <> "" And CmbRemitoPendiente.Text <> "" Then
 
             If MessageBox.Show("Cambiar estado de todo el remito nro: " & CmbRemitoPendiente.Text & " remitente " & CmbRemitente.Text & " a ESP_PROG ?", "Actualizar", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
-                ConfigCorreo.CN_Correo.ActualizarRemito(CmbRemitoPendiente.Text, CmbRemitente.Text, "ESP_PROG", LblCant.Text)
+                '*Cambia estado demitos lexs a Impreso y ya no se muestra para imprimir etiquetas para mostrar cambiar a Importado
+                ConfigCorreo.CN_Correo.CambiarEstadoRemitosLexs(CmbRemitoPendiente.Text, "Impreso")
                 ConfigCorreo.CN_Correo.ActualizarEstado(CmbRemitoPendiente.Text, CmbRemitente.Text, "ESP_PROG")
                 Me.Close()
+
             End If
         Else
             MsgBox("Seleccione remito y remitente")

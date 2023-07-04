@@ -40,7 +40,7 @@ Partial Class FrmRemitosLexs
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(1350, 699)
+        Me.BtnSalir.Location = New System.Drawing.Point(1323, 699)
         '
         'Gb
         '
@@ -53,7 +53,7 @@ Partial Class FrmRemitosLexs
         Me.Gb.Controls.Add(Me.PbRemito)
         Me.Gb.Controls.Add(Me.DtpDesde)
         Me.Gb.Controls.Add(Me.BtnNuevo)
-        Me.Gb.Size = New System.Drawing.Size(1397, 750)
+        Me.Gb.Size = New System.Drawing.Size(1370, 750)
         Me.Gb.Controls.SetChildIndex(Me.PBLogo, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnSalir, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnNuevo, 0)
@@ -145,7 +145,7 @@ Partial Class FrmRemitosLexs
         Me.BtnGuardar.Enabled = False
         Me.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnGuardar.Image = Global.Correo.My.Resources.Resources.Save_32x32
-        Me.BtnGuardar.Location = New System.Drawing.Point(899, 615)
+        Me.BtnGuardar.Location = New System.Drawing.Point(1032, 615)
         Me.BtnGuardar.Name = "BtnGuardar"
         Me.BtnGuardar.Size = New System.Drawing.Size(80, 40)
         Me.BtnGuardar.TabIndex = 287
@@ -160,13 +160,13 @@ Partial Class FrmRemitosLexs
         Me.DgvRemitos.Location = New System.Drawing.Point(1118, 109)
         Me.DgvRemitos.Name = "DgvRemitos"
         Me.DgvRemitos.ReadOnly = True
-        Me.DgvRemitos.Size = New System.Drawing.Size(250, 500)
+        Me.DgvRemitos.Size = New System.Drawing.Size(230, 500)
         Me.DgvRemitos.TabIndex = 288
         '
         'FrmRemitosLexs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(1397, 749)
+        Me.ClientSize = New System.Drawing.Size(1370, 749)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "FrmRemitosLexs"

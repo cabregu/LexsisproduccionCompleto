@@ -33,21 +33,18 @@ Public Class FrmImpDesdeExcel
 
     End Sub
     Private Sub CmbCodigo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmbCodigo.SelectedIndexChanged
-        Dim ArrServicios As New ArrayList
-        ArrServicios = ConfigCorreo.CN_Correo.RemitosdeCte(CmbCodigo.Text)
+        'Dim ArrServicios As New ArrayList
+        'ArrServicios = ConfigCorreo.CN_Correo.RemitosdeCte(CmbCodigo.Text)
+        'For i As Integer = 0 To ArrServicios.Count - 1
+        '    CmbRemito.Items.Add(ArrServicios.Item(i).ToString)
+        'Next
+
         CmbRemito.Items.Clear()
         Dim ArrServiciosremitoslexs As New ArrayList
         ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbCodigo.Text)
-
-        For i As Integer = 0 To ArrServicios.Count - 1
-            CmbRemito.Items.Add(ArrServicios.Item(i).ToString)
-        Next
-
         For i As Integer = 0 To ArrServiciosremitoslexs.Count - 1
             CmbRemito.Items.Add(ArrServiciosremitoslexs.Item(i).ToString)
         Next
-
-
         CmbRemito.Enabled = True
         CmbCodigo.Enabled = False
 
@@ -275,7 +272,10 @@ Public Class FrmImpDesdeExcel
 
         If ConfigCorreo.CN_Correo.InstertarCARTAS(Archtxt3) = True Then
             ActualizarNroCarta(NroCart + 1)
-            ActualizarRemito(CmbRemito.Text, CmbCodigo.Text, "PEND_IMPR", LblCant.Text)
+
+            CambiarEstadoRemitosLexs(CmbRemito.Text, "Importado")
+
+            'ActualizarRemito(CmbRemito.Text, CmbCodigo.Text, "PEND_IMPR", LblCant.Text)
             If MessageBox.Show(LblCant.Text & " Registros Cargados", LblCant.Text & " Registros Cargados", MessageBoxButtons.OK, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
                 Me.Close()
             End If

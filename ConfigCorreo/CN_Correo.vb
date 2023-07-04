@@ -360,9 +360,9 @@ Public Class CN_Correo
     End Function
 
 
-    Public Shared Function RemitosdeCteremitosLexs(ByVal Servicio As String) As ArrayList
+    Public Shared Function RemitosdeCteremitosLexs(ByVal Remitente As String) As ArrayList
         Dim ArrServicios As New ArrayList
-        Dim sqln As String = "SELECT NroRemito FROM remitoslexs WHERE Remitente ='" & Servicio & "'"
+        Dim sqln As String = "SELECT NroRemito FROM remitoslexs WHERE Remitente ='" & Remitente & "' AND Estado='Ingresado' Or Estado='Importado'"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cm As New MySqlCommand(sqln, cn)
         Dim da As New MySqlDataAdapter(cm)
@@ -376,6 +376,20 @@ Public Class CN_Correo
         Return ArrServicios
 
     End Function
+
+    Public Shared Sub CambiarEstadoRemitosLexs(ByVal NroRemito As Integer, ByVal estado As String)
+        Dim sql As String = "UPDATE remitoslexs SET Estado = @estado WHERE NroRemito = @nroRemito"
+        Using cn As New MySqlConnection(CadenaDeConeccionProduccion)
+            Using cm As New MySqlCommand(sql, cn)
+                cm.Parameters.AddWithValue("@estado", estado)
+                cm.Parameters.AddWithValue("@nroRemito", NroRemito)
+                cn.Open()
+                cm.ExecuteNonQuery()
+                cn.Close()
+            End Using
+        End Using
+    End Sub
+
 
     Public Shared Function CargarTodoslosremitente() As ArrayList
         Dim ArrListaRemitentes As New ArrayList
@@ -395,25 +409,25 @@ Public Class CN_Correo
 
         Return ArrListaRemitentes
     End Function
-    Public Shared Function ObtenerRemitosPendientesImpresion(ByVal Remitente As String) As ArrayList
-        Dim ArrListaPendientes As New ArrayList
-        Dim Consultasql As String = "Select Nro_Remito From remitos Where Estado='PEND_IMPR' And TipoRemitente= '" & Remitente & "'"
+    'Public Shared Function ObtenerRemitosPendientesImpresion(ByVal Remitente As String) As ArrayList
+    '    Dim ArrListaPendientes As New ArrayList
+    '    Dim Consultasql As String = "Select Nro_Remito From remitos Where Estado='PEND_IMPR' And TipoRemitente= '" & Remitente & "'"
 
-        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-        Dim CmSql As New MySqlCommand(Consultasql, cn)
-        Dim da As New MySqlDataAdapter(CmSql)
-        Dim dt As New DataTable
-        cn.Open()
-        da.Fill(dt)
-        cn.Close()
+    '    Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+    '    Dim CmSql As New MySqlCommand(Consultasql, cn)
+    '    Dim da As New MySqlDataAdapter(CmSql)
+    '    Dim dt As New DataTable
+    '    cn.Open()
+    '    da.Fill(dt)
+    '    cn.Close()
 
-        For Each rw As DataRow In dt.Rows
-            ArrListaPendientes.Add(rw("Nro_Remito"))
-        Next
+    '    For Each rw As DataRow In dt.Rows
+    '        ArrListaPendientes.Add(rw("Nro_Remito"))
+    '    Next
 
-        Return ArrListaPendientes
+    '    Return ArrListaPendientes
 
-    End Function
+    'End Function
     Public Shared Function ObtenerTodoslosRemitos(ByVal Remitente As String) As ArrayList
         Dim ArrListaPendientes As New ArrayList
         Dim Consultasql As String = "Select Nro_Remito From remitos Where TipoRemitente= '" & Remitente & "'"
@@ -1761,67 +1775,48 @@ Public Class CN_Correo
         End Using
 
     End Function
-    Public Shared Function InstertarRegistro(ByVal NRO_CARTA As String, ByVal REMITENTE As String, ByVal TRABAJO As String, ByVal FECH_TRAB As String, ByVal NOMBRE_APELLIDO As String, ByVal CP As String, ByVal CALLE As String, ByVal LOCALIDAD As String, ByVal PROVINCIA As String, ByVal EMPRESA As String, ByVal NRO_CARTA2 As String, ByVal PRECIO As String, ByVal SOCIO As String, ByVal VALOR As String, ByVal COBRAR As String, ByVal OBS As String, ByVal OBS2 As String, ByVal OBS3 As String, ByVal OBS4 As String, ByVal D_ENTRY As String, ByVal SERVICIO As String, ByVal F_LIMITE As String, ByVal FECHA_IMPORTACION As String, ByVal TIPO_DOC As String, ByVal DOCUMENTO As String) As Boolean
-        'Cargar insert sql
-
-        NOMBRE_APELLIDO = NOMBRE_APELLIDO.Replace("'", "")
-        CALLE = CALLE.Replace("'", "")
-        EMPRESA = EMPRESA.Replace("'", "")
 
 
-        Try
-            Dim ESTADO As String = "ESPERA_IMPRESION"
-            Dim sqlinsert As String = "INSERT INTO cartas (NRO_CARTA, REMITENTE, TRABAJO, FECH_TRAB, NOMBRE_APELLIDO, CP, CALLE, LOCALIDAD, PROVINCIA, ESTADO, TIPO_DOC, DOCUMENTO, OBS, D_ENTRY, EMPRESA, NRO_CARTA2, SERVICIO, PRECIO, F_LIMITE, SOCIO, VALOR, COBRAR, OBS2, OBS3, OBS4, FECHA_IMPORTACION) VALUES (" _
-            & "'" & NRO_CARTA & "'" & ", " _
-            & "'" & REMITENTE & "'" & ", " _
-            & "'" & TRABAJO & "'" & ", " _
-            & FECH_TRAB & ", " _
-            & "'" & NOMBRE_APELLIDO & "'" & ", " _
-            & "'" & CP & "'" & ", " _
-            & "'" & CALLE & "'" & ", " _
-            & "'" & LOCALIDAD & "'" & ", " _
-            & "'" & PROVINCIA & "'" & ", " _
-            & "'" & ESTADO & "'" & ", " _
-            & "'" & TIPO_DOC & "'" & ", " _
-            & "'" & DOCUMENTO & "'" & ", " _
-            & "'" & OBS & "'" & ", " _
-            & "'" & D_ENTRY & "'" & ", " _
-            & "'" & EMPRESA & "'" & ", " _
-            & "'" & NRO_CARTA2 & "'" & ", " _
-            & "'" & SERVICIO & "'" & ", " _
-            & "'" & PRECIO & "'" & ", " _
-            & F_LIMITE & ", " _
-            & "'" & SOCIO & "'" & ", " _
-            & "'" & VALOR & "'" & ", " _
-            & "'" & COBRAR & "'" & ", " _
-            & "'" & OBS2 & "'" & ", " _
-            & "'" & OBS3 & "'" & ", " _
-            & "'" & OBS4 & "'" & ", " _
-            & FECHA_IMPORTACION & ")"
+    Public Shared Function InsertarRegistroCartas(ByVal nroCarta As String, ByVal remitente As String, ByVal trabajo As String, ByVal fechTrab As Date, ByVal apellido As String, ByVal cp As String, ByVal calle As String, ByVal pisoDepto As String, ByVal localidad As String, ByVal provincia As String, ByVal nroCart2 As String, ByVal empresa As String, ByVal socio As String, ByVal obs As String, ByVal obs2 As String, ByVal obs3 As String, ByVal obs4 As String) As Boolean
+        Dim estado As String = "ESPERA_IMPRESION"
+        Dim año As Integer = DateTime.Now.Year
 
-            Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-            Dim cm As New MySqlCommand(sqlinsert, cn)
-            cn.Open()
-            cm.ExecuteNonQuery()
-            cn.Close()
+        Dim fechaTrabajo As String = fechTrab.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ' Formato de fecha para MySQL
 
-        Catch ex As Exception
+        Dim sql As String = "INSERT INTO cartas (NRO_CARTA, REMITENTE, TRABAJO, FECH_TRAB, APELLIDO, CP, CALLE, PISO_DEPTO, LOCALIDAD, PROVINCIA, ESTADO, NRO_CART2, EMPRESA, SOCIO, AÑO, OBS, OBS2, OBS3, OBS4) VALUES (@nroCarta, @remitente, @trabajo, @fechTrab, @apellido, @cp, @calle, @pisoDepto, @localidad, @provincia, @estado, @nroCart2, @empresa, @socio, @año, @obs, @obs2, @obs3, @obs4)"
 
-            MsgBox(NOMBRE_APELLIDO & " " & ex.ToString)
+        Using cn As New MySqlConnection(CadenaDeConeccionProduccion)
+            Using cm As New MySqlCommand(sql, cn)
+                cm.Parameters.AddWithValue("@nroCarta", nroCarta)
+                cm.Parameters.AddWithValue("@remitente", remitente)
+                cm.Parameters.AddWithValue("@trabajo", trabajo)
+                cm.Parameters.AddWithValue("@fechTrab", fechaTrabajo) ' Uso de la fecha formateada
+                cm.Parameters.AddWithValue("@apellido", apellido)
+                cm.Parameters.AddWithValue("@cp", cp)
+                cm.Parameters.AddWithValue("@calle", calle)
+                cm.Parameters.AddWithValue("@pisoDepto", pisoDepto)
+                cm.Parameters.AddWithValue("@localidad", localidad)
+                cm.Parameters.AddWithValue("@provincia", provincia)
+                cm.Parameters.AddWithValue("@estado", estado)
+                cm.Parameters.AddWithValue("@nroCart2", nroCart2)
+                cm.Parameters.AddWithValue("@empresa", empresa)
+                cm.Parameters.AddWithValue("@socio", socio)
+                cm.Parameters.AddWithValue("@año", año)
+                cm.Parameters.AddWithValue("@obs", obs)
+                cm.Parameters.AddWithValue("@obs2", obs2)
+                cm.Parameters.AddWithValue("@obs3", obs3)
+                cm.Parameters.AddWithValue("@obs4", obs4)
 
+                cn.Open()
+                Dim rowsAffected As Integer = cm.ExecuteNonQuery()
+                cn.Close()
 
-        End Try
-
-
+                Return rowsAffected > 0
+            End Using
+        End Using
     End Function
-    Public Shared Function ActualizarRemito(ByVal Remito As String, ByVal Remitente As String, ByVal Estado As String, ByVal Cant As String) As Boolean
-        Dim sql As String = "UPDATE remitos SET Estado='" & Estado & "', Cantidad='" & Cant & "' WHERE Nro_Remito='" & Remito & "'" & " AND TipoRemitente='" & Remitente & "'"
-        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-        Dim cm As New MySqlCommand(sql, cn)
-        cn.Open()
-        cm.ExecuteNonQuery()
-        cn.Close()
-    End Function
+
+
     Public Shared Function ActualizarNroCarta(ByVal NroCarta As String) As Boolean
         'Cargar insert sql
         'Try
@@ -2415,18 +2410,23 @@ Public Class CN_Correo
     End Function
 
 
-    Public Shared Sub InsertarRemitoLexs(nroRemito As String, remitente As String, fecha As String, archivoBytes As Byte())
-        Dim sqlInsert As String = "INSERT INTO remitoslexs (NroRemito, Remitente, Fecha, Archivo) VALUES ('" & nroRemito & "', '" & remitente & "', '" & fecha & "', @Archivo)"
+    Public Shared Sub InsertarRemitoLexs(nroRemito As String, remitente As String, fecha As String, archivoBytes As Byte(), estado As String)
+        Dim sqlInsert As String = "INSERT INTO remitoslexs (NroRemito, Remitente, Fecha, Archivo, Estado) VALUES (@NroRemito, @Remitente, @Fecha, @Archivo, @Estado)"
 
         Using connection As New MySqlConnection(CadenaDeConeccionProduccion)
             Using command As New MySqlCommand(sqlInsert, connection)
+                command.Parameters.AddWithValue("@NroRemito", nroRemito)
+                command.Parameters.AddWithValue("@Remitente", remitente)
+                command.Parameters.AddWithValue("@Fecha", fecha)
                 command.Parameters.AddWithValue("@Archivo", archivoBytes)
+                command.Parameters.AddWithValue("@Estado", estado)
 
                 connection.Open()
                 command.ExecuteNonQuery()
             End Using
         End Using
     End Sub
+
 
 
     Public Shared Function ObtenerArchivosPorNroRemito(nroRemito As String) As List(Of Byte())
