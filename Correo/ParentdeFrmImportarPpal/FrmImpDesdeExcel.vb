@@ -71,120 +71,120 @@ Public Class FrmImpDesdeExcel
         End If
 
     End Sub
-    Private Sub BtnSeleccionar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSeleccionar.Click
+    'Private Sub BtnSeleccionar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-        Try
-            Seleccionar()
-            Insertardesdexls(DtpFecha.Value.ToShortDateString)
-            BtnImportar.Enabled = True
-            BtnSeleccionar.Enabled = False
-        Catch ex As Exception
-            MsgBox("Verifique la planilla")
+    '    Try
+    '        Seleccionar()
+    '        Insertardesdexls(DtpFecha.Value.ToShortDateString)
+    '        BtnImportar.Enabled = True
+    '        BtnSeleccionar.Enabled = False
+    '    Catch ex As Exception
+    '        MsgBox("Verifique la planilla")
 
-        End Try
-
-
-    End Sub
-    Private Sub Seleccionar()
-
-        Dim openFD As New OpenFileDialog()
-        With openFD
-            .Title = "Seleccionar archivos"
-            .Filter = "Todos los archivos (*.xls)|*.xls"
-            .Multiselect = False
-            .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
-            If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                txtPath.Text = .FileName
-            Else
-                openFD.Dispose()
-            End If
-            BtnArchivo.Enabled = True
-        End With
-
-    End Sub
-    Private Sub Insertardesdexls(ByVal FechaImportacion As Date)
-        'Try
-        Dim NombreHoja As String = ""
-        NombreHoja = ObtenerNombrePrimeraHoja(txtPath.Text)
+    '    End Try
 
 
-        Dim strconn As String
-        strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + txtPath.Text + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
-        Dim mconn As New OleDbConnection(strconn)
-        Dim ad As New OleDbDataAdapter("Select * from [" & NombreHoja & "$]", mconn)
-        mconn.Open()
-        ad.Fill(dt)
-        mconn.Close()
+    'End Sub
+    'Private Sub Seleccionar()
 
-        Dim ArrCampos As New ArrayList
-        ArrCampos.Add("APELLIDO")
-        ArrCampos.Add("CALLE")
-        ArrCampos.Add("NRO")
-        ArrCampos.Add("PISO_DEPTO")
-        ArrCampos.Add("CP")
-        ArrCampos.Add("LOCALIDAD")
-        ArrCampos.Add("PROVINCIA")
-        ArrCampos.Add("EMPRESA")
-        ArrCampos.Add("NRO_CART2")
-        ArrCampos.Add("SOCIO")
-        ArrCampos.Add("OBS")
-        ArrCampos.Add("OBS2")
-        ArrCampos.Add("OBS3")
-        ArrCampos.Add("OBS4")
+    '    Dim openFD As New OpenFileDialog()
+    '    With openFD
+    '        .Title = "Seleccionar archivos"
+    '        .Filter = "Todos los archivos (*.xls)|*.xls"
+    '        .Multiselect = False
+    '        .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+    '        If .ShowDialog = Windows.Forms.DialogResult.OK Then
+    '            txtPath.Text = .FileName
+    '        Else
+    '            openFD.Dispose()
+    '        End If
+    '        BtnArchivo.Enabled = True
+    '    End With
 
-        Dim ArrDescartar As New ArrayList
-
-        For Each col As DataColumn In dt.Columns
-            For i As Integer = 0 To ArrCampos.Count - 1
-                If ArrCampos.Item(i).ToString = col.ToString Then
-                    ArrDescartar.Add(col.ToString)
-                End If
-            Next
-        Next
-
-        For i As Integer = 0 To ArrCampos.Count - 1
-            If Not ArrDescartar.Contains(ArrCampos.Item(i).ToString) Then
-                DgvNoUtilizado.Rows.Add(ArrCampos.Item(i).ToString)
-            End If
-        Next
+    'End Sub
+    'Private Sub Insertardesdexls(ByVal FechaImportacion As Date)
+    '    'Try
+    '    Dim NombreHoja As String = ""
+    '    NombreHoja = ObtenerNombrePrimeraHoja(txtPath.Text)
 
 
-        Dgvimportar.Columns.Add("NRO_CARTA", "NRO_CARTA")
-        Dgvimportar.Columns.Add("REMITENTE", "REMITENTE")
-        Dgvimportar.Columns.Add("TRABAJO", "TRABAJO")
-        Dgvimportar.Columns.Add("FECH_TRAB", "FECH_TRAB")
+    '    Dim strconn As String
+    '    strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + txtPath.Text + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
+    '    Dim mconn As New OleDbConnection(strconn)
+    '    Dim ad As New OleDbDataAdapter("Select * from [" & NombreHoja & "$]", mconn)
+    '    mconn.Open()
+    '    ad.Fill(dt)
+    '    mconn.Close()
+
+    '    Dim ArrCampos As New ArrayList
+    '    ArrCampos.Add("APELLIDO")
+    '    ArrCampos.Add("CALLE")
+    '    ArrCampos.Add("NRO")
+    '    ArrCampos.Add("PISO_DEPTO")
+    '    ArrCampos.Add("CP")
+    '    ArrCampos.Add("LOCALIDAD")
+    '    ArrCampos.Add("PROVINCIA")
+    '    ArrCampos.Add("EMPRESA")
+    '    ArrCampos.Add("NRO_CART2")
+    '    ArrCampos.Add("SOCIO")
+    '    ArrCampos.Add("OBS")
+    '    ArrCampos.Add("OBS2")
+    '    ArrCampos.Add("OBS3")
+    '    ArrCampos.Add("OBS4")
+
+    '    Dim ArrDescartar As New ArrayList
+
+    '    For Each col As DataColumn In dt.Columns
+    '        For i As Integer = 0 To ArrCampos.Count - 1
+    '            If ArrCampos.Item(i).ToString = col.ToString Then
+    '                ArrDescartar.Add(col.ToString)
+    '            End If
+    '        Next
+    '    Next
+
+    '    For i As Integer = 0 To ArrCampos.Count - 1
+    '        If Not ArrDescartar.Contains(ArrCampos.Item(i).ToString) Then
+    '            DgvNoUtilizado.Rows.Add(ArrCampos.Item(i).ToString)
+    '        End If
+    '    Next
+
+
+    '    Dgvimportar.Columns.Add("NRO_CARTA", "NRO_CARTA")
+    '    Dgvimportar.Columns.Add("REMITENTE", "REMITENTE")
+    '    Dgvimportar.Columns.Add("TRABAJO", "TRABAJO")
+    '    Dgvimportar.Columns.Add("FECH_TRAB", "FECH_TRAB")
 
 
 
-        Dgvimportar.DataSource = dt
-        LblCant.Text = Dgvimportar.Rows.Count
+    '    Dgvimportar.DataSource = dt
+    '    LblCant.Text = Dgvimportar.Rows.Count
 
-        NroCart = ObtenerNroCarta()
+    '    NroCart = ObtenerNroCarta()
 
-        For Each drw As DataGridViewRow In Dgvimportar.Rows
+    '    For Each drw As DataGridViewRow In Dgvimportar.Rows
 
-            drw.Cells("NRO_CARTA").Value = NroCart
-            drw.Cells("REMITENTE").Value = CmbCodigo.Text
-            drw.Cells("TRABAJO").Value = CmbRemito.Text
-            drw.Cells("FECH_TRAB").Value = FechaImportacion.ToShortDateString
+    '        drw.Cells("NRO_CARTA").Value = NroCart
+    '        drw.Cells("REMITENTE").Value = CmbCodigo.Text
+    '        drw.Cells("TRABAJO").Value = CmbRemito.Text
+    '        drw.Cells("FECH_TRAB").Value = FechaImportacion.ToShortDateString
 
-            drw.Cells("NRO_CARTA").Style.ForeColor = Color.Red
-            drw.Cells("REMITENTE").Style.ForeColor = Color.Red
-            drw.Cells("TRABAJO").Style.ForeColor = Color.Red
-            drw.Cells("FECH_TRAB").Style.ForeColor = Color.Red
-            NroCart = NroCart + 1
+    '        drw.Cells("NRO_CARTA").Style.ForeColor = Color.Red
+    '        drw.Cells("REMITENTE").Style.ForeColor = Color.Red
+    '        drw.Cells("TRABAJO").Style.ForeColor = Color.Red
+    '        drw.Cells("FECH_TRAB").Style.ForeColor = Color.Red
+    '        NroCart = NroCart + 1
 
-        Next
+    '    Next
 
-        For Each drwsininfo As DataGridViewRow In DgvNoUtilizado.Rows
-            Dgvimportar.Columns.Add(drwsininfo.Cells("SIN_USAR").Value, drwsininfo.Cells("SIN_USAR").Value)
-            Dgvimportar.Columns(drwsininfo.Cells("SIN_USAR").Value).Visible = False
-        Next
+    '    For Each drwsininfo As DataGridViewRow In DgvNoUtilizado.Rows
+    '        Dgvimportar.Columns.Add(drwsininfo.Cells("SIN_USAR").Value, drwsininfo.Cells("SIN_USAR").Value)
+    '        Dgvimportar.Columns(drwsininfo.Cells("SIN_USAR").Value).Visible = False
+    '    Next
 
-        'Catch ex As OleDbException
-        '    MessageBox.Show("Error detectado " & ex.ToString)
-        'End Try
-    End Sub
+    '    'Catch ex As OleDbException
+    '    '    MessageBox.Show("Error detectado " & ex.ToString)
+    '    'End Try
+    'End Sub
 
     Private Sub BtnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSalir.Click
         Me.Close()
@@ -308,16 +308,16 @@ Public Class FrmImpDesdeExcel
     Private Sub DgvNoUtilizado_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
 
     End Sub
-    Private Sub BtnArchivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnArchivo.Click
-        'Dgvimportar.DataSource = Nothing
-        'DgvNoUtilizado.Rows.Clear()
-        System.Diagnostics.Process.Start(txtPath.Text)
-        Me.Dispose()
+    'Private Sub BtnArchivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    'Dgvimportar.DataSource = Nothing
+    '    'DgvNoUtilizado.Rows.Clear()
+    '    System.Diagnostics.Process.Start(txtPath.Text)
+    '    Me.Dispose()
 
-        'txtPath.Text = ""
-        'CmbCodigo.Enabled = True
+    '    'txtPath.Text = ""
+    '    'CmbCodigo.Enabled = True
 
-    End Sub
+    'End Sub
     Private Shared Function Normalizar(ByVal Dato As String) As String
 
         If Dato <> Nothing Then
@@ -330,7 +330,7 @@ Public Class FrmImpDesdeExcel
 
 
 
-    Private Sub DataGridView1_ColumnAdded( _
+    Private Sub DataGridView1_ColumnAdded(
       ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) _
       Handles Dgvimportar.ColumnAdded
 
@@ -343,7 +343,7 @@ Public Class FrmImpDesdeExcel
 
     End Sub
 
-    Private Sub BtnLista_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnLista.Click
+    Private Sub BtnLista_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'Try
         Dim exApp As New Microsoft.Office.Interop.Excel.Application
         Dim exLibro As Microsoft.Office.Interop.Excel.Workbook
@@ -381,27 +381,27 @@ Public Class FrmImpDesdeExcel
 
 
 
-    Private Sub BtnNormalizar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnNormalizar.Click
-        SeleccionarNormalizar()
-    End Sub
-    Public Sub SeleccionarNormalizar()
+    'Private Sub BtnNormalizar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    SeleccionarNormalizar()
+    'End Sub
+    'Public Sub SeleccionarNormalizar()
 
-        Dim openFD As New OpenFileDialog()
-        With openFD
-            .Title = "Seleccionar archivos"
-            .Filter = "Todos los archivos (*.xls)|*.xls"
-            .Multiselect = False
-            .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.Desktop
-            If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                If impExcelNormalizar(.FileName) = True Then
-                    txtPath.Text = Path.GetFileName(.FileName)
-                End If
-            Else
-                openFD.Dispose()
-            End If
-        End With
+    '    Dim openFD As New OpenFileDialog()
+    '    With openFD
+    '        .Title = "Seleccionar archivos"
+    '        .Filter = "Todos los archivos (*.xls)|*.xls"
+    '        .Multiselect = False
+    '        .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.Desktop
+    '        If .ShowDialog = Windows.Forms.DialogResult.OK Then
+    '            If impExcelNormalizar(.FileName) = True Then
+    '                txtPath.Text = Path.GetFileName(.FileName)
+    '            End If
+    '        Else
+    '            openFD.Dispose()
+    '        End If
+    '    End With
 
-    End Sub
+    'End Sub
     Private Function impExcelNormalizar(ByVal Archivo As String) As Boolean
         Dim NombreHoja As String = ObtenerNombrePrimeraHoja(Archivo)
 
@@ -465,7 +465,7 @@ Public Class FrmImpDesdeExcel
             Else
                 openFD.Dispose()
             End If
-            BtnArchivo.Enabled = True
+
         End With
 
     End Function
@@ -598,23 +598,29 @@ Public Class FrmImpDesdeExcel
 
 
             '++++++++++++++++++++++++++++FALTA DIVISION POR EMPRESA +++++++++++++++++++
-
-            Dim domicilios As New Dictionary(Of String, Dictionary(Of String, Integer))
-
+            Dim conteoEmpresas As New Dictionary(Of String, Integer)
 
             For Each row As DataRow In dt2.Rows
                 Dim domicilio As String = row("CALLE").ToString().TrimEnd()
                 Dim empresa As String = row("EMPRESA").ToString().TrimEnd()
 
-                If domicilios.ContainsKey(domicilio) Then
-                    If domicilios(domicilio).ContainsKey(empresa) AndAlso String.IsNullOrEmpty(row("OBS2").ToString().Trim()) Then
-                        domicilios(domicilio)(empresa) += 1
-                        row("OBS2") = "ARM"
-                    ElseIf Not domicilios(domicilio).ContainsKey(empresa) Then
-                        domicilios(domicilio).Add(empresa, 1)
+                If Not String.IsNullOrEmpty(empresa) Then
+                    Dim clave As String = domicilio & "-" & empresa
+                    If conteoEmpresas.ContainsKey(clave) Then
+                        conteoEmpresas(clave) += 1
+                    Else
+                        conteoEmpresas.Add(clave, 1)
                     End If
-                Else
-                    domicilios.Add(domicilio, New Dictionary(Of String, Integer) From {{empresa, 1}})
+                End If
+            Next
+
+            For Each row As DataRow In dt2.Rows
+                Dim domicilio As String = row("CALLE").ToString().TrimEnd()
+                Dim empresa As String = row("EMPRESA").ToString().TrimEnd()
+                Dim clave As String = domicilio & "-" & empresa
+
+                If Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 Then
+                    row("OBS2") = "ARM"
                 End If
             Next
 

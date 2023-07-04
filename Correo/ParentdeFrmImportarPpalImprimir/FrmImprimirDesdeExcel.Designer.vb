@@ -33,11 +33,11 @@ Partial Class FrmImprimirDesdeExcel
         '
         'PBLogo
         '
-        Me.PBLogo.Location = New System.Drawing.Point(5, 385)
+        Me.PBLogo.Location = New System.Drawing.Point(5, 567)
         '
         'BtnSalir
         '
-        Me.BtnSalir.Location = New System.Drawing.Point(885, 385)
+        Me.BtnSalir.Location = New System.Drawing.Point(1090, 567)
         '
         'Gb
         '
@@ -48,7 +48,7 @@ Partial Class FrmImprimirDesdeExcel
         Me.Gb.Controls.Add(Me.TxtPath)
         Me.Gb.Controls.Add(Me.Btnimprimir)
         Me.Gb.Controls.Add(Me.BtnSelectEtic)
-        Me.Gb.Size = New System.Drawing.Size(932, 436)
+        Me.Gb.Size = New System.Drawing.Size(1137, 618)
         Me.Gb.Controls.SetChildIndex(Me.BtnSelectEtic, 0)
         Me.Gb.Controls.SetChildIndex(Me.Btnimprimir, 0)
         Me.Gb.Controls.SetChildIndex(Me.TxtPath, 0)
@@ -62,7 +62,7 @@ Partial Class FrmImprimirDesdeExcel
         'LblCant
         '
         Me.LblCant.AutoSize = True
-        Me.LblCant.Location = New System.Drawing.Point(12, 357)
+        Me.LblCant.Location = New System.Drawing.Point(887, 510)
         Me.LblCant.Name = "LblCant"
         Me.LblCant.Size = New System.Drawing.Size(13, 13)
         Me.LblCant.TabIndex = 35
@@ -73,16 +73,16 @@ Partial Class FrmImprimirDesdeExcel
         Me.DgvImprimir.AllowUserToAddRows = False
         Me.DgvImprimir.AllowUserToDeleteRows = False
         Me.DgvImprimir.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvImprimir.Location = New System.Drawing.Point(12, 86)
+        Me.DgvImprimir.Location = New System.Drawing.Point(12, 107)
         Me.DgvImprimir.Name = "DgvImprimir"
         Me.DgvImprimir.ReadOnly = True
-        Me.DgvImprimir.Size = New System.Drawing.Size(889, 268)
+        Me.DgvImprimir.Size = New System.Drawing.Size(889, 400)
         Me.DgvImprimir.TabIndex = 34
         '
         'LblPath
         '
         Me.LblPath.AutoSize = True
-        Me.LblPath.Location = New System.Drawing.Point(8, 30)
+        Me.LblPath.Location = New System.Drawing.Point(170, 30)
         Me.LblPath.Name = "LblPath"
         Me.LblPath.Size = New System.Drawing.Size(46, 13)
         Me.LblPath.TabIndex = 33
@@ -91,7 +91,7 @@ Partial Class FrmImprimirDesdeExcel
         'TxtPath
         '
         Me.TxtPath.Enabled = False
-        Me.TxtPath.Location = New System.Drawing.Point(11, 46)
+        Me.TxtPath.Location = New System.Drawing.Point(173, 54)
         Me.TxtPath.Name = "TxtPath"
         Me.TxtPath.Size = New System.Drawing.Size(273, 20)
         Me.TxtPath.TabIndex = 32
@@ -102,7 +102,7 @@ Partial Class FrmImprimirDesdeExcel
         Me.BtnSelectEtic.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnSelectEtic.Image = Global.Correo.My.Resources.Resources.filefind
         Me.BtnSelectEtic.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.BtnSelectEtic.Location = New System.Drawing.Point(343, 28)
+        Me.BtnSelectEtic.Location = New System.Drawing.Point(452, 30)
         Me.BtnSelectEtic.Name = "BtnSelectEtic"
         Me.BtnSelectEtic.Size = New System.Drawing.Size(108, 47)
         Me.BtnSelectEtic.TabIndex = 31
@@ -116,7 +116,7 @@ Partial Class FrmImprimirDesdeExcel
         Me.Btnimprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Btnimprimir.Image = Global.Correo.My.Resources.Resources.Print
         Me.Btnimprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Btnimprimir.Location = New System.Drawing.Point(784, 33)
+        Me.Btnimprimir.Location = New System.Drawing.Point(784, 40)
         Me.Btnimprimir.Name = "Btnimprimir"
         Me.Btnimprimir.Size = New System.Drawing.Size(117, 47)
         Me.Btnimprimir.TabIndex = 30
@@ -127,19 +127,20 @@ Partial Class FrmImprimirDesdeExcel
         '
         Me.BtnSeleccionarExcel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.BtnSeleccionarExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BtnSeleccionarExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.BtnSeleccionarExcel.Location = New System.Drawing.Point(290, 44)
+        Me.BtnSeleccionarExcel.Image = Global.Correo.My.Resources.Resources.table_excel
+        Me.BtnSeleccionarExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnSeleccionarExcel.Location = New System.Drawing.Point(12, 27)
         Me.BtnSeleccionarExcel.Name = "BtnSeleccionarExcel"
-        Me.BtnSeleccionarExcel.Size = New System.Drawing.Size(25, 25)
+        Me.BtnSeleccionarExcel.Size = New System.Drawing.Size(120, 47)
         Me.BtnSeleccionarExcel.TabIndex = 36
-        Me.BtnSeleccionarExcel.Text = "..."
+        Me.BtnSeleccionarExcel.Text = "Buscar Archivo"
         Me.BtnSeleccionarExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.BtnSeleccionarExcel.UseVisualStyleBackColor = True
         '
         'FrmImprimirDesdeExcel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(932, 435)
+        Me.ClientSize = New System.Drawing.Size(1137, 617)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "FrmImprimirDesdeExcel"

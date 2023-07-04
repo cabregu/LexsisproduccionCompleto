@@ -24,8 +24,6 @@ Partial Class FrmImpDesdeExcel
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImpDesdeExcel))
-        Me.txtPath = New System.Windows.Forms.TextBox()
-        Me.BtnSeleccionar = New System.Windows.Forms.Button()
         Me.LblCodigo = New System.Windows.Forms.Label()
         Me.CmbCodigo = New System.Windows.Forms.ComboBox()
         Me.CmbRemito = New System.Windows.Forms.ComboBox()
@@ -36,11 +34,6 @@ Partial Class FrmImpDesdeExcel
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.LblCant = New System.Windows.Forms.Label()
         Me.Dgvimportar = New System.Windows.Forms.DataGridView()
-        Me.DgvNoUtilizado = New System.Windows.Forms.DataGridView()
-        Me.SIN_USAR = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BtnArchivo = New System.Windows.Forms.Button()
-        Me.BtnLista = New System.Windows.Forms.Button()
-        Me.BtnNormalizar = New System.Windows.Forms.Button()
         Me.BtnSalir = New System.Windows.Forms.Button()
         Me.BtnSeleccionDirecta = New System.Windows.Forms.Button()
         Me.TxtNro = New System.Windows.Forms.TextBox()
@@ -50,32 +43,7 @@ Partial Class FrmImpDesdeExcel
         Me.BtnExcel = New System.Windows.Forms.Button()
         Me.BtnSeleccionDeArchivoModificado = New System.Windows.Forms.Button()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvNoUtilizado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'txtPath
-        '
-        Me.txtPath.Enabled = False
-        Me.txtPath.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPath.Location = New System.Drawing.Point(317, 492)
-        Me.txtPath.Name = "txtPath"
-        Me.txtPath.Size = New System.Drawing.Size(68, 20)
-        Me.txtPath.TabIndex = 71
-        Me.txtPath.Visible = False
-        Me.txtPath.WordWrap = False
-        '
-        'BtnSeleccionar
-        '
-        Me.BtnSeleccionar.Enabled = False
-        Me.BtnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSeleccionar.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnSeleccionar.Location = New System.Drawing.Point(514, 457)
-        Me.BtnSeleccionar.Name = "BtnSeleccionar"
-        Me.BtnSeleccionar.Size = New System.Drawing.Size(28, 29)
-        Me.BtnSeleccionar.TabIndex = 72
-        Me.BtnSeleccionar.Text = "S"
-        Me.BtnSeleccionar.UseVisualStyleBackColor = True
-        Me.BtnSeleccionar.Visible = False
         '
         'LblCodigo
         '
@@ -174,65 +142,6 @@ Partial Class FrmImpDesdeExcel
         Me.Dgvimportar.Size = New System.Drawing.Size(891, 275)
         Me.Dgvimportar.TabIndex = 85
         '
-        'DgvNoUtilizado
-        '
-        Me.DgvNoUtilizado.AllowUserToAddRows = False
-        Me.DgvNoUtilizado.AllowUserToDeleteRows = False
-        Me.DgvNoUtilizado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvNoUtilizado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SIN_USAR})
-        Me.DgvNoUtilizado.Location = New System.Drawing.Point(391, 483)
-        Me.DgvNoUtilizado.Name = "DgvNoUtilizado"
-        Me.DgvNoUtilizado.ReadOnly = True
-        Me.DgvNoUtilizado.RowHeadersVisible = False
-        Me.DgvNoUtilizado.Size = New System.Drawing.Size(123, 29)
-        Me.DgvNoUtilizado.TabIndex = 86
-        Me.DgvNoUtilizado.Visible = False
-        '
-        'SIN_USAR
-        '
-        Me.SIN_USAR.HeaderText = "SIN_USAR"
-        Me.SIN_USAR.Name = "SIN_USAR"
-        Me.SIN_USAR.ReadOnly = True
-        '
-        'BtnArchivo
-        '
-        Me.BtnArchivo.Enabled = False
-        Me.BtnArchivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnArchivo.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnArchivo.Location = New System.Drawing.Point(317, 457)
-        Me.BtnArchivo.Name = "BtnArchivo"
-        Me.BtnArchivo.Size = New System.Drawing.Size(191, 29)
-        Me.BtnArchivo.TabIndex = 87
-        Me.BtnArchivo.Text = "Modificar y Reintentar"
-        Me.BtnArchivo.UseVisualStyleBackColor = True
-        Me.BtnArchivo.Visible = False
-        '
-        'BtnLista
-        '
-        Me.BtnLista.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLista.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnLista.Location = New System.Drawing.Point(292, 438)
-        Me.BtnLista.Name = "BtnLista"
-        Me.BtnLista.Size = New System.Drawing.Size(240, 23)
-        Me.BtnLista.TabIndex = 92
-        Me.BtnLista.Text = "Abrir un Excel con el Lista de campos"
-        Me.BtnLista.UseVisualStyleBackColor = True
-        Me.BtnLista.Visible = False
-        '
-        'BtnNormalizar
-        '
-        Me.BtnNormalizar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnNormalizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BtnNormalizar.Image = Global.Correo.My.Resources.Resources.EXCELFILE
-        Me.BtnNormalizar.Location = New System.Drawing.Point(538, 435)
-        Me.BtnNormalizar.Name = "BtnNormalizar"
-        Me.BtnNormalizar.Size = New System.Drawing.Size(82, 62)
-        Me.BtnNormalizar.TabIndex = 93
-        Me.BtnNormalizar.Text = "Normalizar"
-        Me.BtnNormalizar.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.BtnNormalizar.UseVisualStyleBackColor = True
-        Me.BtnNormalizar.Visible = False
-        '
         'BtnSalir
         '
         Me.BtnSalir.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -323,7 +232,6 @@ Partial Class FrmImpDesdeExcel
         '
         'FrmImpDesdeExcel
         '
-        Me.AcceptButton = Me.BtnSeleccionar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
@@ -335,10 +243,6 @@ Partial Class FrmImpDesdeExcel
         Me.Controls.Add(Me.LblNro)
         Me.Controls.Add(Me.TxtNro)
         Me.Controls.Add(Me.BtnSeleccionDirecta)
-        Me.Controls.Add(Me.BtnNormalizar)
-        Me.Controls.Add(Me.BtnLista)
-        Me.Controls.Add(Me.BtnArchivo)
-        Me.Controls.Add(Me.DgvNoUtilizado)
         Me.Controls.Add(Me.Dgvimportar)
         Me.Controls.Add(Me.LblCant)
         Me.Controls.Add(Me.LblFechalimite)
@@ -346,23 +250,18 @@ Partial Class FrmImpDesdeExcel
         Me.Controls.Add(Me.BtnSalir)
         Me.Controls.Add(Me.LblRemito)
         Me.Controls.Add(Me.CmbRemito)
-        Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.BtnImportar)
-        Me.Controls.Add(Me.BtnSeleccionar)
         Me.Controls.Add(Me.LblCodigo)
         Me.Controls.Add(Me.CmbCodigo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FrmImpDesdeExcel"
         Me.Text = "Importar Desde Excel"
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvNoUtilizado, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtPath As System.Windows.Forms.TextBox
     Friend WithEvents BtnImportar As System.Windows.Forms.Button
-    Friend WithEvents BtnSeleccionar As System.Windows.Forms.Button
     Friend WithEvents LblCodigo As System.Windows.Forms.Label
     Friend WithEvents CmbCodigo As System.Windows.Forms.ComboBox
     Friend WithEvents CmbRemito As System.Windows.Forms.ComboBox
@@ -373,11 +272,6 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents LblCant As System.Windows.Forms.Label
     Friend WithEvents Dgvimportar As System.Windows.Forms.DataGridView
-    Friend WithEvents DgvNoUtilizado As System.Windows.Forms.DataGridView
-    Friend WithEvents SIN_USAR As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents BtnArchivo As System.Windows.Forms.Button
-    Friend WithEvents BtnLista As System.Windows.Forms.Button
-    Friend WithEvents BtnNormalizar As System.Windows.Forms.Button
     Friend WithEvents BtnSeleccionDirecta As Button
     Friend WithEvents TxtNro As TextBox
     Friend WithEvents LblNro As Label
