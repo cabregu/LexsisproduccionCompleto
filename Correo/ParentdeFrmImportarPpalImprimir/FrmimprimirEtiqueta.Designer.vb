@@ -30,9 +30,11 @@ Partial Class FrmimprimirEtiqueta
         Me.LblRemitente = New System.Windows.Forms.Label()
         Me.CmbRemitente = New System.Windows.Forms.ComboBox()
         Me.LblCant = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtnCambiarEstado = New System.Windows.Forms.Button()
         Me.BtnSelectEtic = New System.Windows.Forms.Button()
         Me.Btnimprimir = New System.Windows.Forms.Button()
-        Me.BtnCambiarEstado = New System.Windows.Forms.Button()
+        Me.BtnmodoSimple = New System.Windows.Forms.Button()
         CType(Me.DgvImprimir, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,6 +109,32 @@ Partial Class FrmimprimirEtiqueta
         Me.LblCant.TabIndex = 29
         Me.LblCant.Text = "0"
         '
+        'Button1
+        '
+        Me.Button1.Enabled = False
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button1.Image = Global.Correo.My.Resources.Resources.BOProductGroup_32x32
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(361, 16)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(73, 47)
+        Me.Button1.TabIndex = 31
+        Me.Button1.Text = "ARM"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'BtnCambiarEstado
+        '
+        Me.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BtnCambiarEstado.Image = Global.Correo.My.Resources.Resources.tick
+        Me.BtnCambiarEstado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnCambiarEstado.Location = New System.Drawing.Point(733, 206)
+        Me.BtnCambiarEstado.Name = "BtnCambiarEstado"
+        Me.BtnCambiarEstado.Size = New System.Drawing.Size(167, 47)
+        Me.BtnCambiarEstado.TabIndex = 30
+        Me.BtnCambiarEstado.Text = "Cambiar Estado"
+        Me.BtnCambiarEstado.UseVisualStyleBackColor = True
+        '
         'BtnSelectEtic
         '
         Me.BtnSelectEtic.Enabled = False
@@ -134,17 +162,19 @@ Partial Class FrmimprimirEtiqueta
         Me.Btnimprimir.Text = "   Imprimir"
         Me.Btnimprimir.UseVisualStyleBackColor = True
         '
-        'BtnCambiarEstado
+        'BtnmodoSimple
         '
-        Me.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BtnCambiarEstado.Image = Global.Correo.My.Resources.Resources.tick
-        Me.BtnCambiarEstado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnCambiarEstado.Location = New System.Drawing.Point(733, 206)
-        Me.BtnCambiarEstado.Name = "BtnCambiarEstado"
-        Me.BtnCambiarEstado.Size = New System.Drawing.Size(167, 47)
-        Me.BtnCambiarEstado.TabIndex = 30
-        Me.BtnCambiarEstado.Text = "Cambiar Estado"
-        Me.BtnCambiarEstado.UseVisualStyleBackColor = True
+        Me.BtnmodoSimple.Enabled = False
+        Me.BtnmodoSimple.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BtnmodoSimple.Image = Global.Correo.My.Resources.Resources.BOProduct_32x32
+        Me.BtnmodoSimple.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BtnmodoSimple.Location = New System.Drawing.Point(361, 84)
+        Me.BtnmodoSimple.Name = "BtnmodoSimple"
+        Me.BtnmodoSimple.Size = New System.Drawing.Size(93, 47)
+        Me.BtnmodoSimple.TabIndex = 32
+        Me.BtnmodoSimple.Text = "MODO S"
+        Me.BtnmodoSimple.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnmodoSimple.UseVisualStyleBackColor = True
         '
         'FrmimprimirEtiqueta
         '
@@ -152,6 +182,8 @@ Partial Class FrmimprimirEtiqueta
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(912, 552)
+        Me.Controls.Add(Me.BtnmodoSimple)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BtnCambiarEstado)
         Me.Controls.Add(Me.LblCant)
         Me.Controls.Add(Me.LblRemitente)
@@ -182,4 +214,6 @@ Partial Class FrmimprimirEtiqueta
     Friend WithEvents CmbRemitente As System.Windows.Forms.ComboBox
     Friend WithEvents LblCant As System.Windows.Forms.Label
     Friend WithEvents BtnCambiarEstado As System.Windows.Forms.Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents BtnmodoSimple As Button
 End Class
