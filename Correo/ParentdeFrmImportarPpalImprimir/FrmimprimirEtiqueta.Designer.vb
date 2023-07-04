@@ -75,7 +75,7 @@ Partial Class FrmimprimirEtiqueta
         Me.DgvImprimir.AllowUserToAddRows = False
         Me.DgvImprimir.AllowUserToDeleteRows = False
         Me.DgvImprimir.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvImprimir.Location = New System.Drawing.Point(12, 103)
+        Me.DgvImprimir.Location = New System.Drawing.Point(11, 259)
         Me.DgvImprimir.Name = "DgvImprimir"
         Me.DgvImprimir.ReadOnly = True
         Me.DgvImprimir.Size = New System.Drawing.Size(889, 268)
@@ -101,7 +101,7 @@ Partial Class FrmimprimirEtiqueta
         'LblCant
         '
         Me.LblCant.AutoSize = True
-        Me.LblCant.Location = New System.Drawing.Point(12, 374)
+        Me.LblCant.Location = New System.Drawing.Point(11, 530)
         Me.LblCant.Name = "LblCant"
         Me.LblCant.Size = New System.Drawing.Size(13, 13)
         Me.LblCant.TabIndex = 29
@@ -109,14 +109,13 @@ Partial Class FrmimprimirEtiqueta
         '
         'BtnSelectEtic
         '
-        Me.BtnSelectEtic.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSelectEtic.Enabled = False
         Me.BtnSelectEtic.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnSelectEtic.Image = Global.Correo.My.Resources.Resources.filefind
         Me.BtnSelectEtic.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.BtnSelectEtic.Location = New System.Drawing.Point(308, 39)
+        Me.BtnSelectEtic.Location = New System.Drawing.Point(12, 206)
         Me.BtnSelectEtic.Name = "BtnSelectEtic"
-        Me.BtnSelectEtic.Size = New System.Drawing.Size(108, 47)
+        Me.BtnSelectEtic.Size = New System.Drawing.Size(150, 47)
         Me.BtnSelectEtic.TabIndex = 22
         Me.BtnSelectEtic.Text = "Seleccionar Etiqueta"
         Me.BtnSelectEtic.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -124,25 +123,23 @@ Partial Class FrmimprimirEtiqueta
         '
         'Btnimprimir
         '
-        Me.Btnimprimir.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Btnimprimir.Enabled = False
         Me.Btnimprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Btnimprimir.Image = Global.Correo.My.Resources.Resources.Print
         Me.Btnimprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Btnimprimir.Location = New System.Drawing.Point(422, 39)
+        Me.Btnimprimir.Location = New System.Drawing.Point(168, 206)
         Me.Btnimprimir.Name = "Btnimprimir"
-        Me.Btnimprimir.Size = New System.Drawing.Size(117, 47)
+        Me.Btnimprimir.Size = New System.Drawing.Size(159, 47)
         Me.Btnimprimir.TabIndex = 18
         Me.Btnimprimir.Text = "   Imprimir"
         Me.Btnimprimir.UseVisualStyleBackColor = True
         '
         'BtnCambiarEstado
         '
-        Me.BtnCambiarEstado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnCambiarEstado.Image = Global.Correo.My.Resources.Resources.tick
         Me.BtnCambiarEstado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnCambiarEstado.Location = New System.Drawing.Point(734, 39)
+        Me.BtnCambiarEstado.Location = New System.Drawing.Point(733, 206)
         Me.BtnCambiarEstado.Name = "BtnCambiarEstado"
         Me.BtnCambiarEstado.Size = New System.Drawing.Size(167, 47)
         Me.BtnCambiarEstado.TabIndex = 30
@@ -154,7 +151,7 @@ Partial Class FrmimprimirEtiqueta
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
-        Me.ClientSize = New System.Drawing.Size(919, 396)
+        Me.ClientSize = New System.Drawing.Size(912, 552)
         Me.Controls.Add(Me.BtnCambiarEstado)
         Me.Controls.Add(Me.LblCant)
         Me.Controls.Add(Me.LblRemitente)
