@@ -182,7 +182,7 @@
     '*********************************************************************
     Private Sub CmbRemitente_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmbRemitente.SelectedIndexChanged
         Dim ArrServicios As New ArrayList
-        ArrServicios = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbRemitente.Text)
+        ArrServicios = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexsIngresado(CmbRemitente.Text)
         CmbNroTrab.Items.Clear()
         For i As Integer = 0 To ArrServicios.Count - 1
             CmbNroTrab.Items.Add(ArrServicios.Item(i).ToString)

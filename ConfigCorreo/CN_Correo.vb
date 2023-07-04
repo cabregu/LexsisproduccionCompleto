@@ -359,10 +359,25 @@ Public Class CN_Correo
 
     End Function
 
-
-    Public Shared Function RemitosdeCteremitosLexs(ByVal Remitente As String) As ArrayList
+    Public Shared Function RemitosdeCteremitosLexsImportado(ByVal Remitente As String) As ArrayList
         Dim ArrServicios As New ArrayList
-        Dim sqln As String = "SELECT NroRemito FROM remitoslexs WHERE Remitente ='" & Remitente & "' AND Estado='Ingresado' Or Estado='Importado'"
+        Dim sqln As String = "SELECT NroRemito FROM remitoslexs WHERE Remitente ='" & Remitente & "' AND Estado='Importado'"
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sqln, cn)
+        Dim da As New MySqlDataAdapter(cm)
+        Dim ds As New DataSet
+        cn.Open()
+        da.Fill(ds, "remitoslexs")
+        cn.Close()
+        For Each row As DataRow In ds.Tables("remitoslexs").Rows
+            ArrServicios.Add(row("NroRemito"))
+        Next
+        Return ArrServicios
+
+    End Function
+    Public Shared Function RemitosdeCteremitosLexsIngresado(ByVal Remitente As String) As ArrayList
+        Dim ArrServicios As New ArrayList
+        Dim sqln As String = "SELECT NroRemito FROM remitoslexs WHERE Remitente ='" & Remitente & "' AND Estado='Ingresado'"
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cm As New MySqlCommand(sqln, cn)
         Dim da As New MySqlDataAdapter(cm)

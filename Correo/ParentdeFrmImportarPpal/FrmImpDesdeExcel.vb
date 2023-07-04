@@ -41,7 +41,7 @@ Public Class FrmImpDesdeExcel
 
         CmbRemito.Items.Clear()
         Dim ArrServiciosremitoslexs As New ArrayList
-        ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbCodigo.Text)
+        ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexsIngresado(CmbCodigo.Text)
         For i As Integer = 0 To ArrServiciosremitoslexs.Count - 1
             CmbRemito.Items.Add(ArrServiciosremitoslexs.Item(i).ToString)
         Next

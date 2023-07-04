@@ -33,7 +33,7 @@
 
 
         Dim ArrServiciosremitoslexs As New ArrayList
-        ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexs(CmbRemitente.Text)
+        ArrServiciosremitoslexs = ConfigCorreo.CN_Correo.RemitosdeCteremitosLexsImportado(CmbRemitente.Text)
 
         For i As Integer = 0 To ArrServiciosremitoslexs.Count - 1
             CmbRemitoPendiente.Items.Add(ArrServiciosremitoslexs.Item(i).ToString)
