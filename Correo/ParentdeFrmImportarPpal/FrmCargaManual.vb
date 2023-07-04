@@ -261,6 +261,8 @@
         If ConfigCorreo.CN_Correo.InsertarRegistroCartas(nroCarta, remitente, trabajo, fechTrab, apellido, cp, calle, pisoDepto, localidad, provincia, nroCart2, empresa, socio, obs, obs2, obs3, obs4) = True Then
             ConfigCorreo.CN_Correo.ActualizarNroCarta(TxtNro_Carta.Text + 1)
             Limpiar()
+            ObtenerNroCarta()
+
         End If
 
     End Sub

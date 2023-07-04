@@ -1783,7 +1783,8 @@ Public Class CN_Correo
 
         Dim fechaTrabajo As String = fechTrab.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ' Formato de fecha para MySQL
 
-        Dim sql As String = "INSERT INTO cartas (NRO_CARTA, REMITENTE, TRABAJO, FECH_TRAB, APELLIDO, CP, CALLE, PISO_DEPTO, LOCALIDAD, PROVINCIA, ESTADO, NRO_CART2, EMPRESA, SOCIO, AÑO, OBS, OBS2, OBS3, OBS4) VALUES (@nroCarta, @remitente, @trabajo, @fechTrab, @apellido, @cp, @calle, @pisoDepto, @localidad, @provincia, @estado, @nroCart2, @empresa, @socio, @año, @obs, @obs2, @obs3, @obs4)"
+        Dim sql As String = "INSERT INTO cartas (NRO_CARTA, REMITENTE, TRABAJO, FECH_TRAB, APELLIDO, CP, CALLE, NRO, PISO_DEPTO, LOCALIDAD, PROVINCIA, ESTADO, NRO_CART2, EMPRESA, SOCIO, AÑO, OBS, OBS2, OBS3, OBS4) VALUES (@nroCarta, @remitente, @trabajo, @fechTrab, @apellido, @cp, @calle, @nro, @pisoDepto, @localidad, @provincia, @estado, @nroCart2, @empresa, @socio, @año, @obs, @obs2, @obs3, @obs4)"
+
 
         Using cn As New MySqlConnection(CadenaDeConeccionProduccion)
             Using cm As New MySqlCommand(sql, cn)
@@ -1794,6 +1795,7 @@ Public Class CN_Correo
                 cm.Parameters.AddWithValue("@apellido", apellido)
                 cm.Parameters.AddWithValue("@cp", cp)
                 cm.Parameters.AddWithValue("@calle", calle)
+                cm.Parameters.AddWithValue("@nro", "")
                 cm.Parameters.AddWithValue("@pisoDepto", pisoDepto)
                 cm.Parameters.AddWithValue("@localidad", localidad)
                 cm.Parameters.AddWithValue("@provincia", provincia)
