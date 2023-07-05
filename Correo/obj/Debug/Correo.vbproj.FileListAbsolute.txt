@@ -205,3 +205,5 @@ C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\Crystal
 C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.ReportSource.dll
 C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Shared.dll
 C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\bin\Debug\CrystalDecisions.Windows.Forms.dll
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.FrmModoS.resources
+C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\Correo\obj\Debug\Correo.FrmArm.resources

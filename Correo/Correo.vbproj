@@ -238,10 +238,22 @@
     <Compile Include="ParentdeFrmConsulta\FrmConsultaUndato.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ParentdeFrmImportarPpalImprimir\FrmArm.Designer.vb">
+      <DependentUpon>FrmArm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ParentdeFrmImportarPpalImprimir\FrmArm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ParentdeFrmImportarPpalImprimir\FrmImprimirAvisos.Designer.vb">
       <DependentUpon>FrmImprimirAvisos.vb</DependentUpon>
     </Compile>
     <Compile Include="ParentdeFrmImportarPpalImprimir\FrmImprimirAvisos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParentdeFrmImportarPpalImprimir\FrmModoS.Designer.vb">
+      <DependentUpon>FrmModoS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ParentdeFrmImportarPpalImprimir\FrmModoS.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ParentdeFrmImportarPpalImprimir\FrmReportEtiquetasExcel.Designer.vb">
@@ -559,6 +571,9 @@
     <EmbeddedResource Include="ParentdeFrmConsulta\FrmConsultaUndato.resx">
       <DependentUpon>FrmConsultaUndato.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ParentdeFrmImportarPpalImprimir\FrmArm.resx">
+      <DependentUpon>FrmArm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ParentdeFrmImportarPpalImprimir\FrmImprimirAvisos.resx">
       <DependentUpon>FrmImprimirAvisos.vb</DependentUpon>
     </EmbeddedResource>
@@ -568,6 +583,9 @@
     <EmbeddedResource Include="ParentdeFrmImportarPpalImprimir\FrmCambiarEstado.resx">
       <DependentUpon>FrmCambiarEstado.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParentdeFrmImportarPpalImprimir\FrmModoS.resx">
+      <DependentUpon>FrmModoS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ParentdeFrmImportarPpalImprimir\FrmReportEtiquetasExcel.resx">
       <DependentUpon>FrmReportEtiquetasExcel.vb</DependentUpon>
@@ -941,6 +959,7 @@
     <None Include="Resources\m_RemitoLexs.png" />
     <None Include="Resources\BOProductGroup_32x321.png" />
     <None Include="Resources\BOProduct_32x321.png" />
+    <None Include="Resources\DefaultPrinterNetwork_32x321.png" />
     <Content Include="Resources\remito.png" />
     <None Include="EXCELFILE.png" />
     <Content Include="lexs.ico" />

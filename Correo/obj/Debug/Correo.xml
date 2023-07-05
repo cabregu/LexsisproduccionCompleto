@@ -152,6 +152,11 @@ Correo
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Correo.My.Resources.Resources.DefaultPrinterNetwork_32x32">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Correo.My.Resources.Resources.door_out">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.

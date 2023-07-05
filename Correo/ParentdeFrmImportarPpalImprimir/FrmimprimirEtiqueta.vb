@@ -8,8 +8,6 @@
             DtImprimir = ConfigCorreo.CN_Correo.LlenarDatatableImprimir(CmbRemitoPendiente.Text)
             DgvImprimir.DataSource = DtImprimir
             LblCant.Text = DgvImprimir.RowCount
-            BtnArm.Enabled = True
-            BtnModoS.Enabled = True
 
         End If
     End Sub
@@ -72,7 +70,7 @@
     Private Sub BtnCambiarEstado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCambiarEstado.Click
         If CmbRemitente.Text <> "" And CmbRemitoPendiente.Text <> "" Then
 
-            If MessageBox.Show("Cambiar estado de todo el remito nro: " & CmbRemitoPendiente.Text & " remitente " & CmbRemitente.Text & " a ESP_PROG ?", "Actualizar", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+            If MessageBox.Show("Vas a Cambiar estado de todo el remito nro: " & CmbRemitoPendiente.Text & " a ESP_PROG? Ya no podras hacer ARM ni Modo S ", "Actualizar", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
                 '*Cambia estado demitos lexs a Impreso y ya no se muestra para imprimir etiquetas para mostrar cambiar a Importado
                 ConfigCorreo.CN_Correo.CambiarEstadoRemitosLexs(CmbRemitoPendiente.Text, "Impreso")
                 ConfigCorreo.CN_Correo.ActualizarEstado(CmbRemitoPendiente.Text, CmbRemitente.Text, "ESP_PROG")
@@ -89,11 +87,11 @@
 
     End Sub
 
-    Private Sub BtnModoS_Click(sender As Object, e As EventArgs) Handles BtnModoS.Click
+    Private Sub BtnModoS_Click(sender As Object, e As EventArgs)
         BtnCambiarEstado.Enabled = False
         FiltrarYMostrarDatos(DtImprimir, DgvImprimir)
     End Sub
-    Private Sub BtnArm_Click_1(sender As Object, e As EventArgs) Handles BtnArm.Click
+    Private Sub BtnArm_Click_1(sender As Object, e As EventArgs)
         BtnCambiarEstado.Enabled = False
     End Sub
 

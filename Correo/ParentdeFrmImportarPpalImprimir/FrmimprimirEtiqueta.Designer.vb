@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmimprimirEtiqueta
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmimprimirEtiqueta
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.CmbRemitoPendiente = New System.Windows.Forms.ComboBox()
         Me.LblRemitoPendiente = New System.Windows.Forms.Label()
@@ -30,11 +30,9 @@ Partial Class FrmimprimirEtiqueta
         Me.LblRemitente = New System.Windows.Forms.Label()
         Me.CmbRemitente = New System.Windows.Forms.ComboBox()
         Me.LblCant = New System.Windows.Forms.Label()
-        Me.BtnModoS = New System.Windows.Forms.Button()
         Me.BtnCambiarEstado = New System.Windows.Forms.Button()
         Me.BtnSelectEtic = New System.Windows.Forms.Button()
         Me.Btnimprimir = New System.Windows.Forms.Button()
-        Me.BtnArm = New System.Windows.Forms.Button()
         CType(Me.DgvImprimir, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -77,10 +75,10 @@ Partial Class FrmimprimirEtiqueta
         Me.DgvImprimir.AllowUserToAddRows = False
         Me.DgvImprimir.AllowUserToDeleteRows = False
         Me.DgvImprimir.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvImprimir.Location = New System.Drawing.Point(11, 259)
+        Me.DgvImprimir.Location = New System.Drawing.Point(11, 157)
         Me.DgvImprimir.Name = "DgvImprimir"
         Me.DgvImprimir.ReadOnly = True
-        Me.DgvImprimir.Size = New System.Drawing.Size(889, 268)
+        Me.DgvImprimir.Size = New System.Drawing.Size(889, 370)
         Me.DgvImprimir.TabIndex = 26
         '
         'LblRemitente
@@ -109,26 +107,12 @@ Partial Class FrmimprimirEtiqueta
         Me.LblCant.TabIndex = 29
         Me.LblCant.Text = "0"
         '
-        'BtnModoS
-        '
-        Me.BtnModoS.Enabled = False
-        Me.BtnModoS.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BtnModoS.Image = Global.Correo.My.Resources.Resources.BOProduct_32x32
-        Me.BtnModoS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnModoS.Location = New System.Drawing.Point(11, 137)
-        Me.BtnModoS.Name = "BtnModoS"
-        Me.BtnModoS.Size = New System.Drawing.Size(151, 47)
-        Me.BtnModoS.TabIndex = 32
-        Me.BtnModoS.Text = "FILTRO MODO S"
-        Me.BtnModoS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnModoS.UseVisualStyleBackColor = True
-        '
         'BtnCambiarEstado
         '
         Me.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnCambiarEstado.Image = Global.Correo.My.Resources.Resources.tick
         Me.BtnCambiarEstado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnCambiarEstado.Location = New System.Drawing.Point(733, 206)
+        Me.BtnCambiarEstado.Location = New System.Drawing.Point(733, 104)
         Me.BtnCambiarEstado.Name = "BtnCambiarEstado"
         Me.BtnCambiarEstado.Size = New System.Drawing.Size(167, 47)
         Me.BtnCambiarEstado.TabIndex = 30
@@ -141,7 +125,7 @@ Partial Class FrmimprimirEtiqueta
         Me.BtnSelectEtic.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnSelectEtic.Image = Global.Correo.My.Resources.Resources.filefind
         Me.BtnSelectEtic.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.BtnSelectEtic.Location = New System.Drawing.Point(12, 206)
+        Me.BtnSelectEtic.Location = New System.Drawing.Point(11, 104)
         Me.BtnSelectEtic.Name = "BtnSelectEtic"
         Me.BtnSelectEtic.Size = New System.Drawing.Size(150, 47)
         Me.BtnSelectEtic.TabIndex = 22
@@ -155,25 +139,12 @@ Partial Class FrmimprimirEtiqueta
         Me.Btnimprimir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Btnimprimir.Image = Global.Correo.My.Resources.Resources.Print
         Me.Btnimprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Btnimprimir.Location = New System.Drawing.Point(168, 206)
+        Me.Btnimprimir.Location = New System.Drawing.Point(167, 104)
         Me.Btnimprimir.Name = "Btnimprimir"
         Me.Btnimprimir.Size = New System.Drawing.Size(159, 47)
         Me.Btnimprimir.TabIndex = 18
         Me.Btnimprimir.Text = "   Imprimir"
         Me.Btnimprimir.UseVisualStyleBackColor = True
-        '
-        'BtnArm
-        '
-        Me.BtnArm.Enabled = False
-        Me.BtnArm.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BtnArm.Image = Global.Correo.My.Resources.Resources.BOProductGroup_32x32
-        Me.BtnArm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtnArm.Location = New System.Drawing.Point(168, 137)
-        Me.BtnArm.Name = "BtnArm"
-        Me.BtnArm.Size = New System.Drawing.Size(159, 47)
-        Me.BtnArm.TabIndex = 33
-        Me.BtnArm.Text = "IR A ARM"
-        Me.BtnArm.UseVisualStyleBackColor = True
         '
         'FrmimprimirEtiqueta
         '
@@ -181,8 +152,6 @@ Partial Class FrmimprimirEtiqueta
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(912, 552)
-        Me.Controls.Add(Me.BtnArm)
-        Me.Controls.Add(Me.BtnModoS)
         Me.Controls.Add(Me.BtnCambiarEstado)
         Me.Controls.Add(Me.LblCant)
         Me.Controls.Add(Me.LblRemitente)
@@ -213,6 +182,4 @@ Partial Class FrmimprimirEtiqueta
     Friend WithEvents CmbRemitente As System.Windows.Forms.ComboBox
     Friend WithEvents LblCant As System.Windows.Forms.Label
     Friend WithEvents BtnCambiarEstado As System.Windows.Forms.Button
-    Friend WithEvents BtnModoS As Button
-    Friend WithEvents BtnArm As Button
 End Class

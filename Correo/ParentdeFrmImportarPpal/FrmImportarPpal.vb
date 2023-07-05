@@ -53,4 +53,14 @@
         FrmImprimirAvisos.Show()
 
     End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
+        FrmArm.MdiParent = Me
+        FrmArm.Show()
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
+        FrmModoS.MdiParent = Me
+        FrmModoS.Show()
+    End Sub
 End Class
