@@ -42,6 +42,7 @@ Partial Class FrmImpDesdeExcel
         Me.LblCantidad = New System.Windows.Forms.Label()
         Me.BtnExcel = New System.Windows.Forms.Button()
         Me.BtnSeleccionDeArchivoModificado = New System.Windows.Forms.Button()
+        Me.BtnAchivoComun = New System.Windows.Forms.Button()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -230,12 +231,25 @@ Partial Class FrmImpDesdeExcel
         Me.BtnSeleccionDeArchivoModificado.Text = "Archivo Modificado"
         Me.BtnSeleccionDeArchivoModificado.UseVisualStyleBackColor = True
         '
+        'BtnAchivoComun
+        '
+        Me.BtnAchivoComun.Enabled = False
+        Me.BtnAchivoComun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAchivoComun.ForeColor = System.Drawing.Color.Maroon
+        Me.BtnAchivoComun.Location = New System.Drawing.Point(191, 128)
+        Me.BtnAchivoComun.Name = "BtnAchivoComun"
+        Me.BtnAchivoComun.Size = New System.Drawing.Size(147, 23)
+        Me.BtnAchivoComun.TabIndex = 101
+        Me.BtnAchivoComun.Text = "Archivo Comun"
+        Me.BtnAchivoComun.UseVisualStyleBackColor = True
+        '
         'FrmImpDesdeExcel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
+        Me.Controls.Add(Me.BtnAchivoComun)
         Me.Controls.Add(Me.BtnSeleccionDeArchivoModificado)
         Me.Controls.Add(Me.BtnExcel)
         Me.Controls.Add(Me.LblCantidad)
@@ -279,4 +293,5 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents LblCantidad As Label
     Friend WithEvents BtnExcel As Button
     Friend WithEvents BtnSeleccionDeArchivoModificado As Button
+    Friend WithEvents BtnAchivoComun As Button
 End Class
