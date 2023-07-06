@@ -32,7 +32,6 @@ Partial Class FrmImpDesdeExcel
         Me.LblFechalimite = New System.Windows.Forms.Label()
         Me.BtnImportar = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.LblCant = New System.Windows.Forms.Label()
         Me.Dgvimportar = New System.Windows.Forms.DataGridView()
         Me.BtnSalir = New System.Windows.Forms.Button()
         Me.BtnSeleccionDirecta = New System.Windows.Forms.Button()
@@ -121,23 +120,12 @@ Partial Class FrmImpDesdeExcel
         'Timer1
         '
         '
-        'LblCant
-        '
-        Me.LblCant.AutoSize = True
-        Me.LblCant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblCant.ForeColor = System.Drawing.Color.Maroon
-        Me.LblCant.Location = New System.Drawing.Point(9, 409)
-        Me.LblCant.Name = "LblCant"
-        Me.LblCant.Size = New System.Drawing.Size(14, 13)
-        Me.LblCant.TabIndex = 84
-        Me.LblCant.Text = "0"
-        '
         'Dgvimportar
         '
         Me.Dgvimportar.AllowUserToAddRows = False
         Me.Dgvimportar.AllowUserToDeleteRows = False
         Me.Dgvimportar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Dgvimportar.Location = New System.Drawing.Point(6, 157)
+        Me.Dgvimportar.Location = New System.Drawing.Point(3, 157)
         Me.Dgvimportar.Name = "Dgvimportar"
         Me.Dgvimportar.ReadOnly = True
         Me.Dgvimportar.Size = New System.Drawing.Size(891, 275)
@@ -201,7 +189,7 @@ Partial Class FrmImpDesdeExcel
         Me.LblCantidad.AutoSize = True
         Me.LblCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblCantidad.ForeColor = System.Drawing.Color.Maroon
-        Me.LblCantidad.Location = New System.Drawing.Point(793, 435)
+        Me.LblCantidad.Location = New System.Drawing.Point(737, 435)
         Me.LblCantidad.Name = "LblCantidad"
         Me.LblCantidad.Size = New System.Drawing.Size(14, 13)
         Me.LblCantidad.TabIndex = 98
@@ -258,7 +246,6 @@ Partial Class FrmImpDesdeExcel
         Me.Controls.Add(Me.TxtNro)
         Me.Controls.Add(Me.BtnSeleccionDirecta)
         Me.Controls.Add(Me.Dgvimportar)
-        Me.Controls.Add(Me.LblCant)
         Me.Controls.Add(Me.LblFechalimite)
         Me.Controls.Add(Me.DtpFecha)
         Me.Controls.Add(Me.BtnSalir)
@@ -284,7 +271,6 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents DtpFecha As System.Windows.Forms.DateTimePicker
     Friend WithEvents LblFechalimite As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents LblCant As System.Windows.Forms.Label
     Friend WithEvents Dgvimportar As System.Windows.Forms.DataGridView
     Friend WithEvents BtnSeleccionDirecta As Button
     Friend WithEvents TxtNro As TextBox

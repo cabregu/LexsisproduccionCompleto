@@ -76,11 +76,8 @@ Public Class FrmImpDesdeExcel
 
     End Sub
     Private Sub BtnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnImportar.Click
-        'Try
+
         PasarDatos()
-        'Catch ex As Exception
-        '    MsgBox("Hay un error")
-        'End Try
 
     End Sub
     Private Sub PasarDatos()
@@ -164,7 +161,7 @@ Public Class FrmImpDesdeExcel
             CambiarEstadoRemitosLexs(CmbRemito.Text, "Importado")
 
             'ActualizarRemito(CmbRemito.Text, CmbCodigo.Text, "PEND_IMPR", LblCant.Text)
-            If MessageBox.Show(LblCant.Text & " Registros Cargados", LblCant.Text & " Registros Cargados", MessageBoxButtons.OK, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
+            If MessageBox.Show(LblCantidad.Text & " Registros Cargados", LblCantidad.Text & " Registros Cargados", MessageBoxButtons.OK, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
                 Me.Close()
             End If
 
@@ -692,7 +689,7 @@ Public Class FrmImpDesdeExcel
 
 
         'Actualizamos la cantidad de filas en el DataGridView
-        LblCant.Text = Dgvimportar.Rows.Count.ToString()
+        LblCantidad.Text = Dgvimportar.Rows.Count.ToString()
 
 
     End Sub
@@ -753,6 +750,8 @@ Public Class FrmImpDesdeExcel
     Private Sub BtnAchivoComun_Click(sender As Object, e As EventArgs) Handles BtnAchivoComun.Click
         Seleccionar()
         LblCantidad.Text = Dgvimportar.RowCount
+        BtnImportar.Enabled = True
+
     End Sub
 
 
@@ -777,66 +776,107 @@ Public Class FrmImpDesdeExcel
 
     End Sub
     Private Sub Insertardesdexls(ByVal FechaImportacion As Date, ByVal ruta As String)
-        'Try
-        Dim NombreHoja As String = ""
-        NombreHoja = ObtenerNombrePrimeraHoja(ruta)
-
-
-        Dim strconn As String
-        strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + ruta + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
-        Dim mconn As New OleDbConnection(strconn)
-        Dim ad As New OleDbDataAdapter("Select * from [" & NombreHoja & "$]", mconn)
-        mconn.Open()
-        ad.Fill(dt)
-        mconn.Close()
-
-        Dim ArrCampos As New ArrayList
-        ArrCampos.Add("APELLIDO")
-        ArrCampos.Add("CALLE")
-        ArrCampos.Add("NRO")
-        ArrCampos.Add("PISO_DEPTO")
-        ArrCampos.Add("CP")
-        ArrCampos.Add("LOCALIDAD")
-        ArrCampos.Add("PROVINCIA")
-        ArrCampos.Add("EMPRESA")
-        ArrCampos.Add("NRO_CART2")
-        ArrCampos.Add("SOCIO")
-        ArrCampos.Add("OBS")
-        ArrCampos.Add("OBS2")
-        ArrCampos.Add("OBS3")
-        ArrCampos.Add("OBS4")
-
-
-        Dgvimportar.Columns.Add("NRO_CARTA", "NRO_CARTA")
-        Dgvimportar.Columns.Add("REMITENTE", "REMITENTE")
-        Dgvimportar.Columns.Add("TRABAJO", "TRABAJO")
-        Dgvimportar.Columns.Add("FECH_TRAB", "FECH_TRAB")
+        Try
 
 
 
-        Dgvimportar.DataSource = dt
-        LblCant.Text = Dgvimportar.Rows.Count
+            Dim ArrCampos As New ArrayList
+            ArrCampos.Add("APELLIDO")
+            ArrCampos.Add("CALLE")
+            ArrCampos.Add("NRO")
+            ArrCampos.Add("PISO_DEPTO")
+            ArrCampos.Add("CP")
+            ArrCampos.Add("LOCALIDAD")
+            ArrCampos.Add("PROVINCIA")
+            ArrCampos.Add("EMPRESA")
+            ArrCampos.Add("NRO_CART2")
+            ArrCampos.Add("SOCIO")
+            ArrCampos.Add("OBS")
+            ArrCampos.Add("OBS2")
+            ArrCampos.Add("OBS3")
+            ArrCampos.Add("OBS4")
 
-        NroCart = ObtenerNroCarta()
+            Dim NombreHoja As String = ""
+            NombreHoja = ObtenerNombrePrimeraHoja(ruta)
 
-        For Each drw As DataGridViewRow In Dgvimportar.Rows
+            Dim strconn As String
+            strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + ruta + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
+            Dim mconn As New OleDbConnection(strconn)
+            Dim ad As New OleDbDataAdapter("Select * from [" & NombreHoja & "$]", mconn)
+            mconn.Open()
+            ad.Fill(dt)
+            mconn.Close()
 
-            drw.Cells("NRO_CARTA").Value = NroCart
-            drw.Cells("REMITENTE").Value = CmbCodigo.Text
-            drw.Cells("TRABAJO").Value = CmbRemito.Text
-            drw.Cells("FECH_TRAB").Value = FechaImportacion.ToShortDateString
+            Dgvimportar.Columns.Add("NRO_CARTA", "NRO_CARTA")
+            Dgvimportar.Columns.Add("REMITENTE", "REMITENTE")
+            Dgvimportar.Columns.Add("TRABAJO", "TRABAJO")
+            Dgvimportar.Columns.Add("FECH_TRAB", "FECH_TRAB")
 
-            drw.Cells("NRO_CARTA").Style.ForeColor = Color.Red
-            drw.Cells("REMITENTE").Style.ForeColor = Color.Red
-            drw.Cells("TRABAJO").Style.ForeColor = Color.Red
-            drw.Cells("FECH_TRAB").Style.ForeColor = Color.Red
-            NroCart = NroCart + 1
+            ' Verificar campos faltantes y agregar columnas vacías
+            Dim camposFaltantes As New ArrayList
 
-        Next
+            For Each campo As String In ArrCampos
+                If Not dt.Columns.Contains(campo) Then
+                    camposFaltantes.Add(campo)
+                    dt.Columns.Add(campo)
+                End If
+            Next
 
 
+            'eliminar espacios de mas en todos los campos 
+            For Each fila As DataRow In dt.Rows
+                For Each columna As DataColumn In dt.Columns
+                    If TypeOf fila(columna) Is String Then
+                        fila(columna) = fila(columna).ToString().TrimStart()
+                    End If
+                Next
+            Next
+
+
+
+            Dgvimportar.DataSource = dt
+            NroCart = ObtenerNroCarta()
+
+            For Each drw As DataGridViewRow In Dgvimportar.Rows
+                drw.Cells("NRO_CARTA").Value = NroCart
+                drw.Cells("REMITENTE").Value = CmbCodigo.Text
+                drw.Cells("TRABAJO").Value = CmbRemito.Text
+                drw.Cells("FECH_TRAB").Value = FechaImportacion.ToShortDateString
+
+                drw.Cells("NRO_CARTA").Style.ForeColor = Color.Green
+                drw.Cells("REMITENTE").Style.ForeColor = Color.Green
+                drw.Cells("TRABAJO").Style.ForeColor = Color.Green
+                drw.Cells("FECH_TRAB").Style.ForeColor = Color.Green
+                NroCart = NroCart + 1
+            Next
+
+            ' Mostrar mensaje de campos faltantes
+            If camposFaltantes.Count > 0 Then
+                Dim mensaje As String = "Los siguientes campos no existen en el archivo de Excel:" & Environment.NewLine
+                For Each campo As String In camposFaltantes
+                    mensaje += campo & Environment.NewLine
+                Next
+                MessageBox.Show(mensaje, "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+
+
+            Dim columnasIgnoradas As List(Of String) = New List(Of String) From {"NRO_CARTA", "REMITENTE", "TRABAJO", "FECH_TRAB"}
+            For Each columna As DataGridViewColumn In Dgvimportar.Columns
+                Dim nombreColumna As String = columna.HeaderText
+                If Not ArrCampos.Contains(nombreColumna) AndAlso Not columnasIgnoradas.Contains(nombreColumna) Then
+                    columna.DefaultCellStyle.BackColor = Color.Red
+                End If
+            Next
+
+
+        Catch ex As Exception
+
+            MsgBox("Error de proceso verifique esto " & ex.ToString)
+        End Try
 
     End Sub
+
+
 
 
 End Class
