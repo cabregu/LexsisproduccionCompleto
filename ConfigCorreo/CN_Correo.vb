@@ -4004,7 +4004,7 @@ Public Class CN_Correo
 
             cn.Close()
         Catch ex As Exception
-
+            MsgBox("Error capture este dato para el administrador er ActualizarPorCartaEstadoEnCartasActualizadoCampoEspecifico otrodato devosucu " & ex.ToString)
         End Try
     End Sub
 
