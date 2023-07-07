@@ -40,7 +40,6 @@ Partial Class FrmImpDesdeExcel
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblCantidad = New System.Windows.Forms.Label()
         Me.BtnExcel = New System.Windows.Forms.Button()
-        Me.BtnSeleccionDeArchivoModificado = New System.Windows.Forms.Button()
         Me.BtnAchivoComun = New System.Windows.Forms.Button()
         CType(Me.Dgvimportar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -207,18 +206,6 @@ Partial Class FrmImpDesdeExcel
         Me.BtnExcel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.BtnExcel.UseVisualStyleBackColor = True
         '
-        'BtnSeleccionDeArchivoModificado
-        '
-        Me.BtnSeleccionDeArchivoModificado.Enabled = False
-        Me.BtnSeleccionDeArchivoModificado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSeleccionDeArchivoModificado.ForeColor = System.Drawing.Color.Maroon
-        Me.BtnSeleccionDeArchivoModificado.Location = New System.Drawing.Point(630, 128)
-        Me.BtnSeleccionDeArchivoModificado.Name = "BtnSeleccionDeArchivoModificado"
-        Me.BtnSeleccionDeArchivoModificado.Size = New System.Drawing.Size(211, 23)
-        Me.BtnSeleccionDeArchivoModificado.TabIndex = 100
-        Me.BtnSeleccionDeArchivoModificado.Text = "Archivo Modificado"
-        Me.BtnSeleccionDeArchivoModificado.UseVisualStyleBackColor = True
-        '
         'BtnAchivoComun
         '
         Me.BtnAchivoComun.Enabled = False
@@ -238,7 +225,6 @@ Partial Class FrmImpDesdeExcel
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(906, 514)
         Me.Controls.Add(Me.BtnAchivoComun)
-        Me.Controls.Add(Me.BtnSeleccionDeArchivoModificado)
         Me.Controls.Add(Me.BtnExcel)
         Me.Controls.Add(Me.LblCantidad)
         Me.Controls.Add(Me.Label1)
@@ -278,6 +264,5 @@ Partial Class FrmImpDesdeExcel
     Friend WithEvents Label1 As Label
     Friend WithEvents LblCantidad As Label
     Friend WithEvents BtnExcel As Button
-    Friend WithEvents BtnSeleccionDeArchivoModificado As Button
     Friend WithEvents BtnAchivoComun As Button
 End Class
