@@ -19,12 +19,14 @@ Partial Class FrmModoS
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DgvOriginal = New System.Windows.Forms.DataGridView()
+        Me.Dgvresultado = New System.Windows.Forms.DataGridView()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.dgvtabla = New System.Windows.Forms.DataGridView()
         CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Gb.SuspendLayout()
-        CType(Me.DgvOriginal, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Dgvresultado, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvtabla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnSalir
@@ -33,26 +35,28 @@ Partial Class FrmModoS
         '
         'Gb
         '
+        Me.Gb.Controls.Add(Me.dgvtabla)
         Me.Gb.Controls.Add(Me.Button1)
         Me.Gb.Controls.Add(Me.Button2)
-        Me.Gb.Controls.Add(Me.DgvOriginal)
+        Me.Gb.Controls.Add(Me.Dgvresultado)
         Me.Gb.Size = New System.Drawing.Size(973, 480)
         Me.Gb.Controls.SetChildIndex(Me.PBLogo, 0)
         Me.Gb.Controls.SetChildIndex(Me.BtnSalir, 0)
-        Me.Gb.Controls.SetChildIndex(Me.DgvOriginal, 0)
+        Me.Gb.Controls.SetChildIndex(Me.Dgvresultado, 0)
         Me.Gb.Controls.SetChildIndex(Me.Button2, 0)
         Me.Gb.Controls.SetChildIndex(Me.Button1, 0)
+        Me.Gb.Controls.SetChildIndex(Me.dgvtabla, 0)
         '
-        'DgvOriginal
+        'Dgvresultado
         '
-        Me.DgvOriginal.AllowUserToAddRows = False
-        Me.DgvOriginal.AllowUserToDeleteRows = False
-        Me.DgvOriginal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvOriginal.Location = New System.Drawing.Point(110, 52)
-        Me.DgvOriginal.Name = "DgvOriginal"
-        Me.DgvOriginal.ReadOnly = True
-        Me.DgvOriginal.Size = New System.Drawing.Size(800, 300)
-        Me.DgvOriginal.TabIndex = 29
+        Me.Dgvresultado.AllowUserToAddRows = False
+        Me.Dgvresultado.AllowUserToDeleteRows = False
+        Me.Dgvresultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Dgvresultado.Location = New System.Drawing.Point(480, 52)
+        Me.Dgvresultado.Name = "Dgvresultado"
+        Me.Dgvresultado.ReadOnly = True
+        Me.Dgvresultado.Size = New System.Drawing.Size(400, 300)
+        Me.Dgvresultado.TabIndex = 29
         '
         'Button2
         '
@@ -72,6 +76,17 @@ Partial Class FrmModoS
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'dgvtabla
+        '
+        Me.dgvtabla.AllowUserToAddRows = False
+        Me.dgvtabla.AllowUserToDeleteRows = False
+        Me.dgvtabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvtabla.Location = New System.Drawing.Point(59, 52)
+        Me.dgvtabla.Name = "dgvtabla"
+        Me.dgvtabla.ReadOnly = True
+        Me.dgvtabla.Size = New System.Drawing.Size(400, 300)
+        Me.dgvtabla.TabIndex = 34
+        '
         'FrmModoS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -82,11 +97,13 @@ Partial Class FrmModoS
         Me.WindowState = System.Windows.Forms.FormWindowState.Normal
         CType(Me.PBLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Gb.ResumeLayout(False)
-        CType(Me.DgvOriginal, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Dgvresultado, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvtabla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents DgvOriginal As DataGridView
+    Friend WithEvents Dgvresultado As DataGridView
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents dgvtabla As DataGridView
 End Class

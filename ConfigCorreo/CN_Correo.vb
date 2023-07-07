@@ -3353,6 +3353,25 @@ Public Class CN_Correo
         Return dt
 
     End Function
+
+
+
+    Public Shared Function Obtenerfitrocaba() As DataTable
+        Dim sql As String = "SELECT * from fitrocaba"
+        Dim dt As New DataTable
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sql, cn)
+        Dim da As New MySqlDataAdapter(cm)
+        Dim ds As New DataSet
+        cn.Open()
+        da.Fill(ds, "fitrocaba")
+        cn.Close()
+
+        dt = ds.Tables("fitrocaba")
+        Return dt
+    End Function
+
+
     Public Shared Function ObtenerVisitadas(ByVal Fecha As String) As DataTable
         Dim fechahasta As Date = Now.ToShortDateString
         fechahasta = fechahasta.AddDays(-5)

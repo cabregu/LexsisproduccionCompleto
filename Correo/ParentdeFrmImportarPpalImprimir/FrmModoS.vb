@@ -4,6 +4,8 @@ Imports System.Data.OleDb
 Imports System.Text.RegularExpressions
 
 Public Class FrmModoS
+
+    Dim dttabla As New DataTable
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         Dim openFD As New OpenFileDialog()
@@ -18,10 +20,9 @@ Public Class FrmModoS
 
         End With
     End Sub
-
     Private Function impExcel(ByVal Archivo As String) As Boolean
-        Try
-            Dim dt2 As New DataTable
+
+        Dim dt2 As New DataTable
 
             Dim strconn As String
             strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + Archivo + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
@@ -31,21 +32,64 @@ Public Class FrmModoS
             ad.Fill(dt2)
             mconn.Close()
 
-            ' Agregar la columna "NUEVA_CALLE"
-            dt2.Columns.Add("NUEVA_CALLE", GetType(String))
+            ' Agregar columna adicional para el resultado de Levenshtein
+            dt2.Columns.Add("Leven", GetType(Integer))
 
-            ' Recorrer el DataTable y aplicar la función ExtractStreetAndNumber
             For Each row As DataRow In dt2.Rows
-                Dim address As String = row("CALLE").ToString()
-                Dim nuevaCalle As String = ExtractStreetAndNumber(address)
-                row("NUEVA_CALLE") = nuevaCalle
+                Dim campo As String = row("calle").ToString()
+
+                ' Recorrer los campos de dgvtabla y calcular la distancia de Levenshtein
+                Dim minDistancia As Integer = Integer.MaxValue
+                For Each dgvRow As DataGridViewRow In dgvtabla.Rows
+                    Dim dgvCampo As String = dgvRow.Cells("calle").Value.ToString()
+                    Dim distancia As Integer = LevenshteinDistance(campo, dgvCampo)
+                    If distancia < minDistancia Then
+                        minDistancia = distancia
+                    End If
+                Next
+
+                row("Leven") = minDistancia
             Next
 
-            DgvOriginal.DataSource = dt2
-        Catch ex As Exception
-            ' Manejar la excepción
-        End Try
+            Dgvresultado.DataSource = dt2
+
+
+        Return True
     End Function
+
+
+    Private Function LevenshteinDistance(ByVal s As String, ByVal t As String) As Integer
+        Dim n As Integer = s.Length
+        Dim m As Integer = t.Length
+        Dim d(n + 1, m + 1) As Integer
+
+        If n = 0 Then
+            Return m
+        End If
+
+        If m = 0 Then
+            Return n
+        End If
+
+        For i As Integer = 0 To n
+            d(i, 0) = i
+        Next
+
+        For j As Integer = 0 To m
+            d(0, j) = j
+        Next
+
+        For i As Integer = 1 To n
+            For j As Integer = 1 To m
+                Dim cost As Integer = If(s(i - 1) = t(j - 1), 0, 1)
+
+                d(i, j) = Math.Min(Math.Min(d(i - 1, j) + 1, d(i, j - 1) + 1), d(i - 1, j - 1) + cost)
+            Next
+        Next
+
+        Return d(n, m)
+    End Function
+
 
     Public Function ExtractStreetAndNumber(address As String) As String
         Dim patterns As String() = {"11 DE SEPTIEMBRE DE 1888 ", "11 DE SEPTIEMBRE ", "25 DE MAYO ", "9 DE JULIO ", "3 DE FEBRERO ", "12 DE OCTUBRE ", "15 DE NOVIEMBRE DE 1889 ", "20 DE SEPTIEMBRE ", "33 ORIENTALES ", "11 de septiembre ", "25 de Mayo ", "3 de Febrero ", "3 de Febrero ", "3 de febrero ", "3 febrero "}
@@ -115,7 +159,7 @@ Public Class FrmModoS
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        ExportarDataGridViewAExcel(DgvOriginal)
+        ExportarDataGridViewAExcel(Dgvresultado)
     End Sub
     Private Sub ExportarDataGridViewAExcel(ByVal dgv As DataGridView)
         Try
@@ -163,6 +207,13 @@ Public Class FrmModoS
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error al exportar a Excel")
         End Try
+    End Sub
+
+    Private Sub FrmModoS_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        dttabla = ConfigCorreo.CN_Correo.Obtenerfitrocaba
+        dgvtabla.DataSource = dttabla
+
     End Sub
 End Class
 
