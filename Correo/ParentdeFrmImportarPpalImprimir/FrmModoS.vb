@@ -1,99 +1,67 @@
-﻿
-
-Imports System.Data.OleDb
+﻿Imports System.Data.OleDb
+Imports System.Data.SQLite
 Imports System.Text.RegularExpressions
+
 
 Public Class FrmModoS
 
     Dim dttabla As New DataTable
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        Dim openFD As New OpenFileDialog()
-        With openFD
-            .Title = "Seleccionar archivos"
-            .Filter = "Todos los archivos (*.xls)|*.xls"
-            .Multiselect = False
-            .InitialDirectory = My.Computer.FileSystem.SpecialDirectories.Desktop
-            If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                impExcel(.FileName)
-            End If
+        impExcel()
 
-        End With
     End Sub
-    Private Function impExcel(ByVal Archivo As String) As Boolean
+
+    Private Function impExcel() As Boolean
 
         Dim dt2 As New DataTable
+        dt2 = ConfigCorreo.CN_Correo.ObtenerCarteroCapital
 
-            Dim strconn As String
-            strconn = "Provider=Microsoft.Jet.Oledb.4.0; data source= " + Archivo + ";Extended properties=""Excel 8.0;hdr=yes;imex=1"""
-            Dim mconn As New OleDbConnection(strconn)
-            Dim ad As New OleDbDataAdapter("Select * from [" & "Lexs" & "$]", mconn)
-            mconn.Open()
-            ad.Fill(dt2)
-            mconn.Close()
 
-            ' Agregar columna adicional para el resultado de Levenshtein
-            dt2.Columns.Add("Leven", GetType(Integer))
+        Dim palabras As Dictionary(Of String, String) = ConfigCorreo.CN_Correo.ReemplazarPalabras()
 
-            For Each row As DataRow In dt2.Rows
-                Dim campo As String = row("calle").ToString()
 
-                ' Recorrer los campos de dgvtabla y calcular la distancia de Levenshtein
-                Dim minDistancia As Integer = Integer.MaxValue
-                For Each dgvRow As DataGridViewRow In dgvtabla.Rows
-                    Dim dgvCampo As String = dgvRow.Cells("calle").Value.ToString()
-                    Dim distancia As Integer = LevenshteinDistance(campo, dgvCampo)
-                    If distancia < minDistancia Then
-                        minDistancia = distancia
-                    End If
-                Next
+        For Each row As DataRow In dt2.Rows
+            Dim calle As String = row("calle").ToString()
+            Dim modificada As String = calle
 
-                row("Leven") = minDistancia
+            For Each kvp As KeyValuePair(Of String, String) In palabras
+                modificada = modificada.Replace(kvp.Key, kvp.Value)
             Next
 
-            Dgvresultado.DataSource = dt2
+            modificada = Regex.Replace(modificada, "[^a-zA-Z0-9\s]", "")
+
+            row("calle") = modificada.ToUpper()
+        Next
+
+        dt2.Columns.Add("CalleModificada", GetType(String))
+        dt2.Columns.Add("altura", GetType(String))
+
+        For Each row As DataRow In dt2.Rows
+            Dim calle As String = row("calle").ToString()
+            Dim resultado As String = ExtractStreetAndNumber(calle)
+            Dim valores As String() = resultado.Split(";"c)
+
+            If valores.Length >= 1 Then
+                row("CalleModificada") = valores(0)
+            End If
+
+            If valores.Length >= 2 Then
+                row("altura") = valores(1)
+            End If
+
+            InsertarDireccionIfNoExiste(row("cp").ToString(), valores(0), valores(1), row("fecha_recorrido").ToString())
+        Next
+
+        Dgvresultado.DataSource = dt2
 
 
         Return True
     End Function
 
 
-    Private Function LevenshteinDistance(ByVal s As String, ByVal t As String) As Integer
-        Dim n As Integer = s.Length
-        Dim m As Integer = t.Length
-        Dim d(n + 1, m + 1) As Integer
-
-        If n = 0 Then
-            Return m
-        End If
-
-        If m = 0 Then
-            Return n
-        End If
-
-        For i As Integer = 0 To n
-            d(i, 0) = i
-        Next
-
-        For j As Integer = 0 To m
-            d(0, j) = j
-        Next
-
-        For i As Integer = 1 To n
-            For j As Integer = 1 To m
-                Dim cost As Integer = If(s(i - 1) = t(j - 1), 0, 1)
-
-                d(i, j) = Math.Min(Math.Min(d(i - 1, j) + 1, d(i, j - 1) + 1), d(i - 1, j - 1) + cost)
-            Next
-        Next
-
-        Return d(n, m)
-    End Function
-
-
     Public Function ExtractStreetAndNumber(address As String) As String
-        Dim patterns As String() = {"11 DE SEPTIEMBRE DE 1888 ", "11 DE SEPTIEMBRE ", "25 DE MAYO ", "9 DE JULIO ", "3 DE FEBRERO ", "12 DE OCTUBRE ", "15 DE NOVIEMBRE DE 1889 ", "20 DE SEPTIEMBRE ", "33 ORIENTALES ", "11 de septiembre ", "25 de Mayo ", "3 de Febrero ", "3 de Febrero ", "3 de febrero ", "3 febrero "}
-
+        Dim patterns As String() = {"11 DE SEPTIEMBRE DE 1888 ", "11 DE SEPTIEMBRE ", "25 DE MAYO ", "9 DE JULIO ", "3 DE FEBRERO ", "12 DE OCTUBRE ", "15 DE NOVIEMBRE DE 1889 ", "20 DE SEPTIEMBRE ", "33 ORIENTALES ", "11 de septiembre ", "25 de Mayo ", "3 de Febrero ", "3 de Febrero ", "3 de febrero ", "3 febrero ", "24 DE NOVIEMBRE ", "15 DE NOVIEMBRE 1889 ", "29 DE SEPTIEMBRE ", "1 DE MAYO ", "2 DE MAYO ", "14 DE JULIO ", "24 DE MAYO ", "30 DE SEPTIEMBRE ", "1 DE MARZO ", "15 DE NOVIEMBRE ", "11 DESEPTIEMBRE ", "15 DE NOVIEMBRE ", "2 DE ABRIL ", "20 DE FEBRERO ", "3 FEBRERO "}
         ' Verificar si el dato contiene alguno de los textos en patterns
         For Each pattern As String In patterns
             If address.ToUpper().Contains(pattern.ToUpper()) OrElse address.ToLower().Contains(pattern.ToLower()) Then
@@ -119,8 +87,10 @@ Public Class FrmModoS
 
         Return street.Trim() + ";" + number
     End Function
+
+
     Public Function CorreccionCalleConNumeroInicial(calle As String) As String
-        Dim patterns As HashSet(Of String) = New HashSet(Of String) From {"11 DE SEPTIEMBRE DE 1888 ", "11 DE SEPTIEMBRE ", "25 DE MAYO ", "9 DE JULIO ", "3 DE FEBRERO ", "12 DE OCTUBRE ", "15 DE NOVIEMBRE DE 1889 ", "20 DE SEPTIEMBRE ", "33 ORIENTALES ", "11 de septiembre ", "25 de Mayo ", "3 de Febrero ", "3 de Febrero ", "3 de febrero ", "3 febrero "}
+        Dim patterns As HashSet(Of String) = New HashSet(Of String) From {"11 DE SEPTIEMBRE DE 1888 ", "11 DE SEPTIEMBRE ", "25 DE MAYO ", "9 DE JULIO ", "3 DE FEBRERO ", "12 DE OCTUBRE ", "15 DE NOVIEMBRE DE 1889 ", "20 DE SEPTIEMBRE ", "33 ORIENTALES ", "11 de septiembre ", "25 de Mayo ", "3 de Febrero ", "3 de Febrero ", "3 de febrero ", "3 febrero ", "24 DE NOVIEMBRE ", "15 DE NOVIEMBRE 1889 ", "29 DE SEPTIEMBRE ", "1 DE MAYO ", "2 DE MAYO ", "14 DE JULIO ", "24 DE MAYO ", "30 DE SEPTIEMBRE ", "1 DE MARZO ", "15 DE NOVIEMBRE ", "11 DESEPTIEMBRE ", "15 DE NOVIEMBRE ", "2 DE ABRIL ", "20 DE FEBRERO ", "3 FEBRERO "}
 
         Dim calleCompleta As String = calle
         Dim callepattern As String = ""
@@ -154,6 +124,25 @@ Public Class FrmModoS
     End Function
 
 
+    Public Sub InsertarDireccionIfNoExiste(cp As String, calle As String, altura As String, fecha As Date)
+        Dim filePath As String = "C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\filtroarm.db" ' Ruta completa del archivo
+
+        Dim connectionString As String = $"Data Source={filePath};Version=3;"
+        Dim query As String = "INSERT INTO direcciones (CP, CALLE, NUMERO, FECHA) SELECT @CP, @CALLE, @NUMERO, @FECHA WHERE NOT EXISTS (SELECT 1 FROM direcciones WHERE CP = @CP AND CALLE = @CALLE AND NUMERO = @NUMERO);"
+
+        Using connection As New SQLiteConnection(connectionString)
+            connection.Open()
+
+            Using command As New SQLiteCommand(query, connection)
+                command.Parameters.AddWithValue("@CP", cp)
+                command.Parameters.AddWithValue("@CALLE", calle)
+                command.Parameters.AddWithValue("@NUMERO", altura)
+                command.Parameters.AddWithValue("@FECHA", fecha)
+
+                command.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
 
 
 
@@ -211,10 +200,13 @@ Public Class FrmModoS
 
     Private Sub FrmModoS_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        dttabla = ConfigCorreo.CN_Correo.Obtenerfitrocaba
-        dgvtabla.DataSource = dttabla
+        'dttabla = ConfigCorreo.CN_Correo.Obtenerfitrocaba
+        'dgvtabla.DataSource = dttabla
 
     End Sub
+
+
 End Class
+
 
 

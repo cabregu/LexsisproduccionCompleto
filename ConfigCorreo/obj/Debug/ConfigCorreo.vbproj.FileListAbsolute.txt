@@ -196,7 +196,12 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\C
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\ConfigCorreo.pdb
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\ConfigCorreo.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\Microsoft.Office.Interop.Outlook.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\mysql.data.dll
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\stdole.dll
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\office.dll
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\Microsoft.Office.Interop.Outlook.xml
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\office.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.vbproj.AssemblyReference.cache
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.Resources.resources
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.vbproj.GenerateResource.cache
@@ -205,8 +210,3 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\C
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.dll
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\obj\Debug\ConfigCorreo.pdb
-C:\Users\Cristian\source\repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\stdole.dll
-C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\Microsoft.Office.Interop.Outlook.dll
-C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\office.dll
-C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\Microsoft.Office.Interop.Outlook.xml
-C:\Users\Cristian\Source\Repos\LexsisproduccionCompleto\ConfigCorreo\bin\Debug\office.xml

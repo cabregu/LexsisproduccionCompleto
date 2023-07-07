@@ -3354,8 +3354,6 @@ Public Class CN_Correo
 
     End Function
 
-
-
     Public Shared Function Obtenerfitrocaba() As DataTable
         Dim sql As String = "SELECT * from fitrocaba"
         Dim dt As New DataTable
@@ -4569,6 +4567,87 @@ Public Class CN_Correo
         Return True
 
     End Function
+    Public Shared Function ObtenerCarteroCapital() As DataTable
+        Dim sql As String = "SELECT * FROM recorridos WHERE CARTERO = 'JUAREZ JOSE' AND fecha_recorrido > '2023-01-01'"
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sql, cn)
+        Dim da As New MySqlDataAdapter(cm)
+        Dim Dt As New DataTable
+        cn.Open()
+        da.Fill(Dt)
+        cn.Close()
+        Return Dt
+    End Function
 
+    Public Shared Function ReemplazarPalabras() As Dictionary(Of String, String)
+        Dim palabras As New Dictionary(Of String, String)()
+
+        palabras.Add("AV", "")
+        palabras.Add("N°", "")
+        palabras.Add("AV.", "")
+        palabras.Add("AVDA", "")
+        palabras.Add("CMTE", "")
+        palabras.Add("CORONEL", "CNEL")
+        palabras.Add("GENERAL", "GRAL")
+        palabras.Add("MANUEL AUGUSTO", "")
+        palabras.Add("MANUEL BELGRANO", "BELGRANO")
+        palabras.Add("MARIANO BOEDO", "BOEDO")
+        palabras.Add("REGIMIENTO DE", "")
+        palabras.Add("PRES HIPOLITO YRIGOYEN", "HIPOLITO YRIGOYEN")
+        palabras.Add("AVENI", "")
+        palabras.Add("AVENIDA", "")
+        palabras.Add("°", "")
+        palabras.Add("CALLE", "")
+        palabras.Add("CARLOS", "C")
+        palabras.Add("GOBERNADOR", "GDOR")
+        palabras.Add(".", "")
+        palabras.Add("Ã‘", "N")
+        palabras.Add("PRESIDENTE", "PRES")
+        palabras.Add("PROFESOR", "PROF")
+        palabras.Add("REMEDIOS", "R")
+        palabras.Add("REPUBLICA", "REP")
+        palabras.Add("Âº", "")
+        palabras.Add("Â", "")
+        palabras.Add("Ãƒâ€˜", "N")
+        palabras.Add("ALICIA JUSTO", "ALICIA M JUSTO")
+        palabras.Add("ALICIA MOREAU DE JUSTO", "ALICIA M JUSTO")
+        palabras.Add("ALICIA MOROE DE JUSTO", "ALICIA M JUSTO")
+        palabras.Add("AV ALICIA MOREAU DE JUSTO", "ALICIA M JUSTO")
+        palabras.Add("A MOREAU DE JUSTO", "ALICIA M JUSTO")
+        palabras.Add("IÃƒâ€˜", "N")
+        palabras.Add("NÂ°", "")
+        palabras.Add("Ã al final", "")
+        palabras.Add("Ã‰", "")
+        palabras.Add("ARRIBE?OS", "ARRIBENOS")
+        palabras.Add("ARRIBEÃƒâ€˜OS", "ARRIBENOS")
+        palabras.Add("ARRIBEÃ‘OS", "ARRIBENOS")
+        palabras.Add("arribeÃ±os", "ARRIBENOS")
+        palabras.Add(" EDIF", "")
+        palabras.Add("CASTAÃ‘ARES", "CASTANARES")
+        palabras.Add("CATAÃ‘ARES", "CASTANARES")
+        palabras.Add("CERVI?O", "CERVINO")
+        palabras.Add("CERVIÃƒâ€˜O", "CERVINO")
+        palabras.Add("CERVIÃ‘O", "CERVINO")
+        palabras.Add("CNGRESO", "CONGRESO")
+        palabras.Add("PORTERIA", "")
+        palabras.Add("DOCTOR ", "DR ")
+        palabras.Add("R DE ESCALADA", "R E SAN MARTIN")
+        palabras.Add("R DE ESCALADA DE S MARTIN", "R E SAN MARTIN")
+        palabras.Add("R DE ESCALADA DE SAN MARTIN", "R E SAN MARTIN")
+        palabras.Add("R DE ESCALADA DE SAN MARTN", "R E SAN MARTIN")
+        palabras.Add("R E DE SAN MARTIN", "R E SAN MARTIN")
+        palabras.Add("R E S MARTIN", "R E SAN MARTIN")
+        palabras.Add("R ESCALADA DE SAN MARTIN", "R E SAN MARTIN")
+        palabras.Add("R ESCALADA DE SAN MARTN", "R E SAN MARTIN")
+        palabras.Add("R ESCALADA SAN MARTIN", "R E SAN MARTIN")
+        palabras.Add("ENIDA ", "")
+        '
+
+
+
+
+        Return palabras
+
+    End Function
 
 End Class
