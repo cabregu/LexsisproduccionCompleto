@@ -27,8 +27,14 @@
         If Len(CmbRemitente.Text) > 0 Then
             CmbRemitoPendiente.Enabled = False
             DtImprimir = ConfigCorreo.CN_Correo.LlenarDatatableImprimirArm(CmbRemitoPendiente.Text)
-            DgvImprimir.DataSource = DtImprimir
-            LblCant.Text = DgvImprimir.RowCount
+            DgvSeleccion.DataSource = DtImprimir
+
+            For Each col As DataGridViewColumn In DgvSeleccion.Columns
+                col.SortMode = DataGridViewColumnSortMode.NotSortable
+            Next
+
+            LblCant.Text = DgvSeleccion.RowCount
+
         End If
     End Sub
     Private Sub ExportarDataGridViewAExcel(ByVal dgv As DataGridView)
@@ -77,16 +83,35 @@
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error al exportar a Excel")
         End Try
     End Sub
-    Private Sub BtnXls_Click(sender As Object, e As EventArgs) Handles BtnXls.Click
-        ExportarDataGridViewAExcel(DgvImprimir)
-    End Sub
-    Private Sub BtnPdf_Click(sender As Object, e As EventArgs) Handles BtnPdf.Click
-
+    Private Sub BtnXls_Click(sender As Object, e As EventArgs)
+        ExportarDataGridViewAExcel(DgvSeleccion)
     End Sub
 
+    Private Sub DgvSeleccion_DoubleClick(sender As Object, e As EventArgs) Handles DgvSeleccion.DoubleClick
+        Dim N As String = DgvSeleccion.SelectedCells(0).RowIndex.ToString
+        Dim EMPRESA As String = DgvSeleccion.Rows(N).Cells("EMPRESA").Value
+        Dim CALLE As String = DgvSeleccion.Rows(N).Cells("CALLE").Value
+        DgvDatos.DataSource = Nothing
+        Dim Dtdatos As New DataTable
+        Dtdatos = ConfigCorreo.CN_Correo.LlenarDatatableImprimirArmPorEmpresaYCalle(EMPRESA, CALLE, CmbRemitoPendiente.Text)
+        DgvDatos.DataSource = Dtdatos
 
+        For Each col As DataGridViewColumn In DgvDatos.Columns
+            col.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
 
+        For Each row As DataGridViewRow In DgvDatos.Rows
+            Dim empresadato As String = row.Cells("empresa").Value.ToString()
+            Dim calledato As String = row.Cells("calle").Value.ToString()
 
+            For Each drws As DataGridViewRow In DgvSeleccion.Rows
+                If drws.Cells("empresa").Value = empresadato And drws.Cells("calle").Value = calledato Then
+                    drws.DefaultCellStyle.BackColor = Color.Green
+                Else
+                    drws.DefaultCellStyle.BackColor = Color.White
+                End If
+            Next
+        Next
 
-
+    End Sub
 End Class

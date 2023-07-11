@@ -2931,7 +2931,12 @@ Public Class CN_Correo
     End Function
 
     Public Shared Function LlenarDatatableImprimirArm(ByVal Remito As String) As DataTable
-        Dim sql As String = "SELECT NRO_CARTA, FECH_TRAB, APELLIDO, CP, CALLE, NRO, LOCALIDAD, PROVINCIA, NRO_CART2, EMPRESA FROM cartas WHERE TRABAJO='" & Remito & "' AND OBS2='ARM' ORDER BY EMPRESA, CALLE, NRO_CARTA"
+
+        Dim sql As String = "SELECT COUNT(*) AS CANTIDAD, EMPRESA, CALLE, CP, LOCALIDAD, PROVINCIA " &
+                        "FROM cartas " &
+                        "WHERE TRABAJO='" & Remito & "' AND OBS2='ARM' " &
+                        "GROUP BY EMPRESA, CALLE, CP, LOCALIDAD, PROVINCIA " &
+                        "ORDER BY EMPRESA, CALLE, NRO_CARTA"
 
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
         Dim cm As New MySqlCommand(sql, cn)
@@ -2939,42 +2944,30 @@ Public Class CN_Correo
         Dim ds As New DataSet
         Dim DtCartasImprimir As New DataTable
         cn.Open()
-        da.Fill(ds, "remitos")
+        da.Fill(ds, "ARM")
         cn.Close()
-        DtCartasImprimir = ds.Tables("remitos")
-
-        ' Agregar campo "Tipo" para indicar si es principal o secundario
-        DtCartasImprimir.Columns.Add("PRINCIPAL", GetType(String))
-
-        ' Recorrer las filas del DataTable y asignar el tipo correspondiente
-        Dim empresaAnterior As String = ""
-        Dim direccionAnterior As String = ""
-        Dim numeroCartaPrincipal As Integer = 0
-
-        For Each row As DataRow In DtCartasImprimir.Rows
-            Dim empresaActual As String = row("EMPRESA").ToString()
-            Dim direccionActual As String = row("CALLE").ToString()
-
-            ' Verificar si es una nueva empresa o dirección
-            If empresaActual <> empresaAnterior Or direccionActual <> direccionAnterior Then
-                ' Asignar el número de carta actual como principal
-                numeroCartaPrincipal = CInt(row("NRO_CARTA"))
-                row("PRINCIPAL") = numeroCartaPrincipal.ToString
-
-            Else
-                ' Es una dirección secundaria, asignar el número de carta principal
-                row("PRINCIPAL") = numeroCartaPrincipal.ToString
-            End If
-
-            ' Actualizar los valores anteriores
-            empresaAnterior = empresaActual
-            direccionAnterior = direccionActual
-        Next
+        DtCartasImprimir = ds.Tables("ARM")
 
         Return DtCartasImprimir
     End Function
 
+    Public Shared Function LlenarDatatableImprimirArmPorEmpresaYCalle(ByVal Empresa As String, ByVal Calle As String, ByVal Remito As Integer) As DataTable
 
+        Dim sql As String = "SELECT NRO_CARTA, REMITENTE, TRABAJO, FECH_TRAB, APELLIDO, CALLE, NRO, PISO_DEPTO, CP, LOCALIDAD, PROVINCIA, EMPRESA, NRO_CART2, SOCIO, OBS, OBS2, OBS3, OBS4 FROM cartas " &
+        "WHERE TRABAJO='" & Remito & "' AND EMPRESA='" & Empresa & " ' AND CALLE='" & Calle & "'"
+
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sql, cn)
+        Dim da As New MySqlDataAdapter(cm)
+        Dim ds As New DataSet
+        Dim DtCartasImprimir As New DataTable
+        cn.Open()
+        da.Fill(ds, "ARM")
+        cn.Close()
+        DtCartasImprimir = ds.Tables("ARM")
+
+        Return DtCartasImprimir
+    End Function
 
     Public Shared Function ConsultaCompleja(ByVal Consulta As String) As DataTable
         Dim cn As New MySqlConnection(CadenaDeConeccionProduccion & ";Convert Zero Datetime=True")

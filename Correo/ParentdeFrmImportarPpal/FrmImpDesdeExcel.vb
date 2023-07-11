@@ -515,6 +515,7 @@ Public Class FrmImpDesdeExcel
                         row("OBS2") = "ARM"
                     End If
                 End If
+
                 If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1000 AndAlso CInt(row("CP")) <= 1399 Then
                     If ConfigCorreo.CN_Correo.VerificarCpDeAsignaciones(CInt(row("CP"))) = True Then
                         row("OBS2") = "ARM"
