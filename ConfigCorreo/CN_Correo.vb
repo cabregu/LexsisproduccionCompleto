@@ -884,6 +884,26 @@ Public Class CN_Correo
 
 
 
+    Public Shared Function VerificarCpDeAsignaciones(ByVal Cp As Integer) As Boolean
+        Dim sqlNumero As String = "SELECT cp FROM asignaciones WHERE cp = @Cp"
+        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+        Dim cm As New MySqlCommand(sqlNumero, cn)
+        cm.Parameters.AddWithValue("@Cp", Cp)
+        Dim existeCp As Boolean = False
+        Try
+            cn.Open()
+            Dim resultado As Object = cm.ExecuteScalar()
+            If resultado IsNot Nothing AndAlso Not IsDBNull(resultado) Then
+                existeCp = True
+            End If
+        Catch ex As Exception
+
+        Finally
+            cn.Close()
+        End Try
+        Return existeCp
+    End Function
+
 
     'mysql Integer
     Public Shared Function ClaveUsuario(ByVal usuario As String, ByVal clave As String) As Integer

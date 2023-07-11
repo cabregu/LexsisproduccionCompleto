@@ -505,9 +505,22 @@ Public Class FrmImpDesdeExcel
                 Dim empresa As String = row("EMPRESA").ToString().TrimEnd()
                 Dim clave As String = domicilio & "-" & empresa
 
-                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 Then
+
+                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1400 AndAlso CInt(row("CP")) <= 9999 Then
                     row("OBS2") = "ARM"
                 End If
+
+                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 4 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1000 AndAlso CInt(row("CP")) <= 1399 Then
+                    If ConfigCorreo.CN_Correo.VerificarCpDeAsignaciones(CInt(row("CP"))) = False Then
+                        row("OBS2") = "ARM"
+                    End If
+                End If
+                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1000 AndAlso CInt(row("CP")) <= 1399 Then
+                    If ConfigCorreo.CN_Correo.VerificarCpDeAsignaciones(CInt(row("CP"))) = True Then
+                        row("OBS2") = "ARM"
+                    End If
+                End If
+
             Next
 
 
