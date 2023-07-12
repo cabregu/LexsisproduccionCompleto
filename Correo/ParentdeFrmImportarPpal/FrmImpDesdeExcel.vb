@@ -483,7 +483,7 @@ Public Class FrmImpDesdeExcel
             dt2.Columns("PROVINCIA").SetOrdinal(5)
 
 
-            '++++++++++++++++++++++++++++FALTA DIVISION POR EMPRESA +++++++++++++++++++
+            '++++++++++++++++++++Arm+++++++++++++++++++++++++++
             Dim conteoEmpresas As New Dictionary(Of String, Integer)
 
             For Each row As DataRow In dt2.Rows
@@ -510,17 +510,13 @@ Public Class FrmImpDesdeExcel
                     row("OBS2") = "ARM"
                 End If
 
-                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 4 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1000 AndAlso CInt(row("CP")) <= 1399 Then
-                    If ConfigCorreo.CN_Correo.VerificarCpDeAsignaciones(CInt(row("CP"))) = False Then
-                        row("OBS2") = "ARM"
-                    End If
+                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 3 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1000 AndAlso CInt(row("CP")) <= 1399 Then
+
+                    row("OBS2") = "ARM"
+
                 End If
 
-                If String.IsNullOrEmpty(row("OBS2").ToString().Trim()) AndAlso Not String.IsNullOrEmpty(empresa) AndAlso conteoEmpresas.ContainsKey(clave) AndAlso conteoEmpresas(clave) > 1 AndAlso IsNumeric(row("CP")) AndAlso CInt(row("CP")) >= 1000 AndAlso CInt(row("CP")) <= 1399 Then
-                    If ConfigCorreo.CN_Correo.VerificarCpDeAsignaciones(CInt(row("CP"))) = True Then
-                        row("OBS2") = "ARM"
-                    End If
-                End If
+
 
             Next
 
