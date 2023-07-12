@@ -211,3 +211,6 @@ C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\System.
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\System.Data.SQLite.pdb
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\System.Data.SQLite.xml
 C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\itextsharp.dll
+C:\Users\Cristian\source\repos\LexsisproduccionCompleto\Correo\bin\Debug\itextsharp.xml

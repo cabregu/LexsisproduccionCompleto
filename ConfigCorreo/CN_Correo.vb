@@ -407,22 +407,28 @@ Public Class CN_Correo
 
 
     Public Shared Function CargarTodoslosremitente() As ArrayList
-        Dim ArrListaRemitentes As New ArrayList
-        Dim Consultasql As String = "Select Remitente From remitentes"
+        Try
 
-        Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
-        Dim CmSql As New MySqlCommand(Consultasql, cn)
-        Dim da As New MySqlDataAdapter(CmSql)
-        Dim dt As New DataTable
-        cn.Open()
-        da.Fill(dt)
-        cn.Close()
 
-        For Each rw As DataRow In dt.Rows
-            ArrListaRemitentes.Add(rw("Remitente"))
-        Next
+            Dim ArrListaRemitentes As New ArrayList
+            Dim Consultasql As String = "Select Remitente From remitentes"
 
-        Return ArrListaRemitentes
+            Dim cn As New MySqlConnection(CadenaDeConeccionProduccion)
+            Dim CmSql As New MySqlCommand(Consultasql, cn)
+            Dim da As New MySqlDataAdapter(CmSql)
+            Dim dt As New DataTable
+            cn.Open()
+            da.Fill(dt)
+            cn.Close()
+
+            For Each rw As DataRow In dt.Rows
+                ArrListaRemitentes.Add(rw("Remitente"))
+            Next
+
+            Return ArrListaRemitentes
+        Catch ex As Exception
+
+        End Try
     End Function
     'Public Shared Function ObtenerRemitosPendientesImpresion(ByVal Remitente As String) As ArrayList
     '    Dim ArrListaPendientes As New ArrayList

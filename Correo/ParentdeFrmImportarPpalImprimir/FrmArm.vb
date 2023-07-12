@@ -1,14 +1,28 @@
-﻿Public Class FrmArm
+﻿Imports iTextSharp.text
+Imports iTextSharp.text.pdf
+Imports System.IO
+
+
+Public Class FrmArm
 
     Public DtImprimir As New DataTable
+    Dim Dtdatos As New DataTable
 
     Private Sub FrmArm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim ArrayRemitentes As New ArrayList
-        ArrayRemitentes = ConfigCorreo.CN_Correo.CargarTodoslosremitente
-        CmbRemitente.Items.Clear()
-        For i As Integer = 0 To ArrayRemitentes.Count - 1
-            CmbRemitente.Items.Add(ArrayRemitentes.Item(i).ToString)
-        Next
+        Try
+            Dim ArrayRemitentes As New ArrayList()
+            ArrayRemitentes = ConfigCorreo.CN_Correo.CargarTodoslosremitente()
+
+            If ArrayRemitentes IsNot Nothing Then
+                CmbRemitente.Items.Clear()
+
+                For i As Integer = 0 To ArrayRemitentes.Count - 1
+                    CmbRemitente.Items.Add(ArrayRemitentes.Item(i).ToString())
+                Next
+            End If
+        Catch ex As Exception
+            ' Manejar la excepción aquí
+        End Try
 
     End Sub
     Private Sub CmbRemitente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbRemitente.SelectedIndexChanged
@@ -28,6 +42,7 @@
             CmbRemitoPendiente.Enabled = False
             DtImprimir = ConfigCorreo.CN_Correo.LlenarDatatableImprimirArm(CmbRemitoPendiente.Text)
             DgvSeleccion.DataSource = DtImprimir
+
 
             For Each col As DataGridViewColumn In DgvSeleccion.Columns
                 col.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -92,7 +107,7 @@
         Dim EMPRESA As String = DgvSeleccion.Rows(N).Cells("EMPRESA").Value
         Dim CALLE As String = DgvSeleccion.Rows(N).Cells("CALLE").Value
         DgvDatos.DataSource = Nothing
-        Dim Dtdatos As New DataTable
+
         Dtdatos = ConfigCorreo.CN_Correo.LlenarDatatableImprimirArmPorEmpresaYCalle(EMPRESA, CALLE, CmbRemitoPendiente.Text)
         DgvDatos.DataSource = Dtdatos
 
@@ -114,4 +129,103 @@
         Next
 
     End Sub
+
+    Private Sub BtnPdf_Click(sender As Object, e As EventArgs) Handles BtnPdf.Click
+        GenerarPDF(Dtdatos)
+    End Sub
+
+
+    'Public Sub GenerarPDF()
+    '    Dim doc As New Document()
+    '    Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream("C:\temp\archivo.pdf", FileMode.Create))
+    '    doc.Open()
+
+    '    Dim contentLeft As New Paragraph()
+    '    contentLeft.Add(New Chunk("Título", New Font(Font.Italic, 16, Font.Bold)))
+    '    contentLeft.Add(New Chunk(vbCrLf & vbCrLf))
+
+    '    Dim rectangle1 As New Rectangle(doc.PageSize.Width / 2, doc.PageSize.Height)
+    '    Dim canvasLeft As PdfContentByte = writer.DirectContent
+    '    canvasLeft.SetColorStroke(BaseColor.BLACK) ' Establecer el color de trazo como negro
+    '    canvasLeft.Rectangle(rectangle1.Left, rectangle1.Bottom, rectangle1.Width, rectangle1.Height)
+    '    canvasLeft.Rectangle(10, 660, 180, 100)
+    '    canvasLeft.Stroke()
+    '    contentLeft.Add(New Chunk(vbCrLf))
+
+    '    contentLeft.Add(New Chunk("Línea 1" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+    '    contentLeft.Add(New Chunk("Línea 2" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+    '    contentLeft.Add(New Chunk("Línea 3" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+    '    contentLeft.Add(New Chunk("Línea 4" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+
+
+    '    contentLeft.Add(New Chunk(vbCrLf & vbCrLf))
+    '    contentLeft.Add(New Chunk(vbCrLf & vbCrLf))
+
+    '    contentLeft.Add(New Chunk("Firma" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+    '    contentLeft.Add(New Chunk("Aclaración" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+
+    '    doc.Add(contentLeft)
+    '    doc.Close()
+
+    '    Process.Start("C:\temp\archivo.pdf")
+    'End Sub
+
+    Public Sub GenerarPDF(dataTable As DataTable)
+        Dim doc As New Document()
+        Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream("C:\temp\archivo.pdf", FileMode.Create))
+        doc.Open()
+
+        Dim contentLeft As New Paragraph()
+        contentLeft.Add(New Chunk("Título", New Font(Font.Italic, 16, Font.Bold)))
+        contentLeft.Add(New Chunk(vbCrLf & vbCrLf))
+
+        Dim rectangle1 As New Rectangle(doc.PageSize.Width / 2, doc.PageSize.Height)
+        Dim canvasLeft As PdfContentByte = writer.DirectContent
+        canvasLeft.SetColorStroke(BaseColor.BLACK) ' Establecer el color de trazo como negro
+        canvasLeft.Rectangle(rectangle1.Left, rectangle1.Bottom, rectangle1.Width, rectangle1.Height)
+        canvasLeft.Rectangle(10, 660, 180, 100)
+        canvasLeft.Stroke()
+        contentLeft.Add(New Chunk(vbCrLf))
+
+        contentLeft.Add(New Chunk("Línea 1" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+        contentLeft.Add(New Chunk("Línea 2" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+        contentLeft.Add(New Chunk("Línea 3" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+        contentLeft.Add(New Chunk("Línea 4" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+
+        Dim contentRight As New Paragraph()
+        For Each row As DataRow In dataTable.Rows
+            Dim nroCarta As String = row("nro_carta").ToString()
+            Dim nroCart2 As String = row("nro_cart2").ToString()
+            contentRight.Add(New Chunk(nroCarta & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+            contentRight.Add(New Chunk(nroCart2 & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+        Next
+
+        Dim columnRight As New ColumnText(canvasLeft)
+        Dim rectangle2 As New Rectangle(doc.PageSize.Width / 2, doc.PageSize.Height)
+        columnRight.SetSimpleColumn(rectangle2.Right, rectangle2.Bottom, rectangle2.Width, rectangle2.Height)
+        columnRight.AddElement(contentRight)
+        columnRight.Go()
+
+        contentLeft.Add(New Chunk(vbCrLf & vbCrLf))
+        contentLeft.Add(New Chunk(vbCrLf & vbCrLf))
+
+        contentLeft.Add(New Chunk("Firma" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+        contentLeft.Add(New Chunk("Aclaración" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
+
+        doc.Add(contentLeft)
+        doc.Close()
+
+        Process.Start("C:\temp\archivo.pdf")
+    End Sub
+
+
+
+
+
+
+
+
+
+
+
 End Class

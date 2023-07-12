@@ -32,4 +32,19 @@ Public Class Frmrdlc
         'TR.Start()
         'cargar()
     End Sub
+
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'Frmrdlc
+        '
+        Me.ClientSize = New System.Drawing.Size(453, 305)
+        Me.Name = "Frmrdlc"
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Private Sub Frmrdlc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
