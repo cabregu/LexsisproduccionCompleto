@@ -181,9 +181,11 @@ Public Class FrmArm
 
         Dim rectangle1 As New Rectangle(doc.PageSize.Width / 2, doc.PageSize.Height)
         Dim canvasLeft As PdfContentByte = writer.DirectContent
-        canvasLeft.SetColorStroke(BaseColor.BLACK) ' Establecer el color de trazo como negro
+        canvasLeft.SetColorStroke(BaseColor.BLACK)
         canvasLeft.Rectangle(rectangle1.Left, rectangle1.Bottom, rectangle1.Width, rectangle1.Height)
         canvasLeft.Rectangle(10, 660, 180, 100)
+        canvasLeft.Rectangle(50, 50, 550, 50)
+
         canvasLeft.Stroke()
         contentLeft.Add(New Chunk(vbCrLf))
 
