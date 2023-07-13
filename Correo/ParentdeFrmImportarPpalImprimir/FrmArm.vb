@@ -181,12 +181,25 @@ Public Class FrmArm
 
         Dim rectangle1 As New Rectangle(doc.PageSize.Width / 2, doc.PageSize.Height)
         Dim canvasLeft As PdfContentByte = writer.DirectContent
-        canvasLeft.SetColorStroke(BaseColor.BLACK)
-        canvasLeft.Rectangle(rectangle1.Left, rectangle1.Bottom, rectangle1.Width, rectangle1.Height)
-        canvasLeft.Rectangle(10, 660, 180, 100)
-        canvasLeft.Rectangle(50, 50, 550, 50)
 
+        ' Definir colores para los bordes de los cuadrados
+        Dim color1 As BaseColor = New BaseColor(255, 0, 0) ' Rojo
+        Dim color2 As BaseColor = New BaseColor(0, 255, 0) ' Verde
+        Dim color3 As BaseColor = New BaseColor(0, 0, 255) ' Azul
+
+        ' Dibujar los cuadrados con bordes de colores diferentes
+        canvasLeft.SetColorStroke(color1)
+        canvasLeft.Rectangle(rectangle1.Left, rectangle1.Bottom, rectangle1.Width, rectangle1.Height)
         canvasLeft.Stroke()
+
+        canvasLeft.SetColorStroke(color2)
+        canvasLeft.Rectangle(10, 660, 180, 100)
+        canvasLeft.Stroke()
+
+        canvasLeft.SetColorStroke(color3)
+        canvasLeft.Rectangle(50, 50, 500, 50)
+        canvasLeft.Stroke()
+
         contentLeft.Add(New Chunk(vbCrLf))
 
         contentLeft.Add(New Chunk("Línea 1" & vbCrLf, FontFactory.GetFont(FontFactory.HELVETICA, 12)))
@@ -219,13 +232,6 @@ Public Class FrmArm
 
         Process.Start("C:\temp\archivo.pdf")
     End Sub
-
-
-
-
-
-
-
 
 
 
